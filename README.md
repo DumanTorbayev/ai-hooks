@@ -12,6 +12,22 @@ requests should go through your own server route and your own provider keys.
 - `apps/web` - the public site, examples gallery, and mock streaming playground.
 - `examples/next-basic-chat` - a minimal example scaffold.
 
+## Current Stage
+
+The project is in the early MVP stage. The first priority is to validate a
+developer resource that can attract organic traffic through practical AI UI
+utilities:
+
+- React hooks for AI interfaces.
+- LLM cost calculator.
+- Token estimator.
+- Model comparison pages.
+- Streaming playground.
+- Copy-paste AI chat UI examples.
+
+The package should stay small and headless. Public demos should use mock data
+unless a user intentionally connects their own provider route.
+
 ## Current Hooks
 
 - `useChatStream`
@@ -57,7 +73,20 @@ packages/
   react/               React hooks package
 examples/
   next-basic-chat/     Example app notes
+docs/
+  architecture.md      Technical direction and package boundaries
+  product-spec.md      Product definition and target audience
+  roadmap.md           Development phases
 ```
+
+## Project Docs
+
+- [Product spec](docs/product-spec.md)
+- [Architecture](docs/architecture.md)
+- [API sketch](docs/api-sketch.md)
+- [Roadmap](docs/roadmap.md)
+- [Backlog](docs/backlog.md)
+- [Monetization](docs/monetization.md)
 
 ## Design Principles
 
@@ -79,3 +108,15 @@ examples/
 
 Early MVP. APIs and examples may change while the project shape is being
 validated.
+
+## Development Workflow
+
+Each completed work block should be committed and pushed:
+
+```bash
+pnpm typecheck
+pnpm build
+git add .
+git commit -m "<type>: <summary>"
+git push
+```
