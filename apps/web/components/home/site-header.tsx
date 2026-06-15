@@ -1,5 +1,5 @@
 type SiteHeaderProps = {
-  active?: "home" | "cost";
+  active?: "home" | "cost" | "tokens";
 };
 
 export function SiteHeader({ active = "home" }: SiteHeaderProps) {
@@ -17,6 +17,9 @@ export function SiteHeader({ active = "home" }: SiteHeaderProps) {
           <a href="/#patterns">Patterns</a>
           <a className={active === "cost" ? "active" : undefined} href="/cost-calculator">
             Calculator
+          </a>
+          <a className={active === "tokens" ? "active" : undefined} href="/token-estimator">
+            Tokens
           </a>
           <a href="/#playground">Playground</a>
           <a href="/#models">Models</a>

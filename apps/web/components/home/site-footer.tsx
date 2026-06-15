@@ -18,6 +18,7 @@ export function SiteFooter() {
           <a href="/#hooks">Hooks</a>
           <a href="/#patterns">Patterns</a>
           <a href="/cost-calculator">Cost calculator</a>
+          <a href="/token-estimator">Token estimator</a>
           <a href="/#playground">Playground</a>
           <a href="/#models">Models</a>
         </div>

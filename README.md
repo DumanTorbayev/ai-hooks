@@ -45,6 +45,8 @@ utilities.
 
 - `/cost-calculator` - local LLM cost calculator with prompt token estimation,
   output token planning, per-request cost, daily cost, and monthly cost.
+- `/token-estimator` - local prompt/token planning utility with text stats,
+  expected output tokens, and context-window usage.
 
 ## Development
 
@@ -104,7 +106,7 @@ docs/
 ## Roadmap
 
 1. Improve docs for every hook.
-2. Expand the LLM cost calculator and add a dedicated token estimator page.
+2. Expand the LLM cost calculator and token estimator with real provider data.
 3. Add model comparison and provider compatibility pages.
 4. Build a richer streaming playground.
 5. Publish copy-paste AI chat UI examples.
