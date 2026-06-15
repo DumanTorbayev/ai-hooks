@@ -70,6 +70,15 @@ export function HeroSection() {
               requests go through your own route and your own provider keys.
             </p>
           </div>
+
+          <div className="hero-actions">
+            <a className="btn accent sm" href="/cost-calculator">
+              Open cost calculator
+            </a>
+            <a className="btn sm" href="#hooks">
+              Browse hooks
+            </a>
+          </div>
         </div>
 
         <MockChatDemo />

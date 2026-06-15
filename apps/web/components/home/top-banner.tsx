@@ -6,7 +6,7 @@ export function TopBanner() {
       <span className="hide-mobile">
         <b>AI Hooks</b> is a library and demo site, not a hosted LLM proxy
       </span>
-      <a href="#playground">try mock streaming</a>
+      <a href="/#playground">try mock streaming</a>
     </div>
   );
 }
