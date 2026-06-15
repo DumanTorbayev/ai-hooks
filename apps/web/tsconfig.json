@@ -1,0 +1,38 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@ai-hooks/core": [
+        "../../packages/core/src"
+      ],
+      "@ai-hooks/core/*": [
+        "../../packages/core/src/*"
+      ],
+      "@ai-hooks/react": [
+        "../../packages/react/src"
+      ],
+      "@ai-hooks/react/*": [
+        "../../packages/react/src/*"
+      ],
+      "@/*": [
+        "./*"
+      ]
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "incremental": true
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

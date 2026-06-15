@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "declaration": true,
+    "emitDeclarationOnly": false,
+    "noEmit": false,
+    "outDir": "dist",
+    "paths": {
+      "@ai-hooks/core": ["../core/dist/index.d.ts"],
+      "@ai-hooks/core/*": ["../core/dist/*.d.ts"]
+    },
+    "rootDir": "src"
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "name": "@ai-hooks/react",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "sideEffects": false,
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./use-abort-controller": {
+      "types": "./dist/use-abort-controller.d.ts",
+      "import": "./dist/use-abort-controller.js"
+    },
+    "./use-chat-stream": {
+      "types": "./dist/use-chat-stream.d.ts",
+      "import": "./dist/use-chat-stream.js"
+    },
+    "./use-conversation-storage": {
+      "types": "./dist/use-conversation-storage.d.ts",
+      "import": "./dist/use-conversation-storage.js"
+    },
+    "./use-file-upload": {
+      "types": "./dist/use-file-upload.d.ts",
+      "import": "./dist/use-file-upload.js"
+    },
+    "./use-model-cost": {
+      "types": "./dist/use-model-cost.d.ts",
+      "import": "./dist/use-model-cost.js"
+    },
+    "./use-token-usage": {
+      "types": "./dist/use-token-usage.d.ts",
+      "import": "./dist/use-token-usage.js"
+    },
+    "./use-tool-calls": {
+      "types": "./dist/use-tool-calls.d.ts",
+      "import": "./dist/use-tool-calls.js"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "lint": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@ai-hooks/core": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": "^18.3.0 || ^19.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.0",
+    "typescript": "^5.8.3"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "jsx": "react-jsx",
+    "paths": {
+      "@ai-hooks/core": ["../core/src"],
+      "@ai-hooks/core/*": ["../core/src/*"]
+    }
+  },
+  "include": ["src"]
+}
