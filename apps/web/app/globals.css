@@ -1309,6 +1309,37 @@ footer h4 {
   font-size: 10px;
 }
 
+.comparison-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 16px;
+  align-items: start;
+}
+
+.comparison-table {
+  min-width: 0;
+}
+
+.comparison-side {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+
+.comparison-side h2 {
+  margin: 8px 0 10px;
+  font-size: 22px;
+  line-height: 1.12;
+  letter-spacing: 0;
+}
+
+.comparison-side p {
+  margin: 0;
+  color: var(--ink-2);
+}
+
 .pg-grid {
   grid-template-columns: minmax(0, 1fr) 280px;
 }
@@ -1824,6 +1855,7 @@ footer {
   .hero-grid,
   .utility-grid,
   .calculator-shell,
+  .comparison-layout,
   .models-grid,
   .pg-grid,
   .snippet-wrap,

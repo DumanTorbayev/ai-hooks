@@ -20,7 +20,7 @@ export function SiteFooter() {
           <a href="/cost-calculator">Cost calculator</a>
           <a href="/token-estimator">Token estimator</a>
           <a href="/#playground">Playground</a>
-          <a href="/#models">Models</a>
+          <a href="/model-comparison">Model comparison</a>
         </div>
         <div>
           <h4>Docs</h4>

@@ -9,7 +9,7 @@ requests should go through your own server route and your own provider keys.
 
 - `@ai-hooks/core` - token estimation, mock streaming, demo model registry, and cost utilities.
 - `@ai-hooks/react` - React hooks for chat streams, abort state, usage, storage, file upload, and tool calls.
-- `apps/web` - the public site, examples gallery, cost calculator, and mock streaming playground.
+- `apps/web` - the public site, examples gallery, cost calculator, model comparison, and mock streaming playground.
 - `examples/next-basic-chat` - a minimal example scaffold.
 
 ## Current Stage
@@ -47,6 +47,8 @@ utilities.
   output token planning, per-request cost, daily cost, and monthly cost.
 - `/token-estimator` - local prompt/token planning utility with text stats,
   expected output tokens, and context-window usage.
+- `/model-comparison` - local model capability and pricing registry view using
+  demo data only.
 
 ## Development
 
@@ -107,7 +109,7 @@ docs/
 
 1. Improve docs for every hook.
 2. Expand the LLM cost calculator and token estimator with real provider data.
-3. Add model comparison and provider compatibility pages.
+3. Expand model comparison and provider compatibility pages.
 4. Build a richer streaming playground.
 5. Publish copy-paste AI chat UI examples.
 
