@@ -20,6 +20,10 @@
       "types": "./dist/models.d.ts",
       "import": "./dist/models.js"
     },
+    "./providers": {
+      "types": "./dist/providers.d.ts",
+      "import": "./dist/providers.js"
+    },
     "./streaming": {
       "types": "./dist/streaming.d.ts",
       "import": "./dist/streaming.js"

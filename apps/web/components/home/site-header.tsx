@@ -1,5 +1,5 @@
 type SiteHeaderProps = {
-  active?: "home" | "cost" | "tokens" | "models";
+  active?: "home" | "cost" | "tokens" | "models" | "providers";
 };
 
 export function SiteHeader({ active = "home" }: SiteHeaderProps) {
@@ -24,6 +24,12 @@ export function SiteHeader({ active = "home" }: SiteHeaderProps) {
           <a href="/#playground">Playground</a>
           <a className={active === "models" ? "active" : undefined} href="/model-comparison">
             Models
+          </a>
+          <a
+            className={active === "providers" ? "active" : undefined}
+            href="/provider-compatibility"
+          >
+            Providers
           </a>
           <a href="/#docs">Docs</a>
         </nav>
