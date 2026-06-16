@@ -52,6 +52,8 @@ utilities.
   demo data only.
 - `/provider-compatibility` - source-backed provider capability matrix for
   adapter and UI planning.
+- `/docs` - public docs index for current MVP hooks with focused hook reference
+  pages.
 
 ## Development
 

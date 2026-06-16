@@ -25,10 +25,10 @@ export function SiteFooter() {
         </div>
         <div>
           <h4>Docs</h4>
-          <a href="/#docs">MVP scope</a>
-          <a href="/#docs">Provider adapters</a>
-          <a href="/#docs">Bundle size</a>
-          <a href="/#docs">Monetization notes</a>
+          <a href="/docs">Hooks docs</a>
+          <a href="/docs/use-chat-stream">useChatStream</a>
+          <a href="/docs/use-model-cost">useModelCost</a>
+          <a href="/provider-compatibility">Provider matrix</a>
         </div>
         <div>
           <h4>Principles</h4>
