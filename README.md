@@ -94,8 +94,10 @@ docs/
 - [Architecture](docs/architecture.md)
 - [API sketch](docs/api-sketch.md)
 - [Roadmap](docs/roadmap.md)
-- [Backlog](docs/backlog.md)
-- [Monetization](docs/monetization.md)
+
+Internal business strategy and working task lists are kept outside the public
+repository. Public work should be tracked through GitHub Issues and pull
+requests.
 
 ## Design Principles
 
