@@ -1634,6 +1634,107 @@ footer h4 {
   font-size: 11px;
 }
 
+.docs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.docs-card {
+  display: flex;
+  min-height: 170px;
+  flex-direction: column;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--surface);
+  padding: 15px;
+  box-shadow: var(--shadow);
+}
+
+.docs-card p {
+  flex: 1;
+  color: var(--ink-2);
+}
+
+.docs-card code,
+.doc-import code {
+  color: var(--accent-ink);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.doc-import {
+  margin-top: 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface-2);
+  padding: 12px;
+}
+
+.doc-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 22px;
+  align-items: start;
+}
+
+.doc-main {
+  display: grid;
+  gap: 28px;
+}
+
+.doc-main p {
+  max-width: 760px;
+  margin: 8px 0 0;
+  color: var(--ink-2);
+  font-size: 16px;
+}
+
+.doc-code {
+  overflow-x: auto;
+  margin: 10px 0 0;
+  border: 1px solid var(--code-line);
+  border-radius: 8px;
+  background: var(--code-bg);
+  padding: 18px;
+  color: var(--code-ink);
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.doc-side {
+  display: grid;
+  gap: 12px;
+}
+
+.doc-side section {
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--surface);
+  padding: 14px;
+}
+
+.doc-side h2 {
+  margin: 0 0 8px;
+  font-size: 14px;
+}
+
+.doc-side ul {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+  padding-left: 18px;
+  color: var(--ink-2);
+}
+
+.doc-side code {
+  color: var(--accent-ink);
+  font-family: var(--mono);
+  font-size: 11px;
+}
+
 .calculator-shell {
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
@@ -1875,6 +1976,7 @@ footer {
   .utility-grid,
   .calculator-shell,
   .comparison-layout,
+  .doc-layout,
   .models-grid,
   .pg-grid,
   .snippet-wrap,
@@ -1884,7 +1986,8 @@ footer {
   }
 
   .hooks-grid,
-  .pat-grid {
+  .pat-grid,
+  .docs-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -1919,7 +2022,8 @@ footer {
   }
 
   .hooks-grid,
-  .pat-grid {
+  .pat-grid,
+  .docs-grid {
     grid-template-columns: 1fr;
   }
 

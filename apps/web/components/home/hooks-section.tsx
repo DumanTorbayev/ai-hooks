@@ -14,7 +14,7 @@ export function HooksSection() {
             </p>
           </div>
           <div className="rhs">
-            <a className="btn sm" href="#docs">
+            <a className="btn sm" href="/docs">
               API reference →
             </a>
           </div>
