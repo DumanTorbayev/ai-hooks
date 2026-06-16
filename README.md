@@ -7,7 +7,7 @@ requests should go through your own server route and your own provider keys.
 
 ## What Is Inside
 
-- `@ai-hooks/core` - token estimation, mock streaming, demo model registry, and cost utilities.
+- `@ai-hooks/core` - token estimation, mock streaming, demo model/provider registries, and cost utilities.
 - `@ai-hooks/react` - React hooks for chat streams, abort state, usage, storage, file upload, and tool calls.
 - `apps/web` - the public site, examples gallery, cost calculator, model comparison, and mock streaming playground.
 - `examples/next-basic-chat` - a minimal example scaffold.
@@ -22,6 +22,7 @@ utilities:
 - LLM cost calculator.
 - Token estimator.
 - Model comparison pages.
+- Provider compatibility matrix.
 - Streaming playground.
 - Copy-paste AI chat UI examples.
 
@@ -49,6 +50,8 @@ utilities.
   expected output tokens, and context-window usage.
 - `/model-comparison` - local model capability and pricing registry view using
   demo data only.
+- `/provider-compatibility` - source-backed provider capability matrix for
+  adapter and UI planning.
 
 ## Development
 

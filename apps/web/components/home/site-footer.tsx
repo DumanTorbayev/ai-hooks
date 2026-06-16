@@ -21,6 +21,7 @@ export function SiteFooter() {
           <a href="/token-estimator">Token estimator</a>
           <a href="/#playground">Playground</a>
           <a href="/model-comparison">Model comparison</a>
+          <a href="/provider-compatibility">Provider matrix</a>
         </div>
         <div>
           <h4>Docs</h4>
