@@ -5,6 +5,7 @@ import { SiteFooter } from "@/components/home/site-footer";
 import { SiteHeader } from "@/components/home/site-header";
 import { TopBanner } from "@/components/home/top-banner";
 import { getHookDoc, hookDocs } from "@/content/hook-docs";
+import styles from "../docs.module.css";
 
 type HookDocPageProps = {
   params: Promise<{
@@ -65,7 +66,7 @@ export default async function HookDocPage({ params }: HookDocPageProps) {
 
             <div className="utility-summary">
               <span className="sec-label">// import</span>
-              <div className="doc-import">
+              <div className={styles.importBox}>
                 <code>{doc.importPath}</code>
               </div>
             </div>
@@ -73,8 +74,8 @@ export default async function HookDocPage({ params }: HookDocPageProps) {
         </section>
 
         <section className="block">
-          <div className="wrap doc-layout">
-            <article className="doc-main">
+          <div className={`wrap ${styles.layout}`}>
+            <article className={styles.main}>
               <section>
                 <span className="sec-label">// purpose</span>
                 <p>{doc.purpose}</p>
@@ -82,13 +83,13 @@ export default async function HookDocPage({ params }: HookDocPageProps) {
 
               <section>
                 <span className="sec-label">// example</span>
-                <pre className="doc-code">
+                <pre className={styles.code}>
                   <code>{doc.example}</code>
                 </pre>
               </section>
             </article>
 
-            <aside className="doc-side">
+            <aside className={styles.side}>
               <section>
                 <h2>Returns</h2>
                 <ul>
