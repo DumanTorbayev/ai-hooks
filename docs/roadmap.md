@@ -72,7 +72,7 @@ Goal: public beta.
 
 ## Days 61-90
 
-Goal: grow repeat usage and validate monetization path.
+Goal: grow repeat usage and validate contributor interest.
 
 ### Product
 
@@ -90,16 +90,4 @@ Goal: grow repeat usage and validate monetization path.
 - Start weekly updates/newsletter.
 - Publish comparison pages.
 - Publish "AI UI patterns" pages.
-- Reach out to AI infra companies for sponsorship feedback.
-
-### Monetization Prep
-
-- Add sponsor placement inventory:
-  - homepage slot;
-  - calculator sponsor;
-  - newsletter sponsor;
-  - model comparison sponsor;
-  - docs sidebar sponsor.
-
-Do not add aggressive ads before there is trust and traffic.
-
+- Collect feedback from developers building AI interfaces.
