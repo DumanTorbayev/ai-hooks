@@ -74,8 +74,8 @@ export function HeroSection() {
             <a className="btn accent sm" href="/cost-calculator">
               Open cost calculator
             </a>
-            <a className="btn sm" href="#hooks">
-              Browse hooks
+            <a className="btn sm" href="/docs">
+              Browse hook docs
             </a>
           </div>
         </div>

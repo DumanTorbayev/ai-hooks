@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 
 import { hookDocs } from "@/content/hook-docs";
-import { SiteFooter } from "@/components/home/site-footer";
 import { SiteHeader } from "@/components/home/site-header";
 import { TopBanner } from "@/components/home/top-banner";
 import { createPageMetadata } from "@/lib/metadata";
-import styles from "./docs.module.css";
+import { DocsCatalog } from "./docs-catalog";
 
 export const metadata: Metadata = createPageMetadata({
   description:
@@ -29,18 +28,18 @@ export default function DocsIndexPage() {
               </div>
               <h1 className="utility-head">AI Hooks docs.</h1>
               <p className="utility-sub">
-                Practical references for the current React hooks: root imports, return
-                values, options, usage notes, and copy-ready examples.
+                Search the current React hooks, inspect API contracts, and copy examples
+                that match the package we actually ship today.
               </p>
             </div>
 
             <div className="utility-summary">
               <span className="sec-label">// current docs</span>
               <div className="summary-list">
-                <span>Headless React hooks</span>
-                <span>Provider-agnostic examples</span>
-                <span>No hidden provider calls</span>
-                <span>Tree-shakable package imports</span>
+                <span>{hookDocs.length} shipped hooks</span>
+                <span>Search and categories</span>
+                <span>API tables and recipes</span>
+                <span>No future-only hooks listed</span>
               </div>
             </div>
           </div>
@@ -48,27 +47,10 @@ export default function DocsIndexPage() {
 
         <section className="block">
           <div className="wrap">
-            <div className={styles.grid}>
-              {hookDocs.map((doc) => (
-                <a className={styles.card} href={`/docs/${doc.slug}`} key={doc.slug}>
-                  <div className="hc-top">
-                    <span className="hname">
-                      <span className="h">use</span>
-                      {doc.name.replace("use", "")}
-                    </span>
-                    <span className={`stable ${doc.status === "beta" ? "beta" : ""}`}>
-                      {doc.status}
-                    </span>
-                  </div>
-                  <p>{doc.summary}</p>
-                  <code>{`import { ${doc.name} } from "@ai-hooks/react";`}</code>
-                </a>
-              ))}
-            </div>
+            <DocsCatalog docs={hookDocs} />
           </div>
         </section>
       </main>
-      <SiteFooter />
     </>
   );
 }

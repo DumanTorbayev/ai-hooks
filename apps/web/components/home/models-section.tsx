@@ -1,7 +1,12 @@
+"use client";
+
 import { listModels } from "@ai-hooks/core/models";
+import { useMemo, useState } from "react";
 
 export function ModelsSection() {
-  const models = listModels();
+  const models = useMemo(() => listModels(), []);
+  const [selectedModelId, setSelectedModelId] = useState(models[0]?.id ?? "mock-fast");
+  const selectedModel = models.find((model) => model.id === selectedModelId) ?? models[0];
 
   return (
     <section className="block" id="models">
@@ -27,10 +32,13 @@ export function ModelsSection() {
             <div className="sel-head">
               Demo model registry <span className="pill">core/models</span>
             </div>
-            {models.map((model, index) => (
-              <div
-                className={`modelopt ${index === 0 ? "selected" : ""}`}
+            {models.map((model) => (
+              <button
+                aria-pressed={model.id === selectedModel.id}
+                className={`modelopt ${model.id === selectedModel.id ? "selected" : ""}`}
                 key={model.id}
+                onClick={() => setSelectedModelId(model.id)}
+                type="button"
               >
                 <span className="radio" />
                 <div className="mo-main">
@@ -43,12 +51,12 @@ export function ModelsSection() {
                 <div className="mo-ctx">
                   <b>{formatContextWindow(model.contextWindow)}</b>ctx
                 </div>
-              </div>
+              </button>
             ))}
             <div className="sel-foot">
-              selected → <code>model="mock-fast"</code>
+              selected → <code>{`model="${selectedModel.id}"`}</code>
               <br />
-              hook imports stay provider-agnostic
+              {selectedModel.displayName} · {formatContextWindow(selectedModel.contextWindow)} context
             </div>
           </div>
 
@@ -78,7 +86,10 @@ export function ModelsSection() {
                     : "custom";
 
                   return (
-                    <tr key={model.id}>
+                    <tr
+                      className={model.id === selectedModel.id ? "selected-row" : undefined}
+                      key={model.id}
+                    >
                       <td className="prov">
                         {model.displayName} <small>{model.provider}</small>
                       </td>

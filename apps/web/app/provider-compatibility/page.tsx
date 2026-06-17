@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 
-import { SiteFooter } from "@/components/home/site-footer";
 import { SiteHeader } from "@/components/home/site-header";
 import { TopBanner } from "@/components/home/top-banner";
 import { ProviderCompatibilityMatrix } from "@/components/provider-compatibility/provider-compatibility-matrix";
@@ -59,7 +58,6 @@ export default function ProviderCompatibilityPage() {
           </div>
         </section>
       </main>
-      <SiteFooter />
     </>
   );
 }
