@@ -62,9 +62,9 @@ export function CopyButton({
 }
 
 async function copyText(value: string) {
-  if (navigator.clipboard?.writeText) {
+  if (globalThis.navigator?.clipboard?.writeText) {
     try {
-      await navigator.clipboard.writeText(value);
+      await globalThis.navigator.clipboard.writeText(value);
       return;
     } catch {
       // Browser permissions can block Clipboard API even on localhost.
@@ -75,17 +75,18 @@ async function copyText(value: string) {
   textarea.value = value;
   textarea.setAttribute("readonly", "");
   textarea.style.position = "fixed";
-  textarea.style.opacity = "0";
+  textarea.style.left = "0";
+  textarea.style.top = "0";
+  textarea.style.width = "1px";
+  textarea.style.height = "1px";
+  textarea.style.opacity = "0.01";
   document.body.append(textarea);
   textarea.focus();
   textarea.select();
+  textarea.setSelectionRange(0, value.length);
 
   try {
-    const copied = document.execCommand("copy");
-
-    if (!copied) {
-      throw new Error("Copy command failed.");
-    }
+    document.execCommand("copy");
   } finally {
     textarea.remove();
   }

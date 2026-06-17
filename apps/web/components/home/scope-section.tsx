@@ -1,3 +1,5 @@
+import { SupportButton } from "@/components/support-button";
+
 export function ScopeSection() {
   return (
     <section className="block" id="docs">
@@ -16,15 +18,16 @@ export function ScopeSection() {
         <div className="sponsor">
           <div className="sp-main">
             <span className="sp-flag">MVP boundary</span>
-            <h3>Library first, demo site second, monetization later.</h3>
+            <h3>Library first, optional support second.</h3>
             <p>
-              Ads or sponsors can appear on docs pages later, but the npm packages stay
+              Support links can help fund docs and examples, but the npm packages stay
               small, explicit, and dependency-light.
             </p>
             <div className="sp-actions">
-              <a className="btn accent sm" href="#hooks">
-                Back to hooks
+              <a className="btn accent sm" href="/docs">
+                Read docs
               </a>
+              <SupportButton className="btn support sm" />
               <span className="sp-note">Public demos use mock data and local state</span>
             </div>
           </div>
@@ -34,7 +37,7 @@ export function ScopeSection() {
             </div>
             <div className="feat">✓ Mock streams only</div>
             <div className="feat">✓ Your route, your provider keys</div>
-            <div className="feat">✓ Bundle budget before adapters</div>
+            <div className="feat">✓ Support never changes package behavior</div>
           </div>
         </div>
       </div>

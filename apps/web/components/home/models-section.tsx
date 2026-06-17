@@ -11,13 +11,13 @@ export function ModelsSection() {
             <span className="sec-label">// model layer</span>
             <h2>Model choice is a product layer, not a hard dependency.</h2>
             <p>
-              The MVP ships with mock models for UI testing. Real providers should live in
-              separate adapters and your own API routes.
+              The MVP ships with mock models for UI testing and a provider compatibility
+              matrix for planning your own API routes.
             </p>
           </div>
           <div className="rhs">
-            <a className="btn sm" href="#models">
-              demo registry →
+            <a className="btn sm" href="/provider-compatibility">
+              Provider matrix →
             </a>
           </div>
         </div>
@@ -48,7 +48,7 @@ export function ModelsSection() {
             <div className="sel-foot">
               selected → <code>model="mock-fast"</code>
               <br />
-              provider adapters will be added without changing hook imports
+              hook imports stay provider-agnostic
             </div>
           </div>
 
@@ -99,7 +99,7 @@ export function ModelsSection() {
             </table>
             <div className="matrix-legend">
               <span>● demo registry only</span>
-              <span>● real provider matrix later</span>
+              <span>● provider compatibility page available</span>
               <span>● no requests run through AI Hooks</span>
             </div>
           </div>

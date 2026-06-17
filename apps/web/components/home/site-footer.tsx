@@ -1,41 +1,29 @@
+import { SupportButton } from "@/components/support-button";
+
 export function SiteFooter() {
   return (
     <footer>
-      <div className="wrap foot-grid">
-        <div className="foot-brand">
-          <a className="brand" href="/">
-            <span className="glyph">AI</span> AI Hooks
-          </a>
-          <p>Headless React primitives for production AI interfaces.</p>
-          <div className="foot-install">
-            <code>
-              npm i <span className="pkg">@ai-hooks/react</span>
-            </code>
-          </div>
+      <div className="wrap foot-compact">
+        <a className="brand" href="/">
+          <span className="glyph">AI</span> AI Hooks
+        </a>
+        <div className="foot-install">
+          <code>
+            npm i <span className="pkg">@ai-hooks/react</span>
+          </code>
         </div>
-        <div>
-          <h4>Product</h4>
-          <a href="/#hooks">Hooks</a>
-          <a href="/#patterns">Patterns</a>
+        <div className="foot-links">
+          <a href="/docs">Docs</a>
           <a href="/cost-calculator">Cost calculator</a>
-          <a href="/token-estimator">Token estimator</a>
-          <a href="/#playground">Playground</a>
-          <a href="/model-comparison">Model comparison</a>
           <a href="/provider-compatibility">Provider matrix</a>
-        </div>
-        <div>
-          <h4>Docs</h4>
-          <a href="/docs">Hooks docs</a>
-          <a href="/docs/use-chat-stream">useChatStream</a>
-          <a href="/docs/use-model-cost">useModelCost</a>
-          <a href="/provider-compatibility">Provider matrix</a>
-        </div>
-        <div>
-          <h4>Principles</h4>
-          <a href="/#docs">No hosted API</a>
-          <a href="/#docs">No telemetry by default</a>
-          <a href="/#docs">Tree-shakable exports</a>
-          <a href="/#docs">Mock demos first</a>
+          <a
+            href="https://github.com/DumanTorbayev/ai-hooks"
+            rel="noreferrer"
+            target="_blank"
+          >
+            GitHub
+          </a>
+          <SupportButton className="btn support sm foot-support" />
         </div>
       </div>
       <div className="wrap foot-bottom">

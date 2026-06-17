@@ -179,9 +179,20 @@
   padding: 14px;
 }
 
+.side .supportCard {
+  border-color: #d9bd84;
+  background: var(--amber-soft);
+}
+
 .side h2 {
   margin: 0 0 8px;
   font-size: 14px;
+}
+
+.supportCard p {
+  margin: 0 0 12px;
+  color: #764706;
+  font-size: 12px;
 }
 
 .side ul {

@@ -6,7 +6,7 @@ import { useMemo, useState } from "react";
 
 const models = listModels();
 const sampleText =
-  "Summarize the attached product feedback, group issues by workflow, and return the top three UX fixes with citations.";
+  "Summarize the attached product feedback, group issues by workflow, and return the top three UX fixes.";
 
 export function TokenEstimator() {
   const [text, setText] = useState(sampleText);

@@ -70,6 +70,9 @@ The local web app runs at:
 http://127.0.0.1:3100
 ```
 
+Copy `.env.example` to `.env.local` and set `NEXT_PUBLIC_SUPPORT_URL` to enable
+the optional support button.
+
 Run checks before committing:
 
 ```bash
