@@ -4,6 +4,7 @@ import { hookDocs } from "@/content/hook-docs";
 import { SiteFooter } from "@/components/home/site-footer";
 import { SiteHeader } from "@/components/home/site-header";
 import { TopBanner } from "@/components/home/top-banner";
+import styles from "./docs.module.css";
 
 export const metadata: Metadata = {
   title: "AI Hooks Docs",
@@ -45,9 +46,9 @@ export default function DocsIndexPage() {
 
         <section className="block">
           <div className="wrap">
-            <div className="docs-grid">
+            <div className={styles.grid}>
               {hookDocs.map((doc) => (
-                <a className="docs-card" href={`/docs/${doc.slug}`} key={doc.slug}>
+                <a className={styles.card} href={`/docs/${doc.slug}`} key={doc.slug}>
                   <div className="hc-top">
                     <span className="hname">
                       <span className="h">use</span>
