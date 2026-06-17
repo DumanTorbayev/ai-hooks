@@ -875,6 +875,18 @@ p {
   padding: 3px 9px;
 }
 
+.cp-copy:hover,
+.cp-copy:focus-visible {
+  border-color: #3a4654;
+  background: #252934;
+  color: var(--code-ink);
+}
+
+.cp-copy[data-state="copied"] {
+  border-color: #477d68;
+  color: #8dd6bd;
+}
+
 pre.code {
   margin: 0;
   overflow-x: auto;

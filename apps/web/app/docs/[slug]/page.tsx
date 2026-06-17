@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { SiteFooter } from "@/components/home/site-footer";
 import { SiteHeader } from "@/components/home/site-header";
 import { TopBanner } from "@/components/home/top-banner";
+import { CopyButton } from "@/components/copy-button";
 import { getHookDoc, hookDocs } from "@/content/hook-docs";
 import styles from "../docs.module.css";
 
@@ -68,6 +69,12 @@ export default async function HookDocPage({ params }: HookDocPageProps) {
               <span className="sec-label">// import</span>
               <div className={styles.importBox}>
                 <code>{doc.importPath}</code>
+                <CopyButton
+                  className={styles.importCopy}
+                  copiedLabel="Copied"
+                  label="Copy"
+                  value={doc.importPath}
+                />
               </div>
             </div>
           </div>
@@ -83,9 +90,15 @@ export default async function HookDocPage({ params }: HookDocPageProps) {
 
               <section>
                 <span className="sec-label">// example</span>
-                <pre className={styles.code}>
-                  <code>{doc.example}</code>
-                </pre>
+                <div className={styles.codeBlock}>
+                  <div className={styles.codeHeader}>
+                    <span>{doc.name}.tsx</span>
+                    <CopyButton className={styles.codeCopy} value={doc.example} />
+                  </div>
+                  <pre className={styles.code}>
+                    <code>{doc.example}</code>
+                  </pre>
+                </div>
               </section>
             </article>
 

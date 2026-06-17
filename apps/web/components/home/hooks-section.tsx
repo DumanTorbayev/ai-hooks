@@ -1,4 +1,16 @@
 import { hooks } from "@/content/home";
+import { CopyButton } from "@/components/copy-button";
+
+const chatSnippet = `import { useChatStream } from "@ai-hooks/react/use-chat-stream";
+
+export function Chat() {
+  const chat = useChatStream({
+    endpoint: "/api/chat",
+    body: { model: "mock-fast" },
+  });
+
+  return <Composer onSend={chat.send} busy={chat.isStreaming} />;
+}`;
 
 export function HooksSection() {
   return (
@@ -50,9 +62,7 @@ export function HooksSection() {
               <span className="cp-tab active">useChatStream</span>
               <span className="cp-tab">useToolCalls</span>
               <span className="cp-file">app/chat.tsx</span>
-              <button className="cp-copy" type="button">
-                Copy
-              </button>
+              <CopyButton className="cp-copy" value={chatSnippet} />
             </div>
             <pre className="code">
               <span className="ln">1</span>
@@ -71,7 +81,8 @@ export function HooksSection() {
               <span className="ln">5</span>    endpoint: <span className="s">"/api/chat"</span>,
               <span className="c"> // your route, your key</span>
               {"\n"}
-              <span className="ln">6</span>    model: <span className="s">"mock-fast"</span>,
+              <span className="ln">6</span>    body: {"{"} model:{" "}
+              <span className="s">"mock-fast"</span> {"}"},
               {"\n"}
               <span className="ln">7</span>  {"}"}){"\n"}
               <span className="ln">8</span>
