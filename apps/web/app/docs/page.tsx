@@ -29,7 +29,7 @@ export default function DocsIndexPage() {
               </div>
               <h1 className="utility-head">AI Hooks docs.</h1>
               <p className="utility-sub">
-                Practical references for the current React hooks: imports, return
+                Practical references for the current React hooks: root imports, return
                 values, options, usage notes, and copy-ready examples.
               </p>
             </div>
@@ -40,7 +40,7 @@ export default function DocsIndexPage() {
                 <span>Headless React hooks</span>
                 <span>Provider-agnostic examples</span>
                 <span>No hidden provider calls</span>
-                <span>Small subpath imports</span>
+                <span>Tree-shakable package imports</span>
               </div>
             </div>
           </div>
@@ -61,7 +61,7 @@ export default function DocsIndexPage() {
                     </span>
                   </div>
                   <p>{doc.summary}</p>
-                  <code>{doc.importPath}</code>
+                  <code>{`import { ${doc.name} } from "@ai-hooks/react";`}</code>
                 </a>
               ))}
             </div>

@@ -34,7 +34,7 @@ export function SiteFooter() {
           <h4>Principles</h4>
           <a href="/#docs">No hosted API</a>
           <a href="/#docs">No telemetry by default</a>
-          <a href="/#docs">Subpath exports</a>
+          <a href="/#docs">Tree-shakable exports</a>
           <a href="/#docs">Mock demos first</a>
         </div>
       </div>

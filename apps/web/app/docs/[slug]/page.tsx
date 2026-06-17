@@ -44,6 +44,9 @@ export default async function HookDocPage({ params }: HookDocPageProps) {
     notFound();
   }
 
+  const rootImport = `import { ${doc.name} } from "@ai-hooks/react";`;
+  const subpathImport = `import { ${doc.name} } from "${doc.importPath}";`;
+
   return (
     <>
       <TopBanner />
@@ -61,8 +64,8 @@ export default async function HookDocPage({ params }: HookDocPageProps) {
               <div className="notice">
                 <span className="notice-icon">✓</span>
                 <p>
-                  <b>Import directly.</b> Use the subpath export to keep unused hooks out
-                  of the application bundle.
+                  <b>Composable hooks.</b> Each hook works on its own. Combine hooks only
+                  when the workflow needs shared state.
                 </p>
               </div>
             </div>
@@ -70,14 +73,17 @@ export default async function HookDocPage({ params }: HookDocPageProps) {
             <div className="utility-summary">
               <span className="sec-label">// import</span>
               <div className={styles.importBox}>
-                <code>{doc.importPath}</code>
+                <code>{rootImport}</code>
                 <CopyButton
                   className={styles.importCopy}
                   copiedLabel="Copied"
                   label="Copy"
-                  value={doc.importPath}
+                  value={rootImport}
                 />
               </div>
+              <p className={styles.importHint}>
+                Bundle-strict: <code>{subpathImport}</code>
+              </p>
             </div>
           </div>
         </section>

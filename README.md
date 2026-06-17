@@ -106,7 +106,7 @@ requests.
 
 ## Design Principles
 
-- Small imports through subpath exports.
+- Tree-shakable root exports with subpath exports for strict bundle control.
 - Provider-agnostic core APIs.
 - No hidden telemetry.
 - No project-owned model spend in public demos.
