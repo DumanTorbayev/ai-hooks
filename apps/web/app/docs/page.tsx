@@ -4,13 +4,15 @@ import { hookDocs } from "@/content/hook-docs";
 import { SiteFooter } from "@/components/home/site-footer";
 import { SiteHeader } from "@/components/home/site-header";
 import { TopBanner } from "@/components/home/top-banner";
+import { createPageMetadata } from "@/lib/metadata";
 import styles from "./docs.module.css";
 
-export const metadata: Metadata = {
-  title: "AI Hooks Docs",
+export const metadata: Metadata = createPageMetadata({
   description:
     "API notes and examples for the MVP React hooks in AI Hooks.",
-};
+  path: "/docs",
+  title: "Docs",
+});
 
 export default function DocsIndexPage() {
   return (

@@ -4,12 +4,14 @@ import { SiteFooter } from "@/components/home/site-footer";
 import { SiteHeader } from "@/components/home/site-header";
 import { TopBanner } from "@/components/home/top-banner";
 import { ProviderCompatibilityMatrix } from "@/components/provider-compatibility/provider-compatibility-matrix";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "Provider Compatibility Matrix - AI Hooks",
+export const metadata: Metadata = createPageMetadata({
   description:
     "Compare AI provider support for streaming, tool calls, structured output, vision, file input, and OpenAI-compatible API shapes.",
-};
+  path: "/provider-compatibility",
+  title: "Provider Compatibility Matrix",
+});
 
 export default function ProviderCompatibilityPage() {
   return (

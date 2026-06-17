@@ -4,12 +4,14 @@ import { LlmCostCalculator } from "@/components/cost-calculator/llm-cost-calcula
 import { SiteFooter } from "@/components/home/site-footer";
 import { SiteHeader } from "@/components/home/site-header";
 import { TopBanner } from "@/components/home/top-banner";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "LLM Cost Calculator - AI Hooks",
+export const metadata: Metadata = createPageMetadata({
   description:
     "Estimate LLM input tokens, output tokens, per-request cost, and monthly AI product spend without sending prompts to a provider.",
-};
+  path: "/cost-calculator",
+  title: "LLM Cost Calculator",
+});
 
 export default function CostCalculatorPage() {
   return (

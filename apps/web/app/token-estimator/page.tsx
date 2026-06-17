@@ -4,12 +4,14 @@ import { SiteFooter } from "@/components/home/site-footer";
 import { SiteHeader } from "@/components/home/site-header";
 import { TopBanner } from "@/components/home/top-banner";
 import { TokenEstimator } from "@/components/token-estimator/token-estimator";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "Token Estimator - AI Hooks",
+export const metadata: Metadata = createPageMetadata({
   description:
     "Estimate prompt tokens, planned output tokens, and context-window usage locally without sending text to an AI provider.",
-};
+  path: "/token-estimator",
+  title: "Token Estimator",
+});
 
 export default function TokenEstimatorPage() {
   return (
