@@ -29,11 +29,51 @@
 }
 
 .importBox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   margin-top: 12px;
   border: 1px solid var(--line);
   border-radius: 6px;
   background: var(--surface-2);
   padding: 12px;
+}
+
+.importBox code {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.importCopy,
+.codeCopy {
+  flex: 0 0 auto;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: var(--surface);
+  padding: 4px 9px;
+  color: var(--ink-2);
+  font-family: var(--mono);
+  font-size: 11px;
+}
+
+.importCopy {
+  margin-left: auto;
+}
+
+.importCopy:hover,
+.importCopy:focus-visible,
+.codeCopy:hover,
+.codeCopy:focus-visible {
+  border-color: var(--line-2);
+  background: var(--surface-2);
+  color: var(--ink);
+}
+
+.importCopy[data-state="copied"],
+.codeCopy[data-state="copied"] {
+  border-color: #c5ddd2;
+  background: var(--accent-soft);
+  color: var(--accent-ink);
 }
 
 .layout {
@@ -45,6 +85,7 @@
 
 .main {
   display: grid;
+  min-width: 0;
   gap: 28px;
 }
 
@@ -55,11 +96,54 @@
   font-size: 16px;
 }
 
-.code {
-  overflow-x: auto;
+.main section {
+  min-width: 0;
+}
+
+.codeBlock {
+  min-width: 0;
   margin: 10px 0 0;
   border: 1px solid var(--code-line);
   border-radius: 8px;
+  background: var(--code-bg);
+  overflow: hidden;
+}
+
+.codeHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid var(--code-line);
+  background: var(--code-bg-2);
+  padding: 8px 10px;
+  color: var(--code-mut);
+  font-family: var(--mono);
+  font-size: 11px;
+}
+
+.codeCopy {
+  margin-left: auto;
+  border-color: var(--code-line);
+  background: transparent;
+  color: var(--code-mut);
+}
+
+.codeCopy:hover,
+.codeCopy:focus-visible {
+  border-color: #3a4654;
+  background: #252934;
+  color: var(--code-ink);
+}
+
+.codeCopy[data-state="copied"] {
+  border-color: #477d68;
+  background: transparent;
+  color: #8dd6bd;
+}
+
+.code {
+  overflow-x: auto;
+  margin: 0;
   background: var(--code-bg);
   padding: 18px;
   color: var(--code-ink);
@@ -70,6 +154,7 @@
 
 .side {
   display: grid;
+  min-width: 0;
   gap: 12px;
 }
 
