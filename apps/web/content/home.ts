@@ -43,36 +43,28 @@ export const patterns = [
     tag: "useChatStream",
     preview: "stream",
     description: "Append deltas into your existing message component.",
+    href: "/docs/use-chat-stream",
   },
   {
     title: "Stop generation",
     tag: "useAbortController",
     preview: "stop",
     description: "Expose a real abort state instead of a fake disabled button.",
+    href: "/docs/use-abort-controller",
   },
   {
     title: "Tool call timeline",
     tag: "useToolCalls",
     preview: "timeline",
     description: "Show agent steps as they run, complete, or fail.",
+    href: "/docs/use-tool-calls",
   },
   {
     title: "File upload chat",
     tag: "useFileUpload",
     preview: "file",
     description: "Handle PDFs, images, and text before sending metadata.",
-  },
-  {
-    title: "Voice input",
-    tag: "useVoiceInput",
-    preview: "voice",
-    description: "Capture speech and turn it into composer text.",
-  },
-  {
-    title: "Citations layout",
-    tag: "useCitations",
-    preview: "cite",
-    description: "Render answer text with grounded source references.",
+    href: "/docs/use-file-upload",
   },
 ] as const;
 

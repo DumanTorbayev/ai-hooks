@@ -5,16 +5,11 @@ export function PlaygroundSection() {
         <div className="block-head">
           <div className="lhs">
             <span className="sec-label">// playground</span>
-            <h2>Mock playground first, real providers later.</h2>
+            <h2>Mock streaming playground.</h2>
             <p>
               The public site can demonstrate streaming, latency, stop states, and usage
               without spending project-owned model credits.
             </p>
-          </div>
-          <div className="rhs">
-            <a className="btn sm" href="#">
-              Full playground later →
-            </a>
           </div>
         </div>
 

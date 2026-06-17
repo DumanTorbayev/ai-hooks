@@ -2,11 +2,12 @@ import { estimateModelCost } from "@ai-hooks/core/cost";
 import { listModels } from "@ai-hooks/core/models";
 import { estimateTokens } from "@ai-hooks/core/tokens";
 
+import { CopyButton } from "@/components/copy-button";
+
 import { MockChatDemo } from "../mock-chat-demo";
 
 export function HeroSection() {
-  const prompt =
-    "Summarize this uploaded document and return answer sections with citations.";
+  const prompt = "Draft a short product update for an AI chat interface.";
   const tokens = estimateTokens({ text: prompt });
   const cost = estimateModelCost({
     model: "mock-fast",
@@ -28,7 +29,7 @@ export function HeroSection() {
           </h1>
           <p className="sub">
             Headless hooks, live mock streams, and copy-paste UI patterns for{" "}
-            <b>chat, tool calls, files, voice, citations, and model-aware UX</b>.
+            <b>chat, tool calls, file input, token usage, and model-aware UX</b>.
           </p>
 
           <div className="featurow" aria-label="Feature highlights">
@@ -47,9 +48,7 @@ export function HeroSection() {
                 npm i <span className="pkg">@ai-hooks/react</span>
               </code>
             </div>
-            <button className="copybtn" type="button">
-              Copy
-            </button>
+            <CopyButton className="copybtn" value="npm i @ai-hooks/react" />
           </div>
           <div className="cmd-meta">
             <span>

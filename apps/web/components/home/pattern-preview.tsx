@@ -51,33 +51,6 @@ export function PatternPreview({ type }: PatternPreviewProps) {
     );
   }
 
-  if (type === "voice") {
-    return (
-      <div className="pat-preview center">
-        <div className="mini-voice">
-          <i />
-          <i />
-          <i />
-          <i />
-          <i />
-        </div>
-        <div className="mini-stream muted">listening · transcribing...</div>
-      </div>
-    );
-  }
-
-  if (type === "cite") {
-    return (
-      <div className="pat-preview center">
-        <div className="mini-cite">
-          The index rebalanced in Q1 <sup>[1]</sup>, lifting small-cap weight{" "}
-          <sup>[2]</sup>.
-          <div className="src">[1] q1-report.pdf · p.4 · [2] rules.md</div>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="pat-preview">
       <div className="mini-bubble">Explain RAG in one line.</div>
