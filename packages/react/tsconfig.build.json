@@ -10,5 +10,6 @@
       "@ai-hooks/core/*": ["../core/dist/*.d.ts"]
     },
     "rootDir": "src"
-  }
+  },
+  "exclude": ["src/**/*.test.ts", "src/**/*.test.tsx"]
 }

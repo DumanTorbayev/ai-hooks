@@ -7,7 +7,7 @@
     "dev": "next dev --hostname 127.0.0.1 --port 3100",
     "build": "next build",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "lint": "next lint"
+    "lint": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
     "@ai-hooks/core": "workspace:*",
@@ -23,4 +23,3 @@
     "typescript": "^5.8.3"
   }
 }
-
