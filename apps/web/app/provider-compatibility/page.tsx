@@ -16,7 +16,7 @@ export default function ProviderCompatibilityPage() {
   return (
     <>
       <TopBanner />
-      <SiteHeader active="providers" />
+      <SiteHeader />
       <main>
         <section className="utility-hero">
           <div className="wrap utility-grid">

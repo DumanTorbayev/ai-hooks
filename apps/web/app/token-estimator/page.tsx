@@ -16,7 +16,7 @@ export default function TokenEstimatorPage() {
   return (
     <>
       <TopBanner />
-      <SiteHeader active="tokens" />
+      <SiteHeader />
       <main>
         <section className="utility-hero">
           <div className="wrap utility-grid">

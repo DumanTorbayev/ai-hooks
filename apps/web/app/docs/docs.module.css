@@ -98,6 +98,16 @@
   font-size: 10px;
 }
 
+.tagRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tagRow .cardMeta {
+  margin-bottom: 0;
+}
+
 .card code,
 .importBox code {
   color: var(--accent-ink);
@@ -307,6 +317,40 @@
   color: var(--ink-2);
 }
 
+.toolsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.toolCard {
+  display: block;
+  min-height: 130px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--surface);
+  padding: 15px;
+  box-shadow: var(--shadow);
+}
+
+.toolCard span {
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.toolCard p {
+  margin: 10px 0 0;
+  color: var(--ink-2);
+  font-size: 13px;
+}
+
+.toolCard:hover,
+.toolCard:focus-visible {
+  border-color: var(--line-2);
+  box-shadow: var(--shadow-lg);
+}
+
 .side {
   display: grid;
   min-width: 0;
@@ -372,10 +416,18 @@
   .recipeGrid {
     grid-template-columns: 1fr;
   }
+
+  .toolsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 720px) {
   .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .toolsGrid {
     grid-template-columns: 1fr;
   }
 }
