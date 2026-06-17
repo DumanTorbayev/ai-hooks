@@ -1,7 +1,7 @@
 import { hooks } from "@/content/home";
 import { CopyButton } from "@/components/copy-button";
 
-const chatSnippet = `import { useChatStream } from "@ai-hooks/react/use-chat-stream";
+const chatSnippet = `import { useChatStream } from "@ai-hooks/react";
 
 export function Chat() {
   const chat = useChatStream({
@@ -68,7 +68,7 @@ export function HooksSection() {
               <span className="ln">1</span>
               <span className="k">import</span> {"{ useChatStream }"}{" "}
               <span className="k">from</span>{" "}
-              <span className="s">"@ai-hooks/react/use-chat-stream"</span>
+              <span className="s">"@ai-hooks/react"</span>
               {"\n"}
               <span className="ln">2</span>
               {"\n"}
@@ -115,7 +115,7 @@ export function HooksSection() {
               <span className="n">3</span>
               <div>
                 <h4>Small imports</h4>
-                <p>Subpath exports keep unused hooks and adapters out of the bundle.</p>
+                <p>Root exports are tree-shakable; subpath exports stay available.</p>
               </div>
             </div>
           </div>
