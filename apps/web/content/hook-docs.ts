@@ -36,8 +36,7 @@ export const hookDocs = [
       "Production requests should go through your own API route.",
       "Mock transport is useful for docs, examples, and UI tests.",
     ],
-    example: `import { useChatStream } from "@ai-hooks/react/use-chat-stream";
-import { useConversationStorage } from "@ai-hooks/react/use-conversation-storage";
+    example: `import { useChatStream, useConversationStorage } from "@ai-hooks/react";
 
 export function ChatPanel() {
   const conversation = useConversationStorage({ key: "support-chat" });
@@ -81,8 +80,7 @@ export function ChatPanel() {
       "abort() cancels the current controller and prepares the next one.",
       "version can be used when you need to react to controller resets.",
     ],
-    example: `import { useAbortController } from "@ai-hooks/react/use-abort-controller";
-import { useChatStream } from "@ai-hooks/react/use-chat-stream";
+    example: `import { useAbortController, useChatStream } from "@ai-hooks/react";
 
 export function Composer() {
   const abort = useAbortController();
@@ -125,7 +123,7 @@ export function Composer() {
       "Messages use the portable AiMessage shape from @ai-hooks/core.",
       "Use server storage for production account history.",
     ],
-    example: `import { useConversationStorage } from "@ai-hooks/react/use-conversation-storage";
+    example: `import { useConversationStorage } from "@ai-hooks/react";
 
 export function Thread() {
   const conversation = useConversationStorage({ key: "demo-thread" });
@@ -158,8 +156,7 @@ export function Thread() {
       "It does not estimate tokens by itself.",
       "Pair it with provider usage metadata or estimateTokens().",
     ],
-    example: `import { useTokenUsage } from "@ai-hooks/react/use-token-usage";
-import { useChatStream } from "@ai-hooks/react/use-chat-stream";
+    example: `import { useChatStream, useTokenUsage } from "@ai-hooks/react";
 
 export function UsageAwareChat() {
   const usage = useTokenUsage();
@@ -196,7 +193,7 @@ export function UsageAwareChat() {
       "You can pass explicit pricing for custom or private models.",
       "The hook does not send usage data anywhere.",
     ],
-    example: `import { useModelCost } from "@ai-hooks/react/use-model-cost";
+    example: `import { useModelCost } from "@ai-hooks/react";
 
 export function CostMeter() {
   const cost = useModelCost({ model: "mock-fast" });
@@ -234,7 +231,7 @@ export function CostMeter() {
       "Use your own server route for parsing or provider upload.",
       "Validation runs in the browser before any network request.",
     ],
-    example: `import { useFileUpload } from "@ai-hooks/react/use-file-upload";
+    example: `import { useFileUpload } from "@ai-hooks/react";
 
 export function FilePicker() {
   const upload = useFileUpload({
@@ -274,7 +271,7 @@ export function FilePicker() {
       "schema exposes the registered tool names for UI/debug panels.",
       "Store provider-specific tool schemas outside the hook.",
     ],
-    example: `import { useToolCalls } from "@ai-hooks/react/use-tool-calls";
+    example: `import { useToolCalls } from "@ai-hooks/react";
 
 export function ToolTimeline() {
   const tools = useToolCalls({
