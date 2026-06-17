@@ -1,3 +1,5 @@
+import { SupportButton } from "@/components/support-button";
+
 export function SiteFooter() {
   return (
     <footer>
@@ -12,6 +14,7 @@ export function SiteFooter() {
               npm i <span className="pkg">@ai-hooks/react</span>
             </code>
           </div>
+          <SupportButton className="btn support sm foot-support" />
         </div>
         <div>
           <h4>Product</h4>

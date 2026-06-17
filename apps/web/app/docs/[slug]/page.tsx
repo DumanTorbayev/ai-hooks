@@ -5,6 +5,8 @@ import { SiteFooter } from "@/components/home/site-footer";
 import { SiteHeader } from "@/components/home/site-header";
 import { TopBanner } from "@/components/home/top-banner";
 import { CopyButton } from "@/components/copy-button";
+import { SupportButton } from "@/components/support-button";
+import { siteConfig } from "@/content/site";
 import { getHookDoc, hookDocs } from "@/content/hook-docs";
 import { createPageMetadata } from "@/lib/metadata";
 import styles from "../docs.module.css";
@@ -105,6 +107,14 @@ export default async function HookDocPage({ params }: HookDocPageProps) {
             </article>
 
             <aside className={styles.side}>
+              {siteConfig.supportUrl ? (
+                <section className={styles.supportCard}>
+                  <h2>Support AI Hooks</h2>
+                  <p>Help keep the docs, examples, and package work independent.</p>
+                  <SupportButton className="btn support sm" />
+                </section>
+              ) : null}
+
               <section>
                 <h2>Returns</h2>
                 <ul>

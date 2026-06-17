@@ -1,3 +1,5 @@
+import { SupportButton } from "@/components/support-button";
+
 type SiteHeaderProps = {
   active?: "home" | "cost" | "tokens" | "models" | "providers" | "docs";
 };
@@ -39,6 +41,7 @@ export function SiteHeader({ active = "home" }: SiteHeaderProps) {
         <a className="btn sm" href="/#docs">
           Scope
         </a>
+        <SupportButton className="btn support sm" />
         <a className="btn primary sm" href="/cost-calculator">
           Cost calculator
         </a>

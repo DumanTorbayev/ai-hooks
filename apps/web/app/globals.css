@@ -221,6 +221,19 @@ p {
   color: #ffffff;
 }
 
+.btn.support {
+  border-color: #d9bd84;
+  background: var(--amber-soft);
+  color: #764706;
+}
+
+.btn.support:hover,
+.btn.support:focus-visible {
+  border-color: #c99f4e;
+  background: #f0dfb8;
+  color: #5d3500;
+}
+
 .hero {
   border-bottom: 1px solid var(--line);
   padding: 46px 0 30px;
@@ -1863,6 +1876,13 @@ footer {
 
 .foot-install {
   max-width: 280px;
+}
+
+.foot-grid .foot-support {
+  display: inline-flex;
+  width: fit-content;
+  margin-top: 10px;
+  padding: 5px 10px;
 }
 
 .foot-install code {
