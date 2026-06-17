@@ -4,12 +4,14 @@ import { SiteFooter } from "@/components/home/site-footer";
 import { SiteHeader } from "@/components/home/site-header";
 import { TopBanner } from "@/components/home/top-banner";
 import { ModelComparisonTable } from "@/components/model-comparison/model-comparison-table";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "Model Comparison - AI Hooks",
+export const metadata: Metadata = createPageMetadata({
   description:
     "Compare demo model capabilities, context windows, and pricing fields used by AI Hooks utilities.",
-};
+  path: "/model-comparison",
+  title: "Model Comparison",
+});
 
 export default function ModelComparisonPage() {
   return (

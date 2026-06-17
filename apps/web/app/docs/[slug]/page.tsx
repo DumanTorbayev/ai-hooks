@@ -6,6 +6,7 @@ import { SiteHeader } from "@/components/home/site-header";
 import { TopBanner } from "@/components/home/top-banner";
 import { CopyButton } from "@/components/copy-button";
 import { getHookDoc, hookDocs } from "@/content/hook-docs";
+import { createPageMetadata } from "@/lib/metadata";
 import styles from "../docs.module.css";
 
 type HookDocPageProps = {
@@ -28,10 +29,11 @@ export async function generateMetadata({ params }: HookDocPageProps): Promise<Me
     return {};
   }
 
-  return {
-    title: `${doc.name} - AI Hooks`,
+  return createPageMetadata({
     description: doc.summary,
-  };
+    path: `/docs/${doc.slug}`,
+    title: doc.name,
+  });
 }
 
 export default async function HookDocPage({ params }: HookDocPageProps) {

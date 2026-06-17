@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
+
+import { createPageMetadata } from "@/lib/metadata";
 import "./globals.css";
 
-export const metadata: Metadata = {
-  title: "AI Hooks - React UI patterns for AI apps",
-  description:
-    "React hooks, UI patterns, demos, and implementation notes for production AI interfaces.",
-};
+export const metadata: Metadata = createPageMetadata();
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -14,4 +12,3 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   );
 }
-
