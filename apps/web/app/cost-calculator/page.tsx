@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 
 import { LlmCostCalculator } from "@/components/cost-calculator/llm-cost-calculator";
-import { SiteFooter } from "@/components/home/site-footer";
 import { SiteHeader } from "@/components/home/site-header";
 import { TopBanner } from "@/components/home/top-banner";
 import { createPageMetadata } from "@/lib/metadata";
@@ -58,7 +57,6 @@ export default function CostCalculatorPage() {
           </div>
         </section>
       </main>
-      <SiteFooter />
     </>
   );
 }

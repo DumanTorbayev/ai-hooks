@@ -1,10 +1,10 @@
 import { SupportButton } from "@/components/support-button";
 
 type SiteHeaderProps = {
-  active?: "home" | "cost" | "tokens" | "models" | "providers" | "docs";
+  active?: "cost" | "tokens" | "models" | "providers" | "docs";
 };
 
-export function SiteHeader({ active = "home" }: SiteHeaderProps) {
+export function SiteHeader({ active }: SiteHeaderProps) {
   return (
     <header className="nav">
       <div className="wrap nav-row">
@@ -13,17 +13,15 @@ export function SiteHeader({ active = "home" }: SiteHeaderProps) {
           AI Hooks <span className="ver">mvp</span>
         </a>
         <nav className="nav-links" aria-label="Primary navigation">
-          <a className={active === "home" ? "active" : undefined} href="/#hooks">
-            Hooks
+          <a className={active === "docs" ? "active" : undefined} href="/docs">
+            Docs
           </a>
-          <a href="/#patterns">Patterns</a>
           <a className={active === "cost" ? "active" : undefined} href="/cost-calculator">
-            Calculator
+            Cost
           </a>
           <a className={active === "tokens" ? "active" : undefined} href="/token-estimator">
             Tokens
           </a>
-          <a href="/#playground">Playground</a>
           <a className={active === "models" ? "active" : undefined} href="/model-comparison">
             Models
           </a>
@@ -33,17 +31,11 @@ export function SiteHeader({ active = "home" }: SiteHeaderProps) {
           >
             Providers
           </a>
-          <a className={active === "docs" ? "active" : undefined} href="/docs">
-            Docs
-          </a>
         </nav>
         <div className="nav-spacer" />
-        <a className="btn sm" href="/#docs">
-          Scope
-        </a>
         <SupportButton className="btn support sm" />
-        <a className="btn primary sm" href="/cost-calculator">
-          Cost calculator
+        <a className="btn primary sm" href="/docs">
+          Get started
         </a>
       </div>
     </header>

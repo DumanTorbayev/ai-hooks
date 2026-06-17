@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 
-import { SiteFooter } from "@/components/home/site-footer";
 import { SiteHeader } from "@/components/home/site-header";
 import { TopBanner } from "@/components/home/top-banner";
 import { TokenEstimator } from "@/components/token-estimator/token-estimator";
@@ -58,7 +57,6 @@ export default function TokenEstimatorPage() {
           </div>
         </section>
       </main>
-      <SiteFooter />
     </>
   );
 }

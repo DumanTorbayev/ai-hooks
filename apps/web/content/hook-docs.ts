@@ -2,12 +2,15 @@ export type HookDoc = {
   slug: string;
   name: string;
   status: "ready" | "beta";
+  category: "streaming" | "state" | "usage" | "files" | "agents";
   summary: string;
   importPath: string;
   purpose: string;
   returns: string[];
   options: string[];
   notes: string[];
+  recipes: string[];
+  related: string[];
   example: string;
 };
 
@@ -16,6 +19,7 @@ export const hookDocs = [
     slug: "use-chat-stream",
     name: "useChatStream",
     status: "ready",
+    category: "streaming",
     summary: "Stream assistant text into your own chat UI.",
     importPath: "@ai-hooks/react/use-chat-stream",
     purpose:
@@ -36,6 +40,12 @@ export const hookDocs = [
       "Production requests should go through your own API route.",
       "Mock transport is useful for docs, examples, and UI tests.",
     ],
+    recipes: [
+      "Connect to your own `/api/chat` route.",
+      "Append assistant deltas into any message store.",
+      "Pair with useAbortController for stop-generation UI.",
+    ],
+    related: ["useAbortController", "useConversationStorage", "useTokenUsage"],
     example: `import { useChatStream, useConversationStorage } from "@ai-hooks/react";
 
 export function ChatPanel() {
@@ -69,6 +79,7 @@ export function ChatPanel() {
     slug: "use-abort-controller",
     name: "useAbortController",
     status: "ready",
+    category: "streaming",
     summary: "Add real stop-generation behavior to streaming requests.",
     importPath: "@ai-hooks/react/use-abort-controller",
     purpose:
@@ -80,6 +91,12 @@ export function ChatPanel() {
       "abort() cancels the current controller and prepares the next one.",
       "version can be used when you need to react to controller resets.",
     ],
+    recipes: [
+      "Add a Stop button while a response is streaming.",
+      "Reset the signal after cancellation.",
+      "Use the same signal with your own fetch implementation.",
+    ],
+    related: ["useChatStream"],
     example: `import { useAbortController, useChatStream } from "@ai-hooks/react";
 
 export function Composer() {
@@ -100,6 +117,7 @@ export function Composer() {
     slug: "use-conversation-storage",
     name: "useConversationStorage",
     status: "ready",
+    category: "state",
     summary: "Persist conversation state in local storage.",
     importPath: "@ai-hooks/react/use-conversation-storage",
     purpose:
@@ -123,6 +141,12 @@ export function Composer() {
       "Messages use the portable AiMessage shape from @ai-hooks/core.",
       "Use server storage for production account history.",
     ],
+    recipes: [
+      "Persist a demo conversation in localStorage.",
+      "Seed examples with initial messages.",
+      "Swap storage in tests with a custom Storage implementation.",
+    ],
+    related: ["useChatStream"],
     example: `import { useConversationStorage } from "@ai-hooks/react";
 
 export function Thread() {
@@ -145,6 +169,7 @@ export function Thread() {
     slug: "use-token-usage",
     name: "useTokenUsage",
     status: "ready",
+    category: "usage",
     summary: "Track token usage as product state.",
     importPath: "@ai-hooks/react/use-token-usage",
     purpose:
@@ -156,6 +181,12 @@ export function Thread() {
       "It does not estimate tokens by itself.",
       "Pair it with provider usage metadata or estimateTokens().",
     ],
+    recipes: [
+      "Show session token counters beside a chat composer.",
+      "Accumulate usage from provider metadata.",
+      "Reset counters when a conversation is cleared.",
+    ],
+    related: ["useChatStream", "useModelCost"],
     example: `import { useChatStream, useTokenUsage } from "@ai-hooks/react";
 
 export function UsageAwareChat() {
@@ -178,6 +209,7 @@ export function UsageAwareChat() {
     slug: "use-model-cost",
     name: "useModelCost",
     status: "ready",
+    category: "usage",
     summary: "Estimate model spend from usage counters.",
     importPath: "@ai-hooks/react/use-model-cost",
     purpose:
@@ -193,6 +225,12 @@ export function UsageAwareChat() {
       "You can pass explicit pricing for custom or private models.",
       "The hook does not send usage data anywhere.",
     ],
+    recipes: [
+      "Display estimated request cost from usage counters.",
+      "Pass explicit pricing for private model routes.",
+      "Pair with the LLM cost calculator before production pricing pages.",
+    ],
+    related: ["useTokenUsage"],
     example: `import { useModelCost } from "@ai-hooks/react";
 
 export function CostMeter() {
@@ -216,6 +254,7 @@ export function CostMeter() {
     slug: "use-file-upload",
     name: "useFileUpload",
     status: "beta",
+    category: "files",
     summary: "Validate local files before an AI workflow uses them.",
     importPath: "@ai-hooks/react/use-file-upload",
     purpose:
@@ -231,6 +270,12 @@ export function CostMeter() {
       "Use your own server route for parsing or provider upload.",
       "Validation runs in the browser before any network request.",
     ],
+    recipes: [
+      "Validate file count and size before submit.",
+      "Keep upload UI state separate from provider file APIs.",
+      "Remove invalid files before calling your own route.",
+    ],
+    related: ["useChatStream"],
     example: `import { useFileUpload } from "@ai-hooks/react";
 
 export function FilePicker() {
@@ -260,6 +305,7 @@ export function FilePicker() {
     slug: "use-tool-calls",
     name: "useToolCalls",
     status: "beta",
+    category: "agents",
     summary: "Track tool call lifecycle for agent UI.",
     importPath: "@ai-hooks/react/use-tool-calls",
     purpose:
@@ -271,6 +317,12 @@ export function FilePicker() {
       "schema exposes the registered tool names for UI/debug panels.",
       "Store provider-specific tool schemas outside the hook.",
     ],
+    recipes: [
+      "Render active tool calls in an agent timeline.",
+      "Keep handler execution inside your app boundary.",
+      "Clear completed calls when a conversation resets.",
+    ],
+    related: ["useChatStream"],
     example: `import { useToolCalls } from "@ai-hooks/react";
 
 export function ToolTimeline() {

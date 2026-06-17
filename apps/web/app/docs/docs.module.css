@@ -4,6 +4,72 @@
   gap: 12px;
 }
 
+.catalogLayout {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.catalogSide {
+  position: sticky;
+  top: 76px;
+  display: grid;
+  gap: 12px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--surface);
+  padding: 14px;
+}
+
+.searchLabel {
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.searchInput {
+  width: 100%;
+  border: 1px solid var(--line-2);
+  border-radius: 6px;
+  background: var(--surface-2);
+  padding: 8px 10px;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 12px;
+}
+
+.categoryList {
+  display: grid;
+  gap: 4px;
+}
+
+.categoryList button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  padding: 7px 8px;
+  color: var(--ink-2);
+  font-size: 12px;
+  text-align: left;
+}
+
+.categoryList button:hover,
+.categoryList button:focus-visible,
+.categoryList .categoryActive {
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+}
+
+.categoryList span {
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+}
+
 .card {
   display: flex;
   min-height: 170px;
@@ -18,6 +84,18 @@
 .card p {
   flex: 1;
   color: var(--ink-2);
+}
+
+.cardMeta {
+  width: fit-content;
+  margin-bottom: 10px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--surface-2);
+  padding: 1px 6px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
 }
 
 .card code,
@@ -166,6 +244,69 @@
   line-height: 1.7;
 }
 
+.tableWrap {
+  overflow: hidden;
+  margin-top: 10px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--surface);
+}
+
+.apiTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.apiTable th,
+.apiTable td {
+  border-bottom: 1px solid var(--line);
+  padding: 10px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.apiTable tr:last-child td {
+  border-bottom: 0;
+}
+
+.apiTable th {
+  background: var(--surface-2);
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.apiTable code {
+  color: var(--accent-ink);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.recipeGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.recipe {
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--surface);
+  padding: 12px;
+  color: var(--ink-2);
+  font-size: 13px;
+}
+
+.noteList {
+  display: grid;
+  gap: 8px;
+  margin: 10px 0 0;
+  padding-left: 18px;
+  color: var(--ink-2);
+}
+
 .side {
   display: grid;
   min-width: 0;
@@ -209,13 +350,27 @@
   font-size: 11px;
 }
 
+.sideLink {
+  color: var(--accent-ink);
+  font-weight: 800;
+}
+
 @media (max-width: 960px) {
+  .catalogLayout,
   .layout {
     grid-template-columns: 1fr;
   }
 
+  .catalogSide {
+    position: static;
+  }
+
   .grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .recipeGrid {
+    grid-template-columns: 1fr;
   }
 }
 
