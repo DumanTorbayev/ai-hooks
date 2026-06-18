@@ -2,14 +2,14 @@
 
 import { useState } from "react";
 
-import { ExamplesIcon, IntroIcon } from "@/components/icons";
+import { IntroIcon } from "@/components/icons";
 import { PlanningToolIcon } from "@/components/site/tool-icon";
 import { categoryLabels, categoryOrder, statusClass, statusLabel } from "@/content/hook-meta";
 import { hookDocs } from "@/content/hook-docs";
 import { planningTools, type PlanningToolId } from "@/content/tools";
 
 type SidebarNavProps = {
-  active?: { kind: "docs" | "examples" } | { kind: "hook"; slug: string } | { id?: PlanningToolId; kind: "tools" };
+  active?: { kind: "docs" } | { kind: "hook"; slug: string } | { id?: PlanningToolId; kind: "tools" };
 };
 
 export function SidebarNav({ active }: SidebarNavProps) {
@@ -30,9 +30,6 @@ export function SidebarNav({ active }: SidebarNavProps) {
             <div className="lbl">Get started</div>
             <a className={active?.kind === "docs" ? "on" : undefined} href="/docs">
               <IntroIcon /> Introduction
-            </a>
-            <a className={active?.kind === "examples" ? "on" : undefined} href="/examples">
-              <ExamplesIcon /> Examples
             </a>
           </div>
 

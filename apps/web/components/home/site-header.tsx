@@ -7,7 +7,7 @@ import { CommandPalette } from "@/components/site/command-palette";
 import { ThemeToggle } from "@/components/site/theme-toggle";
 
 type SiteHeaderProps = {
-  active?: "docs" | "examples";
+  active?: "docs";
 };
 
 export function SiteHeader({ active }: SiteHeaderProps) {
@@ -38,9 +38,6 @@ export function SiteHeader({ active }: SiteHeaderProps) {
           <nav className="hd-nav" aria-label="Primary navigation">
             <a className={active === "docs" ? "active" : undefined} href="/docs">
               Docs
-            </a>
-            <a className={active === "examples" ? "active" : undefined} href="/examples">
-              Examples
             </a>
           </nav>
 
@@ -75,9 +72,6 @@ export function SiteHeader({ active }: SiteHeaderProps) {
         <div className={`wrap m-menu ${mobileOpen ? "open" : ""}`}>
           <a href="/docs" onClick={() => setMobileOpen(false)}>
             Docs
-          </a>
-          <a href="/examples" onClick={() => setMobileOpen(false)}>
-            Examples
           </a>
           <a
             href="https://github.com/DumanTorbayev/ai-hooks"

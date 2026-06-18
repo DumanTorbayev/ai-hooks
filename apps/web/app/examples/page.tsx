@@ -17,9 +17,9 @@ const cloneCommand = "npx @ai-hooks/example next-basic-chat";
 export default function ExamplesPage() {
   return (
     <>
-      <SiteHeader active="examples" />
+      <SiteHeader />
       <main className="wrap doc-layout">
-        <SidebarNav active={{ kind: "examples" }} />
+        <SidebarNav />
         <div className="doc-main">
           <div className="crumbs">
             <a href="/docs">Docs</a> / <span>Examples</span>

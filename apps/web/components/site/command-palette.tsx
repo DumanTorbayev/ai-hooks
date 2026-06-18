@@ -16,7 +16,6 @@ type PaletteItem = {
 
 const pageItems: PaletteItem[] = [
   { description: "Documentation introduction", group: "Pages", href: "/docs", label: "Introduction" },
-  { description: "Next Basic Chat", group: "Pages", href: "/examples", label: "Examples" },
 ];
 
 export function CommandPalette({

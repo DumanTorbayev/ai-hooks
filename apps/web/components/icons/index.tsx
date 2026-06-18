@@ -134,14 +134,6 @@ export function IntroIcon(props: IconProps) {
   );
 }
 
-export function ExamplesIcon(props: IconProps) {
-  return (
-    <svg {...iconProps({ size: 14, ...props }, 1.4)}>
-      <path d="M6 4 2.5 8 6 12M10 4l3.5 4L10 12" />
-    </svg>
-  );
-}
-
 export function CostIcon(props: IconProps) {
   return (
     <svg {...iconProps({ size: 14, ...props }, 1.4)}>
