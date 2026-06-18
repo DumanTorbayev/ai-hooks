@@ -1982,6 +1982,14 @@ code {
   font-weight: 700;
 }
 
+.site-header .glyph svg,
+.hd-nav a svg,
+.kbtn svg,
+.gh-icon svg,
+.hamburger svg {
+  flex-shrink: 0;
+}
+
 .site-header .ver {
   border: 1px solid var(--line-2);
   border-radius: 4px;
@@ -2081,11 +2089,13 @@ code {
 }
 
 .icon-toggle .moon {
-  display: block;
+  display: grid;
+  place-items: center;
 }
 
 [data-theme="dark"] .icon-toggle .sun {
-  display: block;
+  display: grid;
+  place-items: center;
 }
 
 [data-theme="dark"] .icon-toggle .moon {
@@ -2276,6 +2286,16 @@ code {
   color: var(--c-key);
 }
 
+.copybtn svg,
+.cp-copy svg,
+.send svg,
+.stopb svg,
+.coffee-fab svg,
+.home-note svg,
+.tcard .ic svg {
+  flex-shrink: 0;
+}
+
 .codepanel {
   overflow: hidden;
   border: 1px solid var(--code-line);
@@ -2461,6 +2481,11 @@ table.tbl td .ptype {
   font-weight: 600;
 }
 
+.docnav .sub svg {
+  flex-shrink: 0;
+  color: var(--accent);
+}
+
 .docnav .sub .n {
   color: var(--muted);
   font-family: var(--mono);
@@ -2495,20 +2520,13 @@ table.tbl td .ptype {
   font-size: 12px;
 }
 
-.docnav a.hk .st {
-  width: 6px;
-  height: 6px;
+.docnav a svg {
   flex-shrink: 0;
-  margin-left: auto;
-  border-radius: 50%;
+  color: var(--muted);
 }
 
-.docnav a.hk .st.stable {
-  background: var(--green);
-}
-
-.docnav a.hk .st.beta {
-  background: var(--amber);
+.docnav a.on svg {
+  color: var(--accent);
 }
 
 .nav-toggle {
@@ -2592,6 +2610,7 @@ table.tbl td .ptype {
 }
 
 .principle .ic {
+  flex-shrink: 0;
   color: var(--accent);
 }
 

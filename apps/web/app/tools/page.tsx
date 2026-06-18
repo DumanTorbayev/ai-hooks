@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { SiteHeader } from "@/components/home/site-header";
 import { TopBanner } from "@/components/home/top-banner";
 import { SidebarNav } from "@/components/site/sidebar-nav";
+import { PlanningToolIcon } from "@/components/site/tool-icon";
 import { planningTools } from "@/content/tools";
 import { createPageMetadata } from "@/lib/metadata";
 
@@ -31,7 +32,9 @@ export default function ToolsIndexPage() {
           <div className="tool-cards">
             {planningTools.map((tool) => (
               <a className="tcard" href={`/tools/${tool.id}`} key={tool.id}>
-                <div className="ic">{tool.name.slice(0, 1)}</div>
+                <div className="ic">
+                  <PlanningToolIcon id={tool.id} size={17} />
+                </div>
                 <div>
                   <h4>{tool.name}</h4>
                   <p>{tool.description}</p>
@@ -45,4 +48,3 @@ export default function ToolsIndexPage() {
     </>
   );
 }
-
