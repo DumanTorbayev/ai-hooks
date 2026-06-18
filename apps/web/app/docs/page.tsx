@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { KeyRound, PackageCheck, PanelsTopLeft, Unplug } from "lucide-react";
 
 import { SiteHeader } from "@/components/home/site-header";
 import { TopBanner } from "@/components/home/top-banner";
@@ -35,29 +34,25 @@ export default function DocsIndexPage() {
           <div className="principles">
             <div className="principle">
               <h4>
-                <PanelsTopLeft aria-hidden="true" className="ic" size={15} strokeWidth={1.8} />
-                Headless
+                <span className="ic">⌘</span> Headless
               </h4>
               <p>Hooks return state and actions only. You render every pixel.</p>
             </div>
             <div className="principle">
               <h4>
-                <KeyRound aria-hidden="true" className="ic" size={15} strokeWidth={1.8} />
-                Your keys
+                <span className="ic">⌘</span> Your keys
               </h4>
               <p>The package never proxies model calls. Keys live on your server.</p>
             </div>
             <div className="principle">
               <h4>
-                <Unplug aria-hidden="true" className="ic" size={15} strokeWidth={1.8} />
-                Provider-agnostic
+                <span className="ic">⌘</span> Provider-agnostic
               </h4>
               <p>Swap models across providers without touching UI code.</p>
             </div>
             <div className="principle">
               <h4>
-                <PackageCheck aria-hidden="true" className="ic" size={15} strokeWidth={1.8} />
-                Zero deps
+                <span className="ic">⌘</span> Zero deps
               </h4>
               <p>Tree-shakeable, small, and framework-friendly.</p>
             </div>

@@ -1,10 +1,10 @@
 "use client";
 
-import { BookOpen, Boxes, FileText } from "lucide-react";
 import { useState } from "react";
 
+import { ExamplesIcon, IntroIcon } from "@/components/icons";
 import { PlanningToolIcon } from "@/components/site/tool-icon";
-import { categoryLabels, categoryOrder } from "@/content/hook-meta";
+import { categoryLabels, categoryOrder, statusClass, statusLabel } from "@/content/hook-meta";
 import { hookDocs } from "@/content/hook-docs";
 import { planningTools, type PlanningToolId } from "@/content/tools";
 
@@ -29,10 +29,10 @@ export function SidebarNav({ active }: SidebarNavProps) {
           <div className="grp">
             <div className="lbl">Get started</div>
             <a className={active?.kind === "docs" ? "on" : undefined} href="/docs">
-              <BookOpen aria-hidden="true" size={14} strokeWidth={1.8} /> Overview
+              <IntroIcon /> Overview
             </a>
             <a className={active?.kind === "examples" ? "on" : undefined} href="/examples">
-              <FileText aria-hidden="true" size={14} strokeWidth={1.8} /> Examples
+              <ExamplesIcon /> Examples
             </a>
           </div>
 
@@ -48,7 +48,6 @@ export function SidebarNav({ active }: SidebarNavProps) {
               return (
                 <div key={category}>
                   <div className="sub">
-                    <Boxes aria-hidden="true" size={13} strokeWidth={1.8} />
                     {category} <span className="n">{items.length}</span>
                   </div>
                   {items.map((doc) => (
@@ -60,6 +59,7 @@ export function SidebarNav({ active }: SidebarNavProps) {
                       key={doc.slug}
                     >
                       {doc.name}
+                      <span className={`st ${statusClass(doc.status)}`} title={statusLabel(doc.status)} />
                     </a>
                   ))}
                 </div>

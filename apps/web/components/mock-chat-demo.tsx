@@ -1,7 +1,8 @@
 "use client";
 
-import { SendHorizontal, Square } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+
+import { SendIcon, StopIcon } from "@/components/icons";
 
 type Message = {
   content: string;
@@ -156,7 +157,7 @@ export function MockChatDemo() {
           />
           {isStreaming ? (
             <button className="stopb on" onClick={() => stop()} type="button">
-              <Square aria-hidden="true" fill="currentColor" size={9} strokeWidth={1.8} /> Stop
+              <StopIcon /> Stop
             </button>
           ) : (
             <button
@@ -166,7 +167,7 @@ export function MockChatDemo() {
               onClick={send}
               type="button"
             >
-              <SendHorizontal aria-hidden="true" size={14} strokeWidth={1.8} />
+              <SendIcon />
             </button>
           )}
         </div>

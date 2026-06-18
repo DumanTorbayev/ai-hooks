@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { SiteHeader } from "@/components/home/site-header";
 import { TopBanner } from "@/components/home/top-banner";
 import { CopyButton } from "@/components/copy-button";
+import { InfoIcon } from "@/components/icons";
 import { SidebarNav } from "@/components/site/sidebar-nav";
 import { createPageMetadata } from "@/lib/metadata";
 
@@ -31,7 +32,7 @@ export default function ExamplesPage() {
             today — more appear here only once they ship.
           </p>
           <div className="ex-note">
-            <span aria-hidden="true">ⓘ</span>
+            <InfoIcon />
             <div>
               Examples run on a <b>mock streaming engine by default</b> so you can clone
               and run them with no keys. To use a real model, add your own provider key
@@ -113,4 +114,3 @@ export default function ExamplesPage() {
     </>
   );
 }
-

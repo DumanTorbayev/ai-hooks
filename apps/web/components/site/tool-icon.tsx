@@ -1,5 +1,4 @@
-import { Binary, Calculator, GitCompareArrows, Table2 } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
+import { CostIcon, ModelsIcon, ProvidersIcon, TokensIcon } from "@/components/icons";
 
 import type { PlanningToolId } from "@/content/tools";
 
@@ -10,12 +9,12 @@ type PlanningToolIconProps = {
 
 export function PlanningToolIcon({ id, size = 15 }: PlanningToolIconProps) {
   const icons = {
-    cost: Calculator,
-    models: GitCompareArrows,
-    providers: Table2,
-    tokens: Binary,
-  } satisfies Record<PlanningToolId, LucideIcon>;
+    cost: CostIcon,
+    models: ModelsIcon,
+    providers: ProvidersIcon,
+    tokens: TokensIcon,
+  } satisfies Record<PlanningToolId, typeof CostIcon>;
   const Icon = icons[id];
 
-  return <Icon aria-hidden="true" size={size} strokeWidth={1.8} />;
+  return <Icon size={size} />;
 }
