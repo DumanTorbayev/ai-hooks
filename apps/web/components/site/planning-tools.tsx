@@ -4,35 +4,39 @@ import type { ReactNode } from "react";
 import { useMemo, useState } from "react";
 
 import {
-  modelCapabilities,
-  modelPricing,
+  defaultModelId,
+  modelCatalog,
+  providerCapabilityBadge,
   providerMatrix,
+  providerLabels,
+  supportBadge,
   type CapabilityLevel,
 } from "@/content/tools";
 
-const modelIds = Object.keys(modelPricing) as Array<keyof typeof modelPricing>;
-
 export function CostCalc() {
-  const [model, setModel] = useState<keyof typeof modelPricing>("gpt-4o-mini");
+  const [model, setModel] = useState(defaultModelId);
   const [requests, setRequests] = useState(1);
   const [inputTokens, setInputTokens] = useState(1200);
   const [outputTokens, setOutputTokens] = useState(400);
-  const pricing = modelPricing[model];
-  const inputCost = (inputTokens / 1_000_000) * pricing.input * requests;
-  const outputCost = (outputTokens / 1_000_000) * pricing.output * requests;
+  const selectedModel = modelCatalog.find((item) => item.id === model) ?? modelCatalog[0];
+
+  if (!selectedModel) {
+    return <p className="tv-disclaim">No source-backed model pricing is available.</p>;
+  }
+
+  const { pricing } = selectedModel;
+  const inputCost = (inputTokens / 1_000_000) * pricing.inputPerMillionUsd * requests;
+  const outputCost = (outputTokens / 1_000_000) * pricing.outputPerMillionUsd * requests;
 
   return (
     <>
       <div className="calc">
         <div className="cfields">
           <Field label="Model">
-            <select
-              onChange={(event) => setModel(event.target.value as keyof typeof modelPricing)}
-              value={model}
-            >
-              {modelIds.map((id) => (
-                <option key={id} value={id}>
-                  {id} · {modelPricing[id].provider}
+            <select onChange={(event) => setModel(event.target.value)} value={selectedModel.id}>
+              {modelCatalog.map((item) => (
+                <option key={item.id} value={item.id}>
+                  {item.displayName} · {providerLabels[item.provider]}
                 </option>
               ))}
             </select>
@@ -48,8 +52,11 @@ export function CostCalc() {
         </div>
       </div>
       <p className="tv-disclaim">
-        cost = (input/1e6 × input_rate + output/1e6 × output_rate) × requests ·
-        pricing is indicative and overridable in <code>useModelCost</code>.
+        Source-backed pricing checked {selectedModel.checkedAt}. Formula: (input/1e6 ×
+        input_rate + output/1e6 × output_rate) × requests.{" "}
+        <a href={selectedModel.sourceUrls[0]} rel="noreferrer" target="_blank">
+          Official source
+        </a>
       </p>
     </>
   );
@@ -85,58 +92,67 @@ export function TokenEstimator() {
 }
 
 export function ModelCompare() {
-  const [selected, setSelected] = useState<keyof typeof modelPricing>("gpt-4o-mini");
+  const [selected, setSelected] = useState(defaultModelId);
+  const selectedModel = modelCatalog.find((item) => item.id === selected) ?? modelCatalog[0];
 
   return (
     <>
       <div className="model-grid">
-        {modelIds.map((id) => {
-          const pricing = modelPricing[id];
-          const caps = modelCapabilities[id];
-
+        {modelCatalog.map((item) => {
           return (
             <button
-              className={`mcard ${selected === id ? "sel" : ""}`}
-              key={id}
-              onClick={() => setSelected(id)}
+              className={`mcard ${selected === item.id ? "sel" : ""}`}
+              key={item.id}
+              onClick={() => setSelected(item.id)}
               type="button"
             >
               <div className="mcard-head">
                 <div>
-                  <h3>{id}</h3>
-                  <p>{pricing.provider}</p>
+                  <h3>{item.displayName}</h3>
+                  <p>{item.id}</p>
                 </div>
                 <span className="radio-check" />
               </div>
               <div className="mrow">
+                <span>provider</span>
+                <b>{providerLabels[item.provider]}</b>
+              </div>
+              <div className="mrow">
                 <span>context</span>
-                <b>{pricing.context}</b>
+                <b>{formatContext(item.contextWindow)}</b>
               </div>
               <div className="mrow">
                 <span>input / 1M</span>
-                <b>${pricing.input}</b>
+                <b>{formatUsdRate(item.pricing.inputPerMillionUsd)}</b>
               </div>
               <div className="mrow">
                 <span>output / 1M</span>
-                <b>${pricing.output}</b>
+                <b>{formatUsdRate(item.pricing.outputPerMillionUsd)}</b>
               </div>
               <div className="mrow">
                 <span>stream</span>
-                <CapabilityBadge value={caps.stream} />
+                <CapabilityBadge value={supportBadge(item.supports.streaming)} />
               </div>
               <div className="mrow">
                 <span>tools</span>
-                <CapabilityBadge value={caps.tools} />
+                <CapabilityBadge value={supportBadge(item.supports.toolCalling)} />
               </div>
               <div className="mrow">
                 <span>vision</span>
-                <CapabilityBadge value={caps.vision} />
+                <CapabilityBadge value={supportBadge(item.supports.vision)} />
               </div>
             </button>
           );
         })}
       </div>
-      <p className="tv-disclaim">Selected: {selected}. Verify current pricing with the provider.</p>
+      {selectedModel ? (
+        <p className="tv-disclaim">
+          Selected: {selectedModel.id}. Checked {selectedModel.checkedAt}.{" "}
+          <a href={selectedModel.sourceUrls[0]} rel="noreferrer" target="_blank">
+            Official source
+          </a>
+        </p>
+      ) : null}
     </>
   );
 }
@@ -158,22 +174,22 @@ export function ProviderMatrix() {
             </thead>
             <tbody>
               {providerMatrix.map((provider) => (
-                <tr key={provider.name}>
+                <tr key={provider.id}>
                   <td>
-                    <span className="pname">{provider.name}</span>
-                    <div className="mono muted">{provider.model}</div>
+                    <span className="pname">{provider.displayName}</span>
+                    <div className="mono muted">{provider.apiStyle}</div>
                   </td>
                   <td>
-                    <CapabilityBadge value={provider.streaming} />
+                    <CapabilityBadge value={providerCapabilityBadge(provider.capabilities.streaming.level)} />
                   </td>
                   <td>
-                    <CapabilityBadge value={provider.tools} />
+                    <CapabilityBadge value={providerCapabilityBadge(provider.capabilities.toolCalling.level)} />
                   </td>
                   <td>
-                    <CapabilityBadge value={provider.vision} />
+                    <CapabilityBadge value={providerCapabilityBadge(provider.capabilities.visionInput.level)} />
                   </td>
                   <td>
-                    <CapabilityBadge value={provider.json} />
+                    <CapabilityBadge value={providerCapabilityBadge(provider.capabilities.structuredOutput.level)} />
                   </td>
                 </tr>
               ))}
@@ -182,8 +198,8 @@ export function ProviderMatrix() {
         </div>
       </div>
       <p className="tv-disclaim">
-        AI Hooks does not bundle provider adapters — you wire your own routes. Capability
-        data is indicative and should be verified before publication.
+        AI Hooks does not bundle provider adapters. Provider capabilities are source-backed
+        planning data, not package runtime behavior.
       </p>
     </>
   );
@@ -247,4 +263,23 @@ function CapabilityBadge({ value }: { value: CapabilityLevel }) {
 
 function formatUsd(value: number) {
   return `$${value.toFixed(4)}`;
+}
+
+function formatUsdRate(value: number) {
+  return `$${value.toLocaleString("en-US", {
+    maximumFractionDigits: 4,
+    minimumFractionDigits: value < 1 ? 2 : 0,
+  })}`;
+}
+
+function formatContext(value: number | undefined) {
+  if (!value) {
+    return "not listed";
+  }
+
+  if (value >= 1_000_000) {
+    return `${value / 1_000_000}M`;
+  }
+
+  return `${Math.round(value / 1000)}k`;
 }
