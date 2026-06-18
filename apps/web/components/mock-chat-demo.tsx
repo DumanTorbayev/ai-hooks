@@ -1,5 +1,6 @@
 "use client";
 
+import { SendHorizontal, Square } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 type Message = {
@@ -155,7 +156,7 @@ export function MockChatDemo() {
           />
           {isStreaming ? (
             <button className="stopb on" onClick={() => stop()} type="button">
-              ■ Stop
+              <Square aria-hidden="true" fill="currentColor" size={9} strokeWidth={1.8} /> Stop
             </button>
           ) : (
             <button
@@ -165,7 +166,7 @@ export function MockChatDemo() {
               onClick={send}
               type="button"
             >
-              →
+              <SendHorizontal aria-hidden="true" size={14} strokeWidth={1.8} />
             </button>
           )}
         </div>
@@ -196,4 +197,3 @@ function renderInlineCode(value: string) {
     return <span key={index}>{chunk}</span>;
   });
 }
-

@@ -1,5 +1,6 @@
 "use client";
 
+import { Check, Copy, RotateCcw } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 type CopyButtonProps = {
@@ -45,6 +46,7 @@ export function CopyButton({
   }
 
   const text = state === "copied" ? copiedLabel : state === "failed" ? "Retry" : label;
+  const Icon = state === "copied" ? Check : state === "failed" ? RotateCcw : Copy;
 
   return (
     <button
@@ -56,7 +58,8 @@ export function CopyButton({
       }}
       type="button"
     >
-      {text}
+      <Icon aria-hidden="true" size={13} strokeWidth={1.8} />
+      <span>{text}</span>
     </button>
   );
 }

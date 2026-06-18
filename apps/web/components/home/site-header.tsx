@@ -1,5 +1,6 @@
 "use client";
 
+import { Command, ExternalLink, GitBranch, Menu, Search } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { CommandPalette } from "@/components/site/command-palette";
@@ -29,7 +30,9 @@ export function SiteHeader({ active }: SiteHeaderProps) {
     <header className="site-header">
       <div className="wrap hd-row">
         <a className="brand" href="/">
-          <span className="glyph">⌘</span>
+          <span className="glyph">
+            <Command aria-hidden="true" size={14} strokeWidth={2.1} />
+          </span>
           <span>AI Hooks</span>
           <span className="ver">v2.4</span>
         </a>
@@ -42,7 +45,7 @@ export function SiteHeader({ active }: SiteHeaderProps) {
             Examples
           </a>
           <a href="https://github.com/DumanTorbayev/ai-hooks" rel="noreferrer" target="_blank">
-            GitHub ↗
+            GitHub <ExternalLink aria-hidden="true" size={12} strokeWidth={1.8} />
           </a>
         </nav>
 
@@ -50,10 +53,7 @@ export function SiteHeader({ active }: SiteHeaderProps) {
 
         <div className="hd-right">
           <button className="kbtn" onClick={() => setPaletteOpen(true)} type="button">
-            <svg aria-hidden="true" fill="none" height="13" viewBox="0 0 16 16" width="13">
-              <circle cx="7" cy="7" r="4.5" stroke="currentColor" strokeWidth="1.5" />
-              <path d="M10.5 10.5L14 14" stroke="currentColor" strokeWidth="1.5" />
-            </svg>
+            <Search aria-hidden="true" size={13} strokeWidth={1.8} />
             Search docs <span className="kbd">⌘K</span>
           </button>
           <ThemeToggle />
@@ -64,7 +64,7 @@ export function SiteHeader({ active }: SiteHeaderProps) {
             rel="noreferrer"
             target="_blank"
           >
-            GH
+            <GitBranch aria-hidden="true" size={16} strokeWidth={1.8} />
           </a>
           <button
             aria-label="Open mobile menu"
@@ -72,7 +72,7 @@ export function SiteHeader({ active }: SiteHeaderProps) {
             onClick={() => setMobileOpen((current) => !current)}
             type="button"
           >
-            ☰
+            <Menu aria-hidden="true" size={17} strokeWidth={1.8} />
           </button>
         </div>
       </div>
@@ -98,4 +98,3 @@ export function SiteHeader({ active }: SiteHeaderProps) {
     </header>
   );
 }
-

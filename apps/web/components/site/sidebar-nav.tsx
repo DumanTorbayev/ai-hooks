@@ -1,8 +1,10 @@
 "use client";
 
+import { BookOpen, Boxes, FileText } from "lucide-react";
 import { useState } from "react";
 
-import { categoryLabels, categoryOrder, statusClass, statusLabel } from "@/content/hook-meta";
+import { PlanningToolIcon } from "@/components/site/tool-icon";
+import { categoryLabels, categoryOrder } from "@/content/hook-meta";
 import { hookDocs } from "@/content/hook-docs";
 import { planningTools, type PlanningToolId } from "@/content/tools";
 
@@ -27,10 +29,10 @@ export function SidebarNav({ active }: SidebarNavProps) {
           <div className="grp">
             <div className="lbl">Get started</div>
             <a className={active?.kind === "docs" ? "on" : undefined} href="/docs">
-              <span aria-hidden="true">□</span> Overview
+              <BookOpen aria-hidden="true" size={14} strokeWidth={1.8} /> Overview
             </a>
             <a className={active?.kind === "examples" ? "on" : undefined} href="/examples">
-              <span aria-hidden="true">◇</span> Examples
+              <FileText aria-hidden="true" size={14} strokeWidth={1.8} /> Examples
             </a>
           </div>
 
@@ -46,6 +48,7 @@ export function SidebarNav({ active }: SidebarNavProps) {
               return (
                 <div key={category}>
                   <div className="sub">
+                    <Boxes aria-hidden="true" size={13} strokeWidth={1.8} />
                     {category} <span className="n">{items.length}</span>
                   </div>
                   {items.map((doc) => (
@@ -57,7 +60,6 @@ export function SidebarNav({ active }: SidebarNavProps) {
                       key={doc.slug}
                     >
                       {doc.name}
-                      <span className={`st ${statusClass(doc.status)}`} title={statusLabel(doc.status)} />
                     </a>
                   ))}
                 </div>
@@ -73,7 +75,7 @@ export function SidebarNav({ active }: SidebarNavProps) {
                 href={`/tools/${tool.id}`}
                 key={tool.id}
               >
-                <span aria-hidden="true">{toolGlyph(tool.id)}</span>
+                <PlanningToolIcon id={tool.id} />
                 {tool.name}
               </a>
             ))}
@@ -82,15 +84,4 @@ export function SidebarNav({ active }: SidebarNavProps) {
       </aside>
     </>
   );
-}
-
-function toolGlyph(id: PlanningToolId) {
-  const glyphs: Record<PlanningToolId, string> = {
-    cost: "$",
-    models: "▦",
-    providers: "▤",
-    tokens: "▭",
-  };
-
-  return glyphs[id];
 }

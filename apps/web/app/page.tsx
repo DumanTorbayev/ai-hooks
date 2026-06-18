@@ -1,3 +1,5 @@
+import { ShieldCheck } from "lucide-react";
+
 import { SiteHeader } from "@/components/home/site-header";
 import { TopBanner } from "@/components/home/top-banner";
 import { MockChatDemo } from "@/components/mock-chat-demo";
@@ -31,7 +33,7 @@ export default function HomePage() {
                 </a>
               </div>
               <div className="home-note">
-                <span aria-hidden="true">✓</span>
+                <ShieldCheck aria-hidden="true" size={15} strokeWidth={1.8} />
                 Demos here run on a local mock stream. No keys, no network, no spend.
               </div>
             </div>
