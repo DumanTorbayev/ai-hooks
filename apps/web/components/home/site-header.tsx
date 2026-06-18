@@ -33,7 +33,6 @@ export function SiteHeader({ active }: SiteHeaderProps) {
           <a className="brand" href="/">
             <span className="glyph">⌘</span>
             <span>AI Hooks</span>
-            <span className="ver">v2.4</span>
           </a>
 
           <nav className="hd-nav" aria-label="Primary navigation">

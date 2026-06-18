@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { CodePanel } from "@/components/site/code-panel";
 import { SiteHeader } from "@/components/home/site-header";
 import { SidebarNav } from "@/components/site/sidebar-nav";
 import { hookDocs } from "@/content/hook-docs";
@@ -28,6 +29,23 @@ export default function DocsIndexPage() {
             product interfaces. Find a hook in the sidebar, read its API, copy the
             usage, and wire it to <b>your own server route and provider key</b>.
           </p>
+
+          <section className="doc-start" aria-labelledby="quick-start">
+            <h2 id="quick-start">Start here</h2>
+            <div className="doc-start-grid">
+              <div>
+                <h3>Install</h3>
+                <CodePanel code="npm i @ai-hooks/react" file="terminal" />
+              </div>
+              <div>
+                <h3>Import</h3>
+                <CodePanel
+                  code={`import { useChatStream } from "@ai-hooks/react";`}
+                  file="example.tsx"
+                />
+              </div>
+            </div>
+          </section>
 
           <div className="principles">
             <div className="principle">

@@ -100,21 +100,24 @@ export default async function HookDocPage({ params }: HookDocPageProps) {
                     </tr>
                   </thead>
                   <tbody>
-                    {doc.options.map((item) => {
-                      const row = splitApiRow(item);
-                      return (
-                        <tr key={item}>
+                    {doc.options.length ? (
+                      doc.options.map((item) => (
+                        <tr key={item.name}>
                           <td>
-                            <span className="pname">{row.name}</span>
+                            <span className="pname">{item.name}</span>
                           </td>
                           <td>
-                            <span className="ptype">configured</span>
+                            <span className="ptype">{item.type}</span>
                           </td>
-                          <td className="mono">—</td>
-                          <td>{row.description}</td>
+                          <td className="mono">{item.defaultValue}</td>
+                          <td>{item.description}</td>
                         </tr>
-                      );
-                    })}
+                      ))
+                    ) : (
+                      <tr>
+                        <td colSpan={4}>This hook does not accept options.</td>
+                      </tr>
+                    )}
                   </tbody>
                 </table>
               </div>
@@ -137,14 +140,14 @@ export default async function HookDocPage({ params }: HookDocPageProps) {
                   </thead>
                   <tbody>
                     {doc.returns.map((item) => (
-                      <tr key={item}>
+                      <tr key={item.name}>
                         <td>
-                          <span className="pname">{item}</span>
+                          <span className="pname">{item.name}</span>
                         </td>
                         <td>
-                          <span className="ptype">state/action</span>
+                          <span className="ptype">{item.type}</span>
                         </td>
-                        <td>{getReturnDescription(item)}</td>
+                        <td>{item.description}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -227,30 +230,4 @@ export default async function HookDocPage({ params }: HookDocPageProps) {
       </main>
     </>
   );
-}
-
-function splitApiRow(item: string) {
-  const separatorIndex = item.indexOf(":");
-
-  if (separatorIndex === -1) {
-    return {
-      description: item,
-      name: item,
-    };
-  }
-
-  return {
-    description: item.slice(separatorIndex + 1).trim(),
-    name: item.slice(0, separatorIndex).trim(),
-  };
-}
-
-function getReturnDescription(value: string) {
-  if (value.includes("send")) return "Starts the current request or interaction.";
-  if (value.includes("stop") || value.includes("abort")) return "Cancels active work.";
-  if (value.includes("reset") || value.includes("clear")) return "Returns state to empty.";
-  if (value.includes("error") || value.includes("errors")) return "Current validation or request error.";
-  if (value.includes("messages")) return "Current rendered conversation state.";
-  if (value.includes("total")) return "Aggregated total for the current session.";
-  return "Returned state or action from the hook.";
 }
