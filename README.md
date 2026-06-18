@@ -97,7 +97,6 @@ docs/
 
 - [Product spec](docs/product-spec.md)
 - [Architecture](docs/architecture.md)
-- [Governance](docs/governance.md)
 - [API sketch](docs/api-sketch.md)
 - [Roadmap](docs/roadmap.md)
 
@@ -137,7 +136,3 @@ git add .
 git commit -m "<type>: <summary>"
 git push
 ```
-
-Key project roles are Senior-level or higher. See
-[Governance](docs/governance.md) for the Product Owner, engineering, review, QA,
-and release gate rules.
