@@ -15,7 +15,7 @@ type PaletteItem = {
 };
 
 const pageItems: PaletteItem[] = [
-  { description: "Documentation overview", group: "Pages", href: "/docs", label: "Overview" },
+  { description: "Documentation introduction", group: "Pages", href: "/docs", label: "Introduction" },
   { description: "Next Basic Chat", group: "Pages", href: "/examples", label: "Examples" },
 ];
 

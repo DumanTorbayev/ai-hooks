@@ -3,14 +3,12 @@ import type { Metadata } from "next";
 import { CodePanel } from "@/components/site/code-panel";
 import { SiteHeader } from "@/components/home/site-header";
 import { SidebarNav } from "@/components/site/sidebar-nav";
-import { hookDocs } from "@/content/hook-docs";
 import { createPageMetadata } from "@/lib/metadata";
-import { DocsCatalog } from "./docs-catalog";
 
 export const metadata: Metadata = createPageMetadata({
-  description: "Documentation for the shipped React hooks in AI Hooks.",
+  description: "Introduction to AI Hooks and its headless React hook model.",
   path: "/docs",
-  title: "Documentation",
+  title: "Introduction",
 });
 
 export default function DocsIndexPage() {
@@ -21,31 +19,16 @@ export default function DocsIndexPage() {
         <SidebarNav active={{ kind: "docs" }} />
         <div className="doc-main">
           <div className="crumbs">
-            <a href="/">Home</a> / <span>Documentation</span>
+            <a href="/">Home</a> / <span>Documentation</span> / <span>Introduction</span>
           </div>
-          <h1 className="page-title">Documentation</h1>
+          <h1 className="page-title">Introduction</h1>
           <p className="page-lede">
             AI Hooks is a small set of <b>headless React hooks</b> for building AI
-            product interfaces. Find a hook in the sidebar, read its API, copy the
-            usage, and wire it to <b>your own server route and provider key</b>.
+            product interfaces — streaming chat, token usage, file inputs, and tool
+            calls. It is <b>not</b> a hosted API, a proxy, or a UI kit: you keep your
+            own server routes, provider keys, and markup. Find a hook in the sidebar,
+            read its API, copy the usage, and ship.
           </p>
-
-          <section className="doc-start" aria-labelledby="quick-start">
-            <h2 id="quick-start">Start here</h2>
-            <div className="doc-start-grid">
-              <div>
-                <h3>Install</h3>
-                <CodePanel code="npm i @ai-hooks/react" file="terminal" />
-              </div>
-              <div>
-                <h3>Import</h3>
-                <CodePanel
-                  code={`import { useChatStream } from "@ai-hooks/react";`}
-                  file="example.tsx"
-                />
-              </div>
-            </div>
-          </section>
 
           <div className="principles">
             <div className="principle">
@@ -74,7 +57,43 @@ export default function DocsIndexPage() {
             </div>
           </div>
 
-          <DocsCatalog docs={hookDocs} />
+          <section className="dsec" id="installation">
+            <h3>
+              <span className="hash">#</span> Installation
+            </h3>
+            <CodePanel code="npm i @ai-hooks/react" file="terminal" />
+            <p className="doc-note">
+              Then import a hook and point it at a route you control — your provider
+              key stays on the server.
+            </p>
+            <CodePanel
+              code={`import { useChatStream } from "@ai-hooks/react";
+
+export function Chat() {
+  const chat = useChatStream({ endpoint: "/api/chat" });
+
+  return (
+    <form
+      onSubmit={(event) => {
+        event.preventDefault();
+        void chat.send();
+      }}
+    >
+      <textarea
+        value={chat.input}
+        onChange={(event) => chat.setInput(event.target.value)}
+      />
+      <button disabled={chat.isStreaming}>Send</button>
+    </form>
+  );
+}`}
+              file="app/chat.tsx"
+            />
+            <p className="doc-note">
+              Browse the full hook list in the sidebar — each entry links straight to
+              its API reference.
+            </p>
+          </section>
 
           <div className="tools-callout">
             <div className="tc-txt">
