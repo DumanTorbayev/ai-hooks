@@ -3892,25 +3892,27 @@ h1.h1 {
   display: flex;
   align-items: center;
   gap: 8px;
-  border: 1px solid var(--line-2);
+  border: 1px solid #e0c200;
   border-radius: 24px;
-  background: var(--bg);
-  box-shadow: var(--shadow-pop);
-  padding: 10px 16px;
-  color: var(--ink);
-  font-size: 13px;
-  font-weight: 500;
-  transition: border-color 0.12s, background 0.12s, transform 0.08s;
+  background: #ffdd00;
+  box-shadow: 0 6px 20px -6px rgba(0, 0, 0, 0.3), 0 2px 6px rgba(0, 0, 0, 0.15);
+  padding: 11px 17px;
+  color: #17181b;
+  font-family: var(--sans);
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.12s, transform 0.08s, box-shadow 0.12s;
 }
 
 .coffee-fab svg {
   flex-shrink: 0;
-  color: var(--amber);
+  color: #17181b;
 }
 
 .coffee-fab:hover {
-  border-color: var(--amber);
-  background: var(--amber-soft);
+  background: #ffe24d;
+  box-shadow: 0 9px 28px -6px rgba(0, 0, 0, 0.4), 0 2px 6px rgba(0, 0, 0, 0.18);
 }
 
 .coffee-fab:active {
