@@ -43,9 +43,6 @@ export function SiteHeader({ active }: SiteHeaderProps) {
             <a className={active === "examples" ? "active" : undefined} href="/examples">
               Examples
             </a>
-            <a href="https://github.com/DumanTorbayev/ai-hooks" rel="noreferrer" target="_blank">
-              GitHub ↗
-            </a>
           </nav>
 
           <div className="hd-spacer" />
