@@ -1,10 +1,10 @@
 import { HeroSection } from "@/components/home/hero-section";
 import { HooksSection } from "@/components/home/hooks-section";
-import { ModelsSection } from "@/components/home/models-section";
 import { PatternsSection } from "@/components/home/patterns-section";
 import { PlaygroundSection } from "@/components/home/playground-section";
 import { ScopeSection } from "@/components/home/scope-section";
 import { SiteHeader } from "@/components/home/site-header";
+import { ToolsSection } from "@/components/home/tools-section";
 import { TopBanner } from "@/components/home/top-banner";
 
 export default function HomePage() {
@@ -16,7 +16,7 @@ export default function HomePage() {
         <HeroSection />
         <HooksSection />
         <PatternsSection />
-        <ModelsSection />
+        <ToolsSection />
         <PlaygroundSection />
         <ScopeSection />
       </main>
