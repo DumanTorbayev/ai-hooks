@@ -2274,7 +2274,18 @@ h1.h1 {
 
   .site-header.menu-open {
     background: var(--bg);
-    height: auto;
+  }
+
+  .m-menu {
+    position: absolute;
+    top: var(--hd);
+    left: 0;
+    right: 0;
+    max-width: none;
+    border-bottom: 1px solid var(--line);
+    background: var(--bg);
+    box-shadow: var(--shadow-lg);
+    padding: 10px 16px 14px;
   }
 
   .hamburger {
