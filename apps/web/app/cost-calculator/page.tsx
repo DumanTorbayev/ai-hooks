@@ -16,7 +16,7 @@ export default function CostCalculatorPage() {
   return (
     <>
       <TopBanner />
-      <SiteHeader active="cost" />
+      <SiteHeader />
       <main>
         <section className="utility-hero">
           <div className="wrap utility-grid">

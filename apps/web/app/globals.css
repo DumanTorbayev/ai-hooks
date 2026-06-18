@@ -1928,14 +1928,26 @@ pre.code {
   }
 
   .hide-mobile,
-  .nav-links,
   .icon-link,
-  .nav .btn:not(.primary) {
+  .nav .btn {
     display: none;
   }
 
   .nav-row {
-    gap: 10px;
+    gap: 8px;
+  }
+
+  .ver {
+    display: none;
+  }
+
+  .nav-links {
+    gap: 0;
+  }
+
+  .nav-links a {
+    padding: 6px 5px;
+    font-size: 12px;
   }
 
   .hero {

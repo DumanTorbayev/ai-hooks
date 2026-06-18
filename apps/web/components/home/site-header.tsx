@@ -1,7 +1,7 @@
 import { SupportButton } from "@/components/support-button";
 
 type SiteHeaderProps = {
-  active?: "cost" | "tokens" | "models" | "providers" | "docs";
+  active?: "docs" | "examples";
 };
 
 export function SiteHeader({ active }: SiteHeaderProps) {
@@ -16,27 +16,22 @@ export function SiteHeader({ active }: SiteHeaderProps) {
           <a className={active === "docs" ? "active" : undefined} href="/docs">
             Docs
           </a>
-          <a className={active === "cost" ? "active" : undefined} href="/cost-calculator">
-            Cost
-          </a>
-          <a className={active === "tokens" ? "active" : undefined} href="/token-estimator">
-            Tokens
-          </a>
-          <a className={active === "models" ? "active" : undefined} href="/model-comparison">
-            Models
+          <a
+            className={active === "examples" ? "active" : undefined}
+            href="/examples"
+          >
+            Examples
           </a>
           <a
-            className={active === "providers" ? "active" : undefined}
-            href="/provider-compatibility"
+            href="https://github.com/DumanTorbayev/ai-hooks"
+            rel="noreferrer"
+            target="_blank"
           >
-            Providers
+            GitHub
           </a>
         </nav>
         <div className="nav-spacer" />
         <SupportButton className="btn support sm" />
-        <a className="btn primary sm" href="/docs">
-          Get started
-        </a>
       </div>
     </header>
   );

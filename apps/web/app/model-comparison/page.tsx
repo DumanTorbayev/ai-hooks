@@ -16,7 +16,7 @@ export default function ModelComparisonPage() {
   return (
     <>
       <TopBanner />
-      <SiteHeader active="models" />
+      <SiteHeader />
       <main>
         <section className="utility-hero">
           <div className="wrap utility-grid">
