@@ -28,7 +28,7 @@ export function SiteHeader({ active }: SiteHeaderProps) {
 
   return (
     <>
-      <header className="site-header">
+      <header className={`site-header ${mobileOpen ? "menu-open" : ""}`}>
         <div className="wrap hd-row">
           <a className="brand" href="/">
             <span className="glyph">⌘</span>
