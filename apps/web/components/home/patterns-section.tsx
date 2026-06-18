@@ -9,14 +9,14 @@ export function PatternsSection() {
         <div className="block-head">
           <div className="lhs">
             <span className="sec-label">// patterns</span>
-            <h2>AI UI patterns developers can copy.</h2>
+            <h2>Copy the common AI interface states.</h2>
             <p>
-              Concrete interface states for chat, agents, file input, and stop controls.
+              Small examples for the hooks that already exist in the package.
             </p>
           </div>
           <div className="rhs">
             <a className="btn sm" href="/docs">
-              Open hook docs →
+              Hook docs →
             </a>
           </div>
         </div>

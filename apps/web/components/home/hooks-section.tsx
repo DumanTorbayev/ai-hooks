@@ -6,7 +6,7 @@ const chatSnippet = `import { useChatStream } from "@ai-hooks/react";
 export function Chat() {
   const chat = useChatStream({
     endpoint: "/api/chat",
-    body: { model: "mock-fast" },
+    body: { model: "your-model" },
   });
 
   return <Composer onSend={chat.send} busy={chat.isStreaming} />;
@@ -82,7 +82,7 @@ export function HooksSection() {
               <span className="c"> // your route, your key</span>
               {"\n"}
               <span className="ln">6</span>    body: {"{"} model:{" "}
-              <span className="s">"mock-fast"</span> {"}"},
+              <span className="s">"your-model"</span> {"}"},
               {"\n"}
               <span className="ln">7</span>  {"}"}){"\n"}
               <span className="ln">8</span>

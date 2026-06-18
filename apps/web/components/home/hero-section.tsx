@@ -1,39 +1,28 @@
-import { estimateModelCost } from "@ai-hooks/core/cost";
-import { listModels } from "@ai-hooks/core/models";
-import { estimateTokens } from "@ai-hooks/core/tokens";
-
 import { CopyButton } from "@/components/copy-button";
-
 import { MockChatDemo } from "../mock-chat-demo";
 
-export function HeroSection() {
-  const prompt = "Draft a short product update for an AI chat interface.";
-  const tokens = estimateTokens({ text: prompt });
-  const cost = estimateModelCost({
-    model: "mock-fast",
-    inputTokens: tokens,
-    outputTokens: 320,
-  });
-  const models = listModels();
+const installCommand = "npm i @ai-hooks/react";
 
+export function HeroSection() {
   return (
     <section className="hero">
       <div className="wrap hero-grid">
         <div>
           <div className="eyebrow">
             <span className="dot" />
-            React primitives for AI product UI
+            Open-source React hooks for AI UI
           </div>
           <h1 className="head">
-            Build production AI interfaces <span className="alt">in React.</span>
+            Build AI interfaces without locking into a provider.
           </h1>
           <p className="sub">
-            Headless hooks, live mock streams, and copy-paste UI patterns for{" "}
-            <b>chat, tool calls, file input, token usage, and model-aware UX</b>.
+            AI Hooks gives you small headless React hooks for streaming chat, stop
+            generation, local conversation state, token usage, tool calls, and file
+            upload flows.
           </p>
 
           <div className="featurow" aria-label="Feature highlights">
-            {["streaming", "abort", "tools", "files", "usage", "models"].map((item) => (
+            {["chat streams", "abort", "storage", "usage", "tools", "files"].map((item) => (
               <span className="chip" key={item}>
                 <span className="pl">+</span>
                 {item}
@@ -48,34 +37,28 @@ export function HeroSection() {
                 npm i <span className="pkg">@ai-hooks/react</span>
               </code>
             </div>
-            <CopyButton className="copybtn" value="npm i @ai-hooks/react" />
+            <CopyButton className="copybtn" value={installCommand} />
           </div>
           <div className="cmd-meta">
-            <span>
-              <b>{tokens}</b> demo tokens
-            </span>
-            <span>
-              <b>{cost.formatted}</b> mock cost
-            </span>
-            <span>
-              <b>{models.length}</b> demo models
-            </span>
+            <span>1 package</span>
+            <span>0 provider SDKs in your UI</span>
+            <span>your API route keeps the keys</span>
           </div>
 
           <div className="notice">
             <span className="notice-icon">✓</span>
             <p>
-              <b>No hosted AI API.</b> Public demos use mock streaming. Production
-              requests go through your own route and your own provider keys.
+              <b>This is not a hosted AI API.</b> The library manages UI state. Your app
+              still sends requests through your own backend and provider account.
             </p>
           </div>
 
           <div className="hero-actions">
-            <a className="btn accent sm" href="/cost-calculator">
-              Open cost calculator
+            <a className="btn accent sm" href="/docs/use-chat-stream">
+              Start with useChatStream
             </a>
-            <a className="btn sm" href="/docs">
-              Browse hook docs
+            <a className="btn sm" href="#hooks">
+              See current hooks
             </a>
           </div>
         </div>
