@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 
 import { SiteHeader } from "@/components/home/site-header";
-import { TopBanner } from "@/components/home/top-banner";
 import { CopyButton } from "@/components/copy-button";
 import { InfoIcon } from "@/components/icons";
 import { SidebarNav } from "@/components/site/sidebar-nav";
@@ -18,7 +17,6 @@ const cloneCommand = "npx @ai-hooks/example next-basic-chat";
 export default function ExamplesPage() {
   return (
     <>
-      <TopBanner />
       <SiteHeader active="examples" />
       <main className="wrap doc-layout">
         <SidebarNav active={{ kind: "examples" }} />

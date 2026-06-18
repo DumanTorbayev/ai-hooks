@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 
 import { SiteHeader } from "@/components/home/site-header";
-import { TopBanner } from "@/components/home/top-banner";
 import { SidebarNav } from "@/components/site/sidebar-nav";
 import { hookDocs } from "@/content/hook-docs";
 import { createPageMetadata } from "@/lib/metadata";
@@ -16,7 +15,6 @@ export const metadata: Metadata = createPageMetadata({
 export default function DocsIndexPage() {
   return (
     <>
-      <TopBanner />
       <SiteHeader active="docs" />
       <main className="wrap doc-layout">
         <SidebarNav active={{ kind: "docs" }} />

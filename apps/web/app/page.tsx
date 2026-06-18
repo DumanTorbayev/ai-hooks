@@ -1,6 +1,5 @@
 import { CheckIcon } from "@/components/icons";
 import { SiteHeader } from "@/components/home/site-header";
-import { TopBanner } from "@/components/home/top-banner";
 import { MockChatDemo } from "@/components/mock-chat-demo";
 import { InstallCommand } from "@/components/site/install-command";
 import { displayCategory, statusClass, statusLabel } from "@/content/hook-meta";
@@ -9,7 +8,6 @@ import { hookDocs } from "@/content/hook-docs";
 export default function HomePage() {
   return (
     <>
-      <TopBanner />
       <SiteHeader />
       <main>
         <section className="home-hero">

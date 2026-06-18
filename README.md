@@ -44,16 +44,13 @@ utilities.
 
 ## Current Utilities
 
-- `/cost-calculator` - local LLM cost calculator with prompt token estimation,
-  output token planning, per-request cost, daily cost, and monthly cost.
-- `/token-estimator` - local prompt/token planning utility with text stats,
-  expected output tokens, and context-window usage.
-- `/model-comparison` - local model capability and pricing registry view using
-  demo data only.
-- `/provider-compatibility` - source-backed provider capability matrix for
-  adapter and UI planning.
 - `/docs` - public docs index for current MVP hooks with focused hook reference
   pages.
+- `/tools/cost` - local LLM cost calculator for request and token spend planning.
+- `/tools/tokens` - local prompt/token planning utility with text stats.
+- `/tools/models` - local model capability and pricing registry view using demo
+  data only.
+- `/tools/providers` - provider capability matrix for adapter and UI planning.
 
 ## Development
 
