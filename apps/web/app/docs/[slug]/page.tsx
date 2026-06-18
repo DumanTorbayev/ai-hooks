@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { SiteHeader } from "@/components/home/site-header";
-import { TopBanner } from "@/components/home/top-banner";
 import { CodePanel } from "@/components/site/code-panel";
 import { SidebarNav } from "@/components/site/sidebar-nav";
 import { displayCategory, statusClass, statusLabel } from "@/content/hook-meta";
@@ -51,7 +50,6 @@ export default async function HookDocPage({ params }: HookDocPageProps) {
 
   return (
     <>
-      <TopBanner />
       <SiteHeader active="docs" />
       <main className="wrap detail-grid">
         <SidebarNav active={{ kind: "hook", slug: doc.slug }} />
@@ -256,4 +254,3 @@ function getReturnDescription(value: string) {
   if (value.includes("total")) return "Aggregated total for the current session.";
   return "Returned state or action from the hook.";
 }
-

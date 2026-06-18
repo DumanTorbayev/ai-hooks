@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 
+import { SearchIcon } from "@/components/icons";
 import { hookDocs } from "@/content/hook-docs";
 import { planningTools } from "@/content/tools";
 
@@ -37,7 +38,7 @@ export function CommandPalette({
       label: doc.name,
     }));
     const toolItems = planningTools.map((tool) => ({
-      description: `${tool.description} ${tool.id}`,
+      description: "planning tool",
       group: "Tools" as const,
       href: `/tools/${tool.id}`,
       label: tool.name,
@@ -115,31 +116,36 @@ export function CommandPalette({
   }));
 
   return (
-    <div className="palette-overlay" onClick={onClose}>
+    <div className="modal-bg show" onClick={onClose}>
       <div className="palette" onClick={(event) => event.stopPropagation()}>
-        <input
-          autoFocus
-          onChange={(event) => {
-            setQuery(event.target.value);
-            setSelectedIndex(0);
-          }}
-          placeholder="Search hooks and tools..."
-          value={query}
-        />
-        <div className="palette-results" role="listbox">
+        <div className="pin">
+          <SearchIcon />
+          <input
+            autoComplete="off"
+            autoFocus
+            onChange={(event) => {
+              setQuery(event.target.value);
+              setSelectedIndex(0);
+            }}
+            placeholder="Search hooks and tools..."
+            value={query}
+          />
+          <span className="esc">esc</span>
+        </div>
+        <div className="presults" role="listbox">
           {filteredItems.length === 0 ? (
-            <div className="palette-empty">No matches for {query}</div>
+            <div className="pempty">No matches for {query}</div>
           ) : (
             groupedItems.map(({ group, items: groupItems }) =>
               groupItems.length ? (
                 <div key={group}>
-                  <div className="palette-group">{group}</div>
+                  <div className="pgl">{group}</div>
                   {groupItems.map((item) => {
                     const globalIndex = filteredItems.indexOf(item);
                     return (
                       <button
                         aria-selected={globalIndex === selectedIndex}
-                        className={globalIndex === selectedIndex ? "selected" : undefined}
+                        className={`pres ${globalIndex === selectedIndex ? "sel" : ""}`}
                         key={`${item.group}-${item.href}`}
                         onClick={() => {
                           router.push(item.href);
@@ -148,8 +154,8 @@ export function CommandPalette({
                         role="option"
                         type="button"
                       >
-                        <span>{item.label}</span>
-                        <small>{item.description}</small>
+                        <span className="pn">{formatPaletteLabel(item.label)}</span>
+                        <span className="pd">{item.description}</span>
                       </button>
                     );
                   })}
@@ -160,5 +166,18 @@ export function CommandPalette({
         </div>
       </div>
     </div>
+  );
+}
+
+function formatPaletteLabel(label: string) {
+  if (!label.startsWith("use")) {
+    return label;
+  }
+
+  return (
+    <>
+      <span className="h">use</span>
+      {label.slice(3)}
+    </>
   );
 }

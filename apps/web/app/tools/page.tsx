@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 
 import { SiteHeader } from "@/components/home/site-header";
-import { TopBanner } from "@/components/home/top-banner";
 import { SidebarNav } from "@/components/site/sidebar-nav";
 import { PlanningToolIcon } from "@/components/site/tool-icon";
 import { planningTools } from "@/content/tools";
@@ -16,7 +15,6 @@ export const metadata: Metadata = createPageMetadata({
 export default function ToolsIndexPage() {
   return (
     <>
-      <TopBanner />
       <SiteHeader active="docs" />
       <main className="wrap doc-layout">
         <SidebarNav active={{ kind: "tools" }} />

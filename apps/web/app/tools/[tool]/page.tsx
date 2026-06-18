@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { SiteHeader } from "@/components/home/site-header";
-import { TopBanner } from "@/components/home/top-banner";
 import { CostCalc, ModelCompare, ProviderMatrix, TokenEstimator } from "@/components/site/planning-tools";
 import { SidebarNav } from "@/components/site/sidebar-nav";
 import { planningTools, type PlanningToolId } from "@/content/tools";
@@ -41,7 +40,6 @@ export default async function ToolPage({ params }: ToolPageProps) {
 
   return (
     <>
-      <TopBanner />
       <SiteHeader active="docs" />
       <main className="wrap doc-layout">
         <SidebarNav active={{ id: tool.id, kind: "tools" }} />
@@ -61,4 +59,3 @@ export default async function ToolPage({ params }: ToolPageProps) {
     </>
   );
 }
-

@@ -1,5 +1,4 @@
-import { Coffee } from "lucide-react";
-
+import { CoffeeIcon } from "@/components/icons";
 import { siteConfig } from "@/content/site";
 
 export function SupportFab() {
@@ -15,7 +14,7 @@ export function SupportFab() {
       rel="noreferrer"
       target="_blank"
     >
-      <Coffee aria-hidden="true" size={15} strokeWidth={1.8} />
+      <CoffeeIcon />
       <span className="lbl">Buy me a coffee</span>
     </a>
   );

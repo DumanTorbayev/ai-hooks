@@ -14,9 +14,8 @@ requests should go through your own server route and your own provider keys.
 
 ## Current Stage
 
-The project is in the early MVP stage. The first priority is to validate a
-developer resource that can attract organic traffic through practical AI UI
-utilities:
+The project is in the early MVP stage. The first priority is to ship a useful
+developer resource for practical AI UI work:
 
 - React hooks for AI interfaces.
 - LLM cost calculator.
@@ -44,16 +43,13 @@ utilities.
 
 ## Current Utilities
 
-- `/cost-calculator` - local LLM cost calculator with prompt token estimation,
-  output token planning, per-request cost, daily cost, and monthly cost.
-- `/token-estimator` - local prompt/token planning utility with text stats,
-  expected output tokens, and context-window usage.
-- `/model-comparison` - local model capability and pricing registry view using
-  demo data only.
-- `/provider-compatibility` - source-backed provider capability matrix for
-  adapter and UI planning.
 - `/docs` - public docs index for current MVP hooks with focused hook reference
   pages.
+- `/tools/cost` - local LLM cost calculator for request and token spend planning.
+- `/tools/tokens` - local prompt/token planning utility with text stats.
+- `/tools/models` - local model capability and pricing registry view using demo
+  data only.
+- `/tools/providers` - provider capability matrix for adapter and UI planning.
 
 ## Development
 
@@ -90,22 +86,7 @@ packages/
   react/               React hooks package
 examples/
   next-basic-chat/     Example app notes
-docs/
-  architecture.md      Technical direction and package boundaries
-  product-spec.md      Product definition and target audience
-  roadmap.md           Development phases
 ```
-
-## Project Docs
-
-- [Product spec](docs/product-spec.md)
-- [Architecture](docs/architecture.md)
-- [API sketch](docs/api-sketch.md)
-- [Roadmap](docs/roadmap.md)
-
-Internal business strategy and working task lists are kept outside the public
-repository. Public work should be tracked through GitHub Issues and pull
-requests.
 
 ## Design Principles
 

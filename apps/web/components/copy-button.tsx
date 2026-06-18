@@ -1,7 +1,8 @@
 "use client";
 
-import { Check, Copy, RotateCcw } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+
+import { CheckIcon, CopyIcon, RetryIcon } from "@/components/icons";
 
 type CopyButtonProps = {
   value: string;
@@ -46,7 +47,7 @@ export function CopyButton({
   }
 
   const text = state === "copied" ? copiedLabel : state === "failed" ? "Retry" : label;
-  const Icon = state === "copied" ? Check : state === "failed" ? RotateCcw : Copy;
+  const Icon = state === "copied" ? CheckIcon : state === "failed" ? RetryIcon : CopyIcon;
 
   return (
     <button
