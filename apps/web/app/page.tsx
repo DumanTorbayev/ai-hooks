@@ -25,9 +25,6 @@ export default function HomePage() {
                 <a className="btn primary" href="/docs">
                   Browse docs
                 </a>
-                <a className="btn" href="/examples">
-                  View examples
-                </a>
               </div>
               <div className="home-note">
                 <CheckIcon size={14} />

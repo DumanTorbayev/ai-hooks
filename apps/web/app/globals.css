@@ -226,16 +226,6 @@ code {
   flex-shrink: 0;
 }
 
-.site-header .ver {
-  border: 1px solid var(--line-2);
-  border-radius: 4px;
-  padding: 1px 5px;
-  color: var(--muted);
-  font-family: var(--mono);
-  font-size: 10px;
-  font-weight: 500;
-}
-
 .hd-nav {
   display: flex;
   gap: 1px;
@@ -573,6 +563,34 @@ pre.code {
   font-family: var(--mono);
   font-size: 12.5px;
   line-height: 1.7;
+}
+
+pre.code .tok-keyword {
+  color: var(--c-key);
+}
+
+pre.code .tok-string {
+  color: var(--c-str);
+}
+
+pre.code .tok-comment {
+  color: var(--c-com);
+}
+
+pre.code .tok-function {
+  color: var(--c-fn);
+}
+
+pre.code .tok-type {
+  color: #b7cdfa;
+}
+
+pre.code .tok-number {
+  color: var(--c-pun);
+}
+
+pre.code .tok-punctuation {
+  color: var(--c-pun);
 }
 
 .k {

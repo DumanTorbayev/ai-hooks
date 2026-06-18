@@ -1,13 +1,25 @@
+export type ApiOptionDoc = {
+  defaultValue: string;
+  description: string;
+  name: string;
+  type: string;
+};
+
+export type ApiReturnDoc = {
+  description: string;
+  name: string;
+  type: string;
+};
+
 export type HookDoc = {
   slug: string;
   name: string;
   status: "ready" | "beta";
   category: "streaming" | "state" | "usage" | "files" | "agents";
   summary: string;
-  importPath: string;
   purpose: string;
-  returns: string[];
-  options: string[];
+  returns: ApiReturnDoc[];
+  options: ApiOptionDoc[];
   notes: string[];
   recipes: string[];
   related: string[];
@@ -21,19 +33,108 @@ export const hookDocs = [
     status: "ready",
     category: "streaming",
     summary: "Stream assistant text into your own chat UI.",
-    importPath: "@ai-hooks/react/use-chat-stream",
     purpose:
       "Use this when your UI needs a composer state, a send action, streaming state, and callbacks for assistant deltas. The hook can run against a mock stream for demos or against your own server endpoint in production.",
-    returns: ["input", "setInput", "send", "isStreaming", "error"],
+    returns: [
+      {
+        description: "Current composer text.",
+        name: "input",
+        type: "string",
+      },
+      {
+        description: "Updates composer text.",
+        name: "setInput",
+        type: "(value: string) => void",
+      },
+      {
+        description: "Starts a stream using the provided content or current input.",
+        name: "send",
+        type: "(content?: string) => Promise<void>",
+      },
+      {
+        description: "True while the current response is streaming.",
+        name: "isStreaming",
+        type: "boolean",
+      },
+      {
+        description: "Last request or streaming error.",
+        name: "error",
+        type: "Error | null",
+      },
+    ],
     options: [
-      "endpoint: server route used when transport is fetch",
-      "transport: fetch or mock",
-      "messages: current conversation payload",
-      "body: extra request body fields",
-      "signal: AbortSignal from useAbortController",
-      "mockResponse: local demo response text",
-      "onAssistantDelta: append streamed text to your UI",
-      "onUsage: receive usage metadata when available",
+      {
+        defaultValue: "undefined",
+        description: "Server route used when transport is fetch.",
+        name: "endpoint",
+        type: "string",
+      },
+      {
+        defaultValue: '"fetch"',
+        description: "Use fetch for a real route or mock for local demos.",
+        name: "transport",
+        type: '"fetch" | "mock"',
+      },
+      {
+        defaultValue: "undefined",
+        description: "Current conversation payload sent to your endpoint.",
+        name: "messages",
+        type: "AiMessage[]",
+      },
+      {
+        defaultValue: "undefined",
+        description: "Extra JSON fields merged into the request body.",
+        name: "body",
+        type: "Record<string, unknown>",
+      },
+      {
+        defaultValue: "undefined",
+        description: "AbortSignal from useAbortController or your own controller.",
+        name: "signal",
+        type: "AbortSignal",
+      },
+      {
+        defaultValue: "generated text",
+        description: "Local response text used by mock transport.",
+        name: "mockResponse",
+        type: "string",
+      },
+      {
+        defaultValue: "undefined",
+        description: "Called before streaming starts with the submitted user text.",
+        name: "onUserMessage",
+        type: "(content: string) => void",
+      },
+      {
+        defaultValue: "undefined",
+        description: "Called when an assistant message should be created.",
+        name: "onAssistantStart",
+        type: "() => void",
+      },
+      {
+        defaultValue: "undefined",
+        description: "Called for every streamed text delta.",
+        name: "onAssistantDelta",
+        type: "(delta: string) => void",
+      },
+      {
+        defaultValue: "undefined",
+        description: "Called when usage metadata is available.",
+        name: "onUsage",
+        type: "(usage: TokenUsage) => void",
+      },
+      {
+        defaultValue: "undefined",
+        description: "Called after a stream completes successfully.",
+        name: "onFinish",
+        type: "() => void",
+      },
+      {
+        defaultValue: "undefined",
+        description: "Called when a request or stream fails.",
+        name: "onError",
+        type: "(error: Error) => void",
+      },
     ],
     notes: [
       "AI Hooks does not call providers directly.",
@@ -81,11 +182,31 @@ export function ChatPanel() {
     status: "ready",
     category: "streaming",
     summary: "Add real stop-generation behavior to streaming requests.",
-    importPath: "@ai-hooks/react/use-abort-controller",
     purpose:
       "Use this when a user needs to cancel an in-flight fetch stream or provider request. The hook exposes a current signal and creates a fresh controller after aborting.",
-    returns: ["signal", "abort", "reset", "version"],
-    options: ["No options."],
+    returns: [
+      {
+        description: "Current abort signal for fetch or streaming work.",
+        name: "signal",
+        type: "AbortSignal",
+      },
+      {
+        description: "Aborts the current controller and creates a fresh one.",
+        name: "abort",
+        type: "() => void",
+      },
+      {
+        description: "Creates a fresh controller without aborting first.",
+        name: "reset",
+        type: "() => void",
+      },
+      {
+        description: "Increments whenever the controller is replaced.",
+        name: "version",
+        type: "number",
+      },
+    ],
+    options: [],
     notes: [
       "Pass signal into useChatStream or your own fetch call.",
       "abort() cancels the current controller and prepares the next one.",
@@ -119,22 +240,64 @@ export function Composer() {
     status: "ready",
     category: "state",
     summary: "Persist conversation state in local storage.",
-    importPath: "@ai-hooks/react/use-conversation-storage",
     purpose:
       "Use this when a demo, prototype, or client-side workflow needs durable messages without introducing a backend database.",
     returns: [
-      "messages",
-      "add",
-      "addMessage",
-      "addUserMessage",
-      "addAssistantMessage",
-      "appendToLastAssistantMessage",
-      "clear",
+      {
+        description: "Current message list.",
+        name: "messages",
+        type: "AiMessage[]",
+      },
+      {
+        description: "Appends a complete AiMessage object.",
+        name: "add",
+        type: "(message: AiMessage) => void",
+      },
+      {
+        description: "Creates and appends a message for the provided role.",
+        name: "addMessage",
+        type: "(role: AiRole, content: string) => AiMessage",
+      },
+      {
+        description: "Creates and appends a user message.",
+        name: "addUserMessage",
+        type: "(content: string) => AiMessage",
+      },
+      {
+        description: "Creates and appends an assistant message.",
+        name: "addAssistantMessage",
+        type: "(content: string) => AiMessage",
+      },
+      {
+        description: "Appends streamed text to the last assistant message.",
+        name: "appendToLastAssistantMessage",
+        type: "(delta: string) => void",
+      },
+      {
+        description: "Resets messages back to initialMessages or an empty list.",
+        name: "clear",
+        type: "() => void",
+      },
     ],
     options: [
-      "key: stable storage key suffix",
-      "initialMessages: optional seed messages",
-      "storage: custom Storage implementation for tests",
+      {
+        defaultValue: "required",
+        description: "Stable storage key suffix. The hook prefixes it with ai-hooks:.",
+        name: "key",
+        type: "string",
+      },
+      {
+        defaultValue: "[]",
+        description: "Optional seed messages used before storage is loaded.",
+        name: "initialMessages",
+        type: "AiMessage[]",
+      },
+      {
+        defaultValue: "localStorage",
+        description: "Custom Storage implementation for tests or non-browser shells.",
+        name: "storage",
+        type: "Storage",
+      },
     ],
     notes: [
       "The storage key is prefixed with ai-hooks:.",
@@ -171,11 +334,48 @@ export function Thread() {
     status: "ready",
     category: "usage",
     summary: "Track token usage as product state.",
-    importPath: "@ai-hooks/react/use-token-usage",
     purpose:
       "Use this when a chat, calculator, or dashboard needs visible input, output, cached, and total token counters.",
-    returns: ["inputTokens", "outputTokens", "cachedInputTokens", "totalTokens", "add", "reset"],
-    options: ["initialUsage: optional starting TokenUsage object"],
+    returns: [
+      {
+        description: "Accumulated input token count.",
+        name: "inputTokens",
+        type: "number",
+      },
+      {
+        description: "Accumulated output token count.",
+        name: "outputTokens",
+        type: "number",
+      },
+      {
+        description: "Accumulated cached input tokens when provided.",
+        name: "cachedInputTokens",
+        type: "number | undefined",
+      },
+      {
+        description: "Input + output + cached input tokens.",
+        name: "totalTokens",
+        type: "number",
+      },
+      {
+        description: "Adds provider usage metadata to the current totals.",
+        name: "add",
+        type: "(usage: TokenUsage) => void",
+      },
+      {
+        description: "Resets usage back to the initial value.",
+        name: "reset",
+        type: "() => void",
+      },
+    ],
+    options: [
+      {
+        defaultValue: "{ inputTokens: 0, outputTokens: 0 }",
+        description: "Optional starting usage object.",
+        name: "initialUsage",
+        type: "TokenUsage",
+      },
+    ],
     notes: [
       "The hook accumulates usage across calls.",
       "It does not estimate tokens by itself.",
@@ -211,14 +411,64 @@ export function UsageAwareChat() {
     status: "ready",
     category: "usage",
     summary: "Estimate model spend from usage counters.",
-    importPath: "@ai-hooks/react/use-model-cost",
     purpose:
       "Use this when the UI needs request, session, or monthly cost feedback based on model pricing and token usage.",
-    returns: ["usage", "inputUsd", "outputUsd", "totalUsd", "formatted", "add", "reset"],
+    returns: [
+      {
+        description: "Current accumulated token usage.",
+        name: "usage",
+        type: "TokenUsage",
+      },
+      {
+        description: "Estimated input-token cost in USD.",
+        name: "inputUsd",
+        type: "number",
+      },
+      {
+        description: "Estimated output-token cost in USD.",
+        name: "outputUsd",
+        type: "number",
+      },
+      {
+        description: "Estimated combined cost in USD.",
+        name: "totalUsd",
+        type: "number",
+      },
+      {
+        description: "Formatted total cost string.",
+        name: "formatted",
+        type: "string",
+      },
+      {
+        description: "Adds usage to the current estimate.",
+        name: "add",
+        type: "(usage: TokenUsage) => void",
+      },
+      {
+        description: "Resets accumulated usage to zero.",
+        name: "reset",
+        type: "() => void",
+      },
+    ],
     options: [
-      "model: model id from the model registry",
-      "pricing: explicit pricing override",
-      "currency: USD",
+      {
+        defaultValue: "undefined",
+        description: "Model id from the registry.",
+        name: "model",
+        type: "string",
+      },
+      {
+        defaultValue: "undefined",
+        description: "Explicit pricing override for custom or private models.",
+        name: "pricing",
+        type: "ModelPricing",
+      },
+      {
+        defaultValue: '"USD"',
+        description: "Display currency for formatted output.",
+        name: "currency",
+        type: "string",
+      },
     ],
     notes: [
       "Pricing data should be verified before public provider pages.",
@@ -256,14 +506,59 @@ export function CostMeter() {
     status: "beta",
     category: "files",
     summary: "Validate local files before an AI workflow uses them.",
-    importPath: "@ai-hooks/react/use-file-upload",
     purpose:
       "Use this when a chat UI accepts files but the app needs to enforce file count, size, and MIME or extension rules before upload.",
-    returns: ["items", "errors", "addFiles", "addFromInput", "remove", "clear"],
+    returns: [
+      {
+        description: "Accepted files with stable ids and metadata.",
+        name: "items",
+        type: "UploadedFileItem[]",
+      },
+      {
+        description: "Validation errors from the most recent add attempt.",
+        name: "errors",
+        type: "string[]",
+      },
+      {
+        description: "Validates and adds a FileList or File array.",
+        name: "addFiles",
+        type: "(files: FileList | File[]) => void",
+      },
+      {
+        description: "Reads files from an input element and adds them.",
+        name: "addFromInput",
+        type: "(input: HTMLInputElement) => void",
+      },
+      {
+        description: "Removes an accepted file by id.",
+        name: "remove",
+        type: "(id: string) => void",
+      },
+      {
+        description: "Clears accepted files and validation errors.",
+        name: "clear",
+        type: "() => void",
+      },
+    ],
     options: [
-      "accept: MIME types, extensions, or wildcards like image/*",
-      "maxFiles: maximum retained files",
-      "maxSizeMB: maximum file size",
+      {
+        defaultValue: "undefined",
+        description: "Accepted MIME types, extensions, or wildcards like image/*.",
+        name: "accept",
+        type: "string[]",
+      },
+      {
+        defaultValue: "undefined",
+        description: "Maximum number of retained files.",
+        name: "maxFiles",
+        type: "number",
+      },
+      {
+        defaultValue: "undefined",
+        description: "Maximum file size in megabytes.",
+        name: "maxSizeMB",
+        type: "number",
+      },
     ],
     notes: [
       "The hook does not upload files.",
@@ -307,11 +602,38 @@ export function FilePicker() {
     status: "beta",
     category: "agents",
     summary: "Track tool call lifecycle for agent UI.",
-    importPath: "@ai-hooks/react/use-tool-calls",
     purpose:
       "Use this when an AI interface needs to show which tools are running, completed, or failed while keeping execution handlers in your app.",
-    returns: ["activeCalls", "schema", "run", "clear"],
-    options: ["tools: record of tool handlers keyed by tool name"],
+    returns: [
+      {
+        description: "Running, completed, and failed tool calls.",
+        name: "activeCalls",
+        type: "ActiveToolCall[]",
+      },
+      {
+        description: "Registered tool names for UI or debug panels.",
+        name: "schema",
+        type: "{ name: string }[]",
+      },
+      {
+        description: "Runs a registered tool handler and tracks lifecycle state.",
+        name: "run",
+        type: "(toolCall: ToolCallInput) => Promise<unknown>",
+      },
+      {
+        description: "Clears tracked tool call state.",
+        name: "clear",
+        type: "() => void",
+      },
+    ],
+    options: [
+      {
+        defaultValue: "required",
+        description: "Record of tool handlers keyed by tool name.",
+        name: "tools",
+        type: "ToolHandlers",
+      },
+    ],
     notes: [
       "Tool handlers run in your app, not inside AI Hooks.",
       "schema exposes the registered tool names for UI/debug panels.",
