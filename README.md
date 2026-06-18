@@ -14,9 +14,8 @@ requests should go through your own server route and your own provider keys.
 
 ## Current Stage
 
-The project is in the early MVP stage. The first priority is to validate a
-developer resource that can attract organic traffic through practical AI UI
-utilities:
+The project is in the early MVP stage. The first priority is to ship a useful
+developer resource for practical AI UI work:
 
 - React hooks for AI interfaces.
 - LLM cost calculator.
@@ -87,22 +86,7 @@ packages/
   react/               React hooks package
 examples/
   next-basic-chat/     Example app notes
-docs/
-  architecture.md      Technical direction and package boundaries
-  product-spec.md      Product definition and target audience
-  roadmap.md           Development phases
 ```
-
-## Project Docs
-
-- [Product spec](docs/product-spec.md)
-- [Architecture](docs/architecture.md)
-- [API sketch](docs/api-sketch.md)
-- [Roadmap](docs/roadmap.md)
-
-Internal business strategy and working task lists are kept outside the public
-repository. Public work should be tracked through GitHub Issues and pull
-requests.
 
 ## Design Principles
 
