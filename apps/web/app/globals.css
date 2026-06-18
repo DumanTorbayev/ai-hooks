@@ -565,6 +565,34 @@ pre.code {
   line-height: 1.7;
 }
 
+pre.code .tok-keyword {
+  color: var(--c-key);
+}
+
+pre.code .tok-string {
+  color: var(--c-str);
+}
+
+pre.code .tok-comment {
+  color: var(--c-com);
+}
+
+pre.code .tok-function {
+  color: var(--c-fn);
+}
+
+pre.code .tok-type {
+  color: #b7cdfa;
+}
+
+pre.code .tok-number {
+  color: var(--c-pun);
+}
+
+pre.code .tok-punctuation {
+  color: var(--c-pun);
+}
+
 .k {
   color: var(--c-key);
 }
@@ -682,38 +710,6 @@ table.tbl td .ptype {
   font-weight: 500;
   letter-spacing: 0;
   text-transform: uppercase;
-}
-
-.side-search {
-  margin: 8px 0 10px;
-  padding: 0 10px;
-}
-
-.side-search input {
-  width: 100%;
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  outline: none;
-  background: var(--bg);
-  padding: 7px 8px;
-  color: var(--ink);
-  font-family: var(--mono);
-  font-size: 11px;
-}
-
-.side-search input:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-soft);
-}
-
-.side-search input::placeholder,
-.nav-empty {
-  color: var(--muted);
-}
-
-.nav-empty {
-  padding: 7px 10px;
-  font-size: 12px;
 }
 
 .docnav .sub {

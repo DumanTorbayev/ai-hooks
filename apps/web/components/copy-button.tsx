@@ -66,21 +66,30 @@ export function CopyButton({
 }
 
 async function copyText(value: string) {
-  if (globalThis.navigator?.clipboard?.writeText) {
-    try {
-      await globalThis.navigator.clipboard.writeText(value);
-      return;
-    } catch {
-      // Browser permissions can block Clipboard API even on localhost.
-    }
+  if (copyWithSelection(value)) {
+    return;
   }
 
+  if (globalThis.navigator?.clipboard?.writeText) {
+    await globalThis.navigator.clipboard.writeText(value);
+    return;
+  }
+
+  throw new Error("Clipboard copy failed.");
+}
+
+function copyWithSelection(value: string) {
   const textarea = document.createElement("textarea");
+  const activeElement = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+  const selection = document.getSelection();
+  const ranges =
+    selection ? Array.from({ length: selection.rangeCount }, (_, index) => selection.getRangeAt(index)) : [];
+
   textarea.value = value;
   textarea.setAttribute("readonly", "");
   textarea.style.position = "fixed";
   textarea.style.left = "0";
-  textarea.style.top = "0";
+  textarea.style.top = "-1000px";
   textarea.style.width = "1px";
   textarea.style.height = "1px";
   textarea.style.opacity = "0.01";
@@ -90,8 +99,12 @@ async function copyText(value: string) {
   textarea.setSelectionRange(0, value.length);
 
   try {
-    document.execCommand("copy");
+    const copied = document.execCommand("copy");
+    return copied;
   } finally {
     textarea.remove();
+    selection?.removeAllRanges();
+    ranges.forEach((range) => selection?.addRange(range));
+    activeElement?.focus({ preventScroll: true });
   }
 }

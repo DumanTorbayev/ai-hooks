@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 
 import { ExamplesIcon, IntroIcon } from "@/components/icons";
 import { PlanningToolIcon } from "@/components/site/tool-icon";
@@ -14,19 +14,6 @@ type SidebarNavProps = {
 
 export function SidebarNav({ active }: SidebarNavProps) {
   const [open, setOpen] = useState(false);
-  const [hookQuery, setHookQuery] = useState("");
-  const normalizedHookQuery = hookQuery.trim().toLowerCase();
-  const visibleHooks = useMemo(() => {
-    if (!normalizedHookQuery) {
-      return hookDocs;
-    }
-
-    return hookDocs.filter((doc) =>
-      [doc.name, doc.summary, doc.category, categoryLabels[doc.category]].some((value) =>
-        value.toLowerCase().includes(normalizedHookQuery),
-      ),
-    );
-  }, [normalizedHookQuery]);
 
   return (
     <>
@@ -51,18 +38,8 @@ export function SidebarNav({ active }: SidebarNavProps) {
 
           <div className="grp">
             <div className="lbl">Hooks · the package</div>
-            <div className="side-search">
-              <input
-                aria-label="Search hooks"
-                onChange={(event) => setHookQuery(event.target.value)}
-                onInput={(event) => setHookQuery(event.currentTarget.value)}
-                placeholder="Search hooks..."
-                type="search"
-                value={hookQuery}
-              />
-            </div>
             {categoryOrder.map((category) => {
-              const items = visibleHooks.filter((doc) => categoryLabels[doc.category] === category);
+              const items = hookDocs.filter((doc) => categoryLabels[doc.category] === category);
 
               if (!items.length) {
                 return null;
@@ -88,7 +65,6 @@ export function SidebarNav({ active }: SidebarNavProps) {
                 </div>
               );
             })}
-            {!visibleHooks.length ? <div className="nav-empty">No hooks found.</div> : null}
           </div>
 
           <div className="grp">
