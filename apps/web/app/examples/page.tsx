@@ -2,88 +2,115 @@ import type { Metadata } from "next";
 
 import { SiteHeader } from "@/components/home/site-header";
 import { TopBanner } from "@/components/home/top-banner";
+import { CopyButton } from "@/components/copy-button";
+import { SidebarNav } from "@/components/site/sidebar-nav";
 import { createPageMetadata } from "@/lib/metadata";
-import styles from "../docs/docs.module.css";
 
 export const metadata: Metadata = createPageMetadata({
-  description:
-    "Current AI Hooks examples that match the package and demo routes shipped today.",
+  description: "Current AI Hooks examples that match the package and demo routes shipped today.",
   path: "/examples",
   title: "Examples",
 });
 
-const examples = [
-  {
-    description:
-      "A production-shaped chat scaffold using useChatStream, useAbortController, and useConversationStorage with mock streaming by default.",
-    href: "https://github.com/DumanTorbayev/ai-hooks/tree/main/examples/next-basic-chat",
-    name: "Next Basic Chat",
-    tags: ["Next.js", "chat", "mock stream"],
-  },
-] as const;
+const cloneCommand = "npx @ai-hooks/example next-basic-chat";
 
 export default function ExamplesPage() {
   return (
     <>
       <TopBanner />
       <SiteHeader active="examples" />
-      <main>
-        <section className="utility-hero">
-          <div className="wrap utility-grid">
+      <main className="wrap doc-layout">
+        <SidebarNav active={{ kind: "examples" }} />
+        <div className="doc-main">
+          <div className="crumbs">
+            <a href="/docs">Docs</a> / <span>Examples</span>
+          </div>
+          <h1 className="page-title">Examples</h1>
+          <p className="page-lede">
+            Runnable starting points built from the shipped hooks. There is one example
+            today — more appear here only once they ship.
+          </p>
+          <div className="ex-note">
+            <span aria-hidden="true">ⓘ</span>
             <div>
-              <div className="eyebrow">
-                <span className="dot" />
-                Copy-ready examples
-              </div>
-              <h1 className="utility-head">Examples.</h1>
-              <p className="utility-sub">
-                Small integration references that match the current package. New
-                frameworks should appear here only after the example exists in the repo.
-              </p>
-            </div>
-
-            <div className="utility-summary">
-              <span className="sec-label">// current examples</span>
-              <div className="summary-list">
-                <span>{examples.length} shipped example</span>
-                <span>Mock streams by default</span>
-                <span>Your route, your provider keys</span>
-                <span>No project-owned model spend</span>
-              </div>
+              Examples run on a <b>mock streaming engine by default</b> so you can clone
+              and run them with no keys. To use a real model, add your own provider key
+              to the example&apos;s server route.
             </div>
           </div>
-        </section>
 
-        <section className="block">
-          <div className="wrap">
-            <div className={styles.grid}>
-              {examples.map((example) => (
-                <a
-                  className={styles.card}
-                  href={example.href}
-                  key={example.name}
-                  rel="noreferrer"
-                  target="_blank"
-                >
-                  <div className="hc-top">
-                    <span className="hname">{example.name}</span>
-                    <span className="stable">repo</span>
-                  </div>
-                  <p>{example.description}</p>
-                  <div className={styles.tagRow}>
-                    {example.tags.map((tag) => (
-                      <span className={styles.cardMeta} key={tag}>
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  <code>examples/next-basic-chat</code>
-                </a>
-              ))}
+          <article className="ex-card">
+            <div className="ec-head">
+              <span className="name">Next Basic Chat</span>
+              <div className="badges">
+                <span className="status stable">stable</span>
+                <span className="cat-tag">Next.js</span>
+                <span className="cat-tag">mock-stream</span>
+              </div>
             </div>
+            <div className="ec-body">
+              <div className="ec-left">
+                <p>
+                  A minimal streaming chat built with <code>useChatStream</code> on a
+                  Next.js App Router route. Shows the send → stream → stop loop and an
+                  optional token counter.
+                </p>
+                <ul>
+                  <li>
+                    Streaming via <code>useChatStream</code>
+                  </li>
+                  <li>
+                    Stop generation with <code>useAbortController</code>
+                  </li>
+                  <li>
+                    Token counter with <code>useTokenUsage</code>
+                  </li>
+                  <li>
+                    Mock route at <code>app/api/chat/route.ts</code>
+                  </li>
+                </ul>
+                <div className="ec-actions">
+                  <a className="btn primary sm" href="/docs/use-chat-stream">
+                    Open useChatStream
+                  </a>
+                  <CopyButton className="btn sm" value={cloneCommand} />
+                </div>
+              </div>
+              <div className="ec-right">
+                <div className="ex-mini">
+                  <div className="emh">app/page.tsx — preview</div>
+                  <div className="emb">
+                    <div className="pm user">
+                      <div className="av">YOU</div>
+                      <div className="b">Hello!</div>
+                    </div>
+                    <div className="pm bot">
+                      <div className="av">AI</div>
+                      <div className="b">
+                        Streaming reply from the mock route<span className="cur" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="cmd">
+                  <div className="pre">
+                    <span className="sigil">$</span>
+                    <code>
+                      npx <span className="pkg">@ai-hooks/example</span> next-basic-chat
+                    </code>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <div className="ex-empty">
+            More examples are in progress and will be listed here only once they ship.
+            This page never shows examples that do not exist yet.
           </div>
-        </section>
+        </div>
       </main>
     </>
   );
 }
+

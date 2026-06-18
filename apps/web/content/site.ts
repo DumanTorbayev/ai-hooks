@@ -11,6 +11,8 @@ function getPublicHttpsUrl(value: string | undefined) {
   }
 }
 
+const defaultSupportUrl = "https://www.buymeacoffee.com/dumantorbaev";
+
 export const siteConfig = {
-  supportUrl: getPublicHttpsUrl(process.env.NEXT_PUBLIC_SUPPORT_URL),
+  supportUrl: getPublicHttpsUrl(process.env.NEXT_PUBLIC_SUPPORT_URL) ?? defaultSupportUrl,
 };

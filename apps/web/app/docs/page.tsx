@@ -1,104 +1,78 @@
 import type { Metadata } from "next";
 
-import { hookDocs } from "@/content/hook-docs";
 import { SiteHeader } from "@/components/home/site-header";
 import { TopBanner } from "@/components/home/top-banner";
+import { SidebarNav } from "@/components/site/sidebar-nav";
+import { hookDocs } from "@/content/hook-docs";
 import { createPageMetadata } from "@/lib/metadata";
 import { DocsCatalog } from "./docs-catalog";
-import styles from "./docs.module.css";
 
 export const metadata: Metadata = createPageMetadata({
-  description:
-    "API notes and examples for the MVP React hooks in AI Hooks.",
+  description: "Documentation for the shipped React hooks in AI Hooks.",
   path: "/docs",
-  title: "Docs",
+  title: "Documentation",
 });
-
-const docTools = [
-  {
-    description: "Estimate request and monthly spend from demo model pricing.",
-    href: "/cost-calculator",
-    label: "Cost calculator",
-  },
-  {
-    description: "Estimate prompt size and context-window pressure locally.",
-    href: "/token-estimator",
-    label: "Token estimator",
-  },
-  {
-    description: "Inspect the mock model registry used by the demos.",
-    href: "/model-comparison",
-    label: "Model comparison",
-  },
-  {
-    description: "Compare provider capabilities before choosing an API route.",
-    href: "/provider-compatibility",
-    label: "Provider matrix",
-  },
-] as const;
 
 export default function DocsIndexPage() {
   return (
     <>
       <TopBanner />
       <SiteHeader active="docs" />
-      <main>
-        <section className="utility-hero">
-          <div className="wrap utility-grid">
-            <div>
-              <div className="eyebrow">
-                <span className="dot" />
-                API notes · MVP hooks
-              </div>
-              <h1 className="utility-head">AI Hooks docs.</h1>
-              <p className="utility-sub">
-                Search the current React hooks, inspect API contracts, and copy examples
-                that match the package we actually ship today.
-              </p>
-            </div>
+      <main className="wrap doc-layout">
+        <SidebarNav active={{ kind: "docs" }} />
+        <div className="doc-main">
+          <div className="crumbs">
+            <a href="/">Home</a> / <span>Documentation</span>
+          </div>
+          <h1 className="page-title">Documentation</h1>
+          <p className="page-lede">
+            AI Hooks is a small set of <b>headless React hooks</b> for building AI
+            product interfaces. Find a hook in the sidebar, read its API, copy the
+            usage, and wire it to <b>your own server route and provider key</b>.
+          </p>
 
-            <div className="utility-summary">
-              <span className="sec-label">// current docs</span>
-              <div className="summary-list">
-                <span>{hookDocs.length} shipped hooks</span>
-                <span>Search and categories</span>
-                <span>API tables and recipes</span>
-                <span>No future-only hooks listed</span>
-              </div>
+          <div className="principles">
+            <div className="principle">
+              <h4>
+                <span className="ic">⌘</span> Headless
+              </h4>
+              <p>Hooks return state and actions only. You render every pixel.</p>
+            </div>
+            <div className="principle">
+              <h4>
+                <span className="ic">⌘</span> Your keys
+              </h4>
+              <p>The package never proxies model calls. Keys live on your server.</p>
+            </div>
+            <div className="principle">
+              <h4>
+                <span className="ic">⌘</span> Provider-agnostic
+              </h4>
+              <p>Swap models across providers without touching UI code.</p>
+            </div>
+            <div className="principle">
+              <h4>
+                <span className="ic">⌘</span> Zero deps
+              </h4>
+              <p>Tree-shakeable, small, and framework-friendly.</p>
             </div>
           </div>
-        </section>
 
-        <section className="block">
-          <div className="wrap">
-            <DocsCatalog docs={hookDocs} />
-          </div>
-        </section>
+          <DocsCatalog docs={hookDocs} />
 
-        <section className="block alt-block">
-          <div className="wrap">
-            <div className="block-head">
-              <div className="lhs">
-                <span className="sec-label">// tools</span>
-                <h2>Planning tools for AI UI work.</h2>
-                <p>
-                  These utilities support the hooks, but they are not the package API.
-                  They live here so top navigation stays focused on docs and examples.
-                </p>
-              </div>
+          <div className="tools-callout">
+            <div className="tc-txt">
+              <b>Planning tools</b> — cost, tokens, models, providers. Reference
+              utilities for designing an AI UI, <b>not part of the package API</b>.
+              They live in the sidebar.
             </div>
-
-            <div className={styles.toolsGrid}>
-              {docTools.map((tool) => (
-                <a className={styles.toolCard} href={tool.href} key={tool.href}>
-                  <span>{tool.label}</span>
-                  <p>{tool.description}</p>
-                </a>
-              ))}
-            </div>
+            <a className="btn sm" href="/tools">
+              Open tools →
+            </a>
           </div>
-        </section>
+        </div>
       </main>
     </>
   );
 }
+

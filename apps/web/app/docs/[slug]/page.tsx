@@ -3,12 +3,11 @@ import { notFound } from "next/navigation";
 
 import { SiteHeader } from "@/components/home/site-header";
 import { TopBanner } from "@/components/home/top-banner";
-import { CopyButton } from "@/components/copy-button";
-import { SupportButton } from "@/components/support-button";
-import { siteConfig } from "@/content/site";
+import { CodePanel } from "@/components/site/code-panel";
+import { SidebarNav } from "@/components/site/sidebar-nav";
+import { displayCategory, statusClass, statusLabel } from "@/content/hook-meta";
 import { getHookDoc, hookDocs } from "@/content/hook-docs";
 import { createPageMetadata } from "@/lib/metadata";
-import styles from "../docs.module.css";
 
 type HookDocPageProps = {
   params: Promise<{
@@ -46,7 +45,6 @@ export default async function HookDocPage({ params }: HookDocPageProps) {
   }
 
   const rootImport = `import { ${doc.name} } from "@ai-hooks/react";`;
-  const subpathImport = `import { ${doc.name} } from "${doc.importPath}";`;
   const relatedDocs = hookDocs.filter((item) =>
     doc.related.some((relatedName) => relatedName === item.name),
   );
@@ -55,172 +53,179 @@ export default async function HookDocPage({ params }: HookDocPageProps) {
     <>
       <TopBanner />
       <SiteHeader active="docs" />
-      <main>
-        <section className="utility-hero">
-          <div className="wrap utility-grid">
-            <div>
-              <div className="eyebrow">
-                <span className="dot" />
-                {doc.category} · {doc.status}
-              </div>
-              <h1 className="utility-head">{doc.name}</h1>
-              <p className="utility-sub">{doc.summary}</p>
-              <div className="notice">
-                <span className="notice-icon">✓</span>
-                <p>
-                  <b>Composable hooks.</b> Each hook works on its own. Combine hooks only
-                  when the workflow needs shared state.
-                </p>
-              </div>
-            </div>
-
-            <div className="utility-summary">
-              <span className="sec-label">// import</span>
-              <div className={styles.importBox}>
-                <code>{rootImport}</code>
-                <CopyButton
-                  className={styles.importCopy}
-                  copiedLabel="Copied"
-                  label="Copy"
-                  value={rootImport}
-                />
-              </div>
-              <p className={styles.importHint}>
-                Bundle-strict: <code>{subpathImport}</code>
-              </p>
-            </div>
+      <main className="wrap detail-grid">
+        <SidebarNav active={{ kind: "hook", slug: doc.slug }} />
+        <article className="detail-main">
+          <div className="crumbs">
+            <a href="/docs">Docs</a> / <span>{displayCategory(doc.category)}</span> /{" "}
+            <span>{doc.name}</span>
           </div>
-        </section>
+          <div className="detail-title">
+            <h1>
+              <span className="h">use</span>
+              {doc.name.replace("use", "")}
+            </h1>
+            <span className={`status ${statusClass(doc.status)}`}>
+              {statusLabel(doc.status)}
+            </span>
+            <span className="cat-tag">{displayCategory(doc.category)}</span>
+          </div>
+          <p className="detail-purpose">{doc.purpose}</p>
 
-        <section className="block">
-          <div className={`wrap ${styles.layout}`}>
-            <article className={styles.main}>
-              <section>
-                <span className="sec-label">// purpose</span>
-                <p>{doc.purpose}</p>
-              </section>
+          <section className="dsec" id="import">
+            <h3>
+              <span className="hash">#</span> Import
+            </h3>
+            <CodePanel code={rootImport} file="import" />
+          </section>
 
-              <section>
-                <span className="sec-label">// usage</span>
-                <div className={styles.codeBlock}>
-                  <div className={styles.codeHeader}>
-                    <span>{doc.name}.tsx</span>
-                    <CopyButton className={styles.codeCopy} value={doc.example} />
-                  </div>
-                  <pre className={styles.code}>
-                    <code>{doc.example}</code>
-                  </pre>
-                </div>
-              </section>
+          <section className="dsec" id="usage">
+            <h3>
+              <span className="hash">#</span> Usage
+            </h3>
+            <CodePanel code={doc.example} file={`${doc.name}.tsx`} />
+          </section>
 
-              <section>
-                <span className="sec-label">// api</span>
-                <div className={styles.tableWrap}>
-                  <table className={styles.apiTable}>
-                    <thead>
-                      <tr>
-                        <th>Option</th>
-                        <th>Description</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {doc.options.map((item) => {
-                        const row = splitApiRow(item);
-
-                        return (
-                          <tr key={item}>
-                            <td>
-                              <code>{row.name}</code>
-                            </td>
-                            <td>{row.description}</td>
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  </table>
-                </div>
-              </section>
-
-              <section>
-                <span className="sec-label">// returns</span>
-                <div className={styles.tableWrap}>
-                  <table className={styles.apiTable}>
-                    <thead>
-                      <tr>
-                        <th>Value</th>
-                        <th>Purpose</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {doc.returns.map((item) => (
+          <section className="dsec" id="options">
+            <h3>
+              <span className="hash">#</span> Options
+            </h3>
+            <div className="tbl-wrap">
+              <div className="tbl-scroll">
+                <table className="tbl">
+                  <thead>
+                    <tr>
+                      <th>Option</th>
+                      <th>Type</th>
+                      <th>Default</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {doc.options.map((item) => {
+                      const row = splitApiRow(item);
+                      return (
                         <tr key={item}>
                           <td>
-                            <code>{item}</code>
+                            <span className="pname">{row.name}</span>
                           </td>
-                          <td>{getReturnDescription(item)}</td>
+                          <td>
+                            <span className="ptype">configured</span>
+                          </td>
+                          <td className="mono">—</td>
+                          <td>{row.description}</td>
                         </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <section className="dsec" id="returns">
+            <h3>
+              <span className="hash">#</span> Returns
+            </h3>
+            <div className="tbl-wrap">
+              <div className="tbl-scroll">
+                <table className="tbl">
+                  <thead>
+                    <tr>
+                      <th>Value</th>
+                      <th>Type</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {doc.returns.map((item) => (
+                      <tr key={item}>
+                        <td>
+                          <span className="pname">{item}</span>
+                        </td>
+                        <td>
+                          <span className="ptype">state/action</span>
+                        </td>
+                        <td>{getReturnDescription(item)}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <section className="dsec" id="recipes">
+            <h3>
+              <span className="hash">#</span> Recipes
+            </h3>
+            {doc.recipes.map((recipe, index) => (
+              <div className="recipe" key={recipe}>
+                <div className="rt">
+                  <span className="n">{index + 1}</span>
+                  {recipe}
                 </div>
-              </section>
+              </div>
+            ))}
+          </section>
 
-              <section>
-                <span className="sec-label">// recipes</span>
-                <div className={styles.recipeGrid}>
-                  {doc.recipes.map((recipe) => (
-                    <div className={styles.recipe} key={recipe}>
-                      {recipe}
-                    </div>
-                  ))}
-                </div>
-              </section>
+          <section className="dsec" id="source">
+            <h3>
+              <span className="hash">#</span> Source notes
+            </h3>
+            {doc.notes.map((item) => (
+              <div className="source-note" key={item}>
+                {item}
+              </div>
+            ))}
+          </section>
 
-              <section>
-                <span className="sec-label">// source notes</span>
-                <ul className={styles.noteList}>
-                  {doc.notes.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </section>
-            </article>
+          <section className="dsec" id="related">
+            <h3>
+              <span className="hash">#</span> Related hooks
+            </h3>
+            <div className="related-row">
+              {relatedDocs.map((item) => (
+                <a className="related-chip" href={`/docs/${item.slug}`} key={item.slug}>
+                  <span className="h">use</span>
+                  {item.name.replace("use", "")}
+                </a>
+              ))}
+            </div>
+          </section>
+        </article>
 
-            <aside className={styles.side}>
-              {siteConfig.supportUrl ? (
-                <section className={styles.supportCard}>
-                  <h2>Support AI Hooks</h2>
-                  <p>Help keep the docs, examples, and package work independent.</p>
-                  <SupportButton className="btn support sm" />
-                </section>
-              ) : null}
-
-              <section>
-                <h2>On This Page</h2>
-                <ul>
-                  <li>Usage</li>
-                  <li>API</li>
-                  <li>Returns</li>
-                  <li>Recipes</li>
-                  <li>Source notes</li>
-                </ul>
-              </section>
-
-              <section>
-                <h2>Related Hooks</h2>
-                <ul>
-                  {relatedDocs.map((item) => (
-                    <li key={item.slug}>
-                      <a className={styles.sideLink} href={`/docs/${item.slug}`}>
-                        {item.name}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </section>
-            </aside>
+        <aside className="detail-side">
+          <div className="onthispage">
+            <h4>On this page</h4>
+            <a href="#import">Import</a>
+            <a href="#usage">Usage</a>
+            <a href="#options">Options</a>
+            <a href="#returns">Returns</a>
+            <a href="#recipes">Recipes</a>
+            <a href="#source">Source notes</a>
+            <a href="#related">Related</a>
           </div>
-        </section>
+          <div className="meta-card">
+            <h4>Details</h4>
+            <div className="mrow">
+              <span>Status</span>
+              <span className="v">{statusLabel(doc.status)}</span>
+            </div>
+            <div className="mrow">
+              <span>Category</span>
+              <span className="v">{displayCategory(doc.category)}</span>
+            </div>
+            <div className="mrow">
+              <span>Import</span>
+              <span className="v">@ai-hooks/react</span>
+            </div>
+            <div className="mrow">
+              <span>Bundle</span>
+              <span className="v">tree-shakeable</span>
+            </div>
+          </div>
+        </aside>
       </main>
     </>
   );
@@ -242,22 +247,13 @@ function splitApiRow(item: string) {
   };
 }
 
-function getReturnDescription(name: string) {
-  if (name.startsWith("is")) {
-    return "Boolean state for rendering controls and status UI.";
-  }
-
-  if (name.includes("Tokens")) {
-    return "Token counter value for usage or cost display.";
-  }
-
-  if (["send", "abort", "reset", "clear", "remove", "add", "run"].includes(name)) {
-    return "Action returned by the hook for your UI to call.";
-  }
-
-  if (name.includes("error") || name === "errors") {
-    return "Error state your UI can render or clear.";
-  }
-
-  return "State or helper value returned by the hook.";
+function getReturnDescription(value: string) {
+  if (value.includes("send")) return "Starts the current request or interaction.";
+  if (value.includes("stop") || value.includes("abort")) return "Cancels active work.";
+  if (value.includes("reset") || value.includes("clear")) return "Returns state to empty.";
+  if (value.includes("error") || value.includes("errors")) return "Current validation or request error.";
+  if (value.includes("messages")) return "Current rendered conversation state.";
+  if (value.includes("total")) return "Aggregated total for the current session.";
+  return "Returned state or action from the hook.";
 }
+

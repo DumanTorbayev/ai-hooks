@@ -1,137 +1,199 @@
 "use client";
 
-import {
-  useAbortController,
-  useChatStream,
-  useConversationStorage,
-  useModelCost,
-  useTokenUsage,
-} from "@ai-hooks/react";
+import { useEffect, useRef, useState } from "react";
+
+type Message = {
+  content: string;
+  role: "assistant" | "user";
+  streaming?: boolean;
+};
+
+const replies = [
+  "Good question. `messages` is the ordered thread, `send()` starts a turn, `isStreaming` flips true while tokens arrive, and `stop()` aborts cleanly.",
+  "You point `endpoint` at your own route, so the provider key stays on your server. The hook just manages streaming UI state.",
+  "Pair it with `useConversationStorage` to persist threads and `useTokenUsage` to track tokens per turn.",
+];
 
 export function MockChatDemo() {
-  const abort = useAbortController();
-  const usage = useTokenUsage();
-  const cost = useModelCost({ model: "mock-fast" });
-  const conversation = useConversationStorage({
-    key: "homepage-design-demo",
-    initialMessages: [
-      {
-        id: "demo-system",
-        role: "assistant",
-        content:
-          "Ask me to draft a streaming AI chat UI. This demo uses mock streaming, not paid model calls.",
-        createdAt: new Date(0).toISOString(),
-      },
-    ],
-  });
+  const [input, setInput] = useState("");
+  const [isStreaming, setIsStreaming] = useState(false);
+  const [messages, setMessages] = useState<Message[]>([
+    {
+      content: "What does `useChatStream` return?",
+      role: "user",
+    },
+    {
+      content:
+        "It returns `messages`, `send()`, `isStreaming`, and `stop()` — you render the UI.",
+      role: "assistant",
+    },
+  ]);
+  const [tokens, setTokens] = useState(428);
+  const replyIndexRef = useRef(0);
+  const timerRef = useRef<number | null>(null);
 
-  const chat = useChatStream({
-    mockResponse:
-      "Start with a client component, stream deltas into the last assistant message, expose a Stop button with AbortController, and keep usage/cost as visible product state.",
-    signal: abort.signal,
-    transport: "mock",
-    onUserMessage(content) {
-      conversation.addUserMessage(content);
+  useEffect(
+    () => () => {
+      if (timerRef.current) {
+        window.clearInterval(timerRef.current);
+      }
     },
-    onAssistantStart() {
-      conversation.addAssistantMessage("");
-    },
-    onAssistantDelta(delta) {
-      conversation.appendToLastAssistantMessage(delta);
-    },
-    onUsage(nextUsage) {
-      usage.add(nextUsage);
-      cost.add(nextUsage);
-    },
-  });
+    [],
+  );
+
+  function send() {
+    const prompt = input.trim();
+
+    if (!prompt || isStreaming) {
+      return;
+    }
+
+    setInput("");
+    setMessages((current) => [
+      ...current,
+      { content: prompt, role: "user" },
+      { content: "", role: "assistant", streaming: true },
+    ]);
+
+    const words = replies[replyIndexRef.current % replies.length].split(" ");
+    replyIndexRef.current += 1;
+    let index = 0;
+    setIsStreaming(true);
+
+    timerRef.current = window.setInterval(() => {
+      if (index >= words.length) {
+        stop(false);
+        return;
+      }
+
+      const nextWord = words[index];
+      index += 1;
+      setTokens((current) => current + 2);
+      setMessages((current) => {
+        const copy = [...current];
+        const last = copy[copy.length - 1];
+
+        if (!last || last.role !== "assistant") {
+          return current;
+        }
+
+        copy[copy.length - 1] = {
+          ...last,
+          content: `${last.content}${last.content ? " " : ""}${nextWord}`,
+        };
+        return copy;
+      });
+    }, 90);
+  }
+
+  function stop(keepPartial = true) {
+    if (timerRef.current) {
+      window.clearInterval(timerRef.current);
+      timerRef.current = null;
+    }
+
+    setIsStreaming(false);
+    setMessages((current) => {
+      const copy = [...current];
+      const last = copy[copy.length - 1];
+
+      if (!last || last.role !== "assistant") {
+        return current;
+      }
+
+      copy[copy.length - 1] = {
+        ...last,
+        content: keepPartial && !last.content ? "Stopped before the first token." : last.content,
+        streaming: false,
+      };
+      return copy;
+    });
+  }
 
   return (
-    <section className="demo" aria-label="Mock streaming chat demo">
-      <div className="demo-head">
-        <span className="tdot" />
-        <span className="tdot" />
-        <span className="tdot" />
-        <div className="demo-title">
-          <b>mock-chat.tsx</b> · live preview
-        </div>
-        <div className="demo-badge">
-          <span className="dot" />
-          local stream
-        </div>
+    <section className="preview" aria-label="Mock useChatStream preview">
+      <div className="pv-head">
+        <span className="dot" />
+        <span className="dot" />
+        <span className="dot" />
+        <span className="pv-title">
+          <b>useChatStream</b> — preview
+        </span>
+        <span className="pv-badge">
+          <span className="d" /> mock
+        </span>
       </div>
-
-      <div className="demo-hookbar">
-        hook <code>useChatStream()</code>
-        <span className="pill">{chat.isStreaming ? "streaming" : "idle"}</span>
-      </div>
-
-      <div className="chat-scroll">
-        {conversation.messages.map((message) => {
-          const isUser = message.role === "user";
-
-          return (
-            <article className={`msg ${isUser ? "user" : "bot"}`} key={message.id}>
-              <div className="av">{isUser ? "YOU" : "AI"}</div>
-              <div className="bubble">
-                <div className="role">
-                  {isUser ? "user" : chat.isStreaming && !message.content ? "assistant · streaming" : "assistant"}
-                </div>
-                <span className="txt">{message.content || "Streaming"}</span>
-                {!isUser && chat.isStreaming && !message.content ? <span className="cursor" /> : null}
+      <div className="pv-scroll">
+        {messages.map((message, index) => (
+          <article className={`pm ${message.role === "user" ? "user" : "bot"}`} key={index}>
+            <div className="av">{message.role === "user" ? "YOU" : "AI"}</div>
+            <div className="b">
+              <div className="role">
+                {message.role === "assistant" && message.streaming
+                  ? "assistant · streaming"
+                  : message.role}
               </div>
-            </article>
-          );
-        })}
-
-        {chat.isStreaming ? (
-          <article className="toolcall" aria-label="Streaming usage">
-            <div className="tc-head">
-              usage meter <span className="ok">running</span>
-            </div>
-            <div className="tc-body">
-              <span className="k">tokens</span>: estimating · <span className="k">cost</span>: mock
+              {renderInlineCode(message.content)}
+              {message.streaming ? <span className="cur" /> : null}
             </div>
           </article>
-        ) : null}
+        ))}
       </div>
-
-      <div className="composer">
-        <div className="composer-inner">
+      <div className="pv-composer">
+        <div className="pv-inner">
           <textarea
-            onChange={(event) => chat.setInput(event.target.value)}
-            placeholder="Ask for an AI UI pattern..."
-            rows={2}
-            value={chat.input}
+            onChange={(event) => setInput(event.target.value)}
+            onKeyDown={(event) => {
+              if (event.key === "Enter" && !event.shiftKey) {
+                event.preventDefault();
+                send();
+              }
+            }}
+            placeholder="Message the mock model..."
+            rows={1}
+            value={input}
           />
-          <button className="icon-btn" onClick={conversation.clear} type="button">
-            ↺
-          </button>
-          <button
-            className={`stop ${chat.isStreaming ? "on" : ""}`}
-            disabled={!chat.isStreaming}
-            onClick={abort.abort}
-            type="button"
-          >
-            ■ Stop
-          </button>
-          <button
-            className="send"
-            disabled={chat.isStreaming || !chat.input.trim()}
-            onClick={() => chat.send()}
-            type="button"
-          >
-            →
-          </button>
+          {isStreaming ? (
+            <button className="stopb on" onClick={() => stop()} type="button">
+              ■ Stop
+            </button>
+          ) : (
+            <button
+              aria-label="send"
+              className="send"
+              disabled={!input.trim()}
+              onClick={send}
+              type="button"
+            >
+              →
+            </button>
+          )}
         </div>
-        <div className="composer-foot">
+        <div className="pv-foot">
           <span>
-            Press <span className="kbd">⌘</span> <span className="kbd">Enter</span>
+            <span className="kbd">Enter</span> send
           </span>
-          <span className="usage">
-            <b>{usage.totalTokens}</b> tokens · <b>{cost.formatted}</b>
+          <span>
+            <span className="kbd">Shift</span> newline
+          </span>
+          <span className="u">
+            tokens <b>{tokens.toLocaleString("en-US")}</b> / 128k
           </span>
         </div>
       </div>
     </section>
   );
 }
+
+function renderInlineCode(value: string) {
+  const chunks = value.split(/(`[^`]+`)/g);
+
+  return chunks.map((chunk, index) => {
+    if (chunk.startsWith("`") && chunk.endsWith("`")) {
+      return <code key={index}>{chunk.slice(1, -1)}</code>;
+    }
+
+    return <span key={index}>{chunk}</span>;
+  });
+}
+
