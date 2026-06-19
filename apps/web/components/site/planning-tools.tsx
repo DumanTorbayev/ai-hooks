@@ -13,6 +13,8 @@ import {
   type CapabilityLevel,
 } from "@/content/tools";
 
+import styles from "./planning-tools.module.css";
+
 export function CostCalc() {
   const [model, setModel] = useState(defaultModelId);
   const [requests, setRequests] = useState(1);
@@ -21,7 +23,7 @@ export function CostCalc() {
   const selectedModel = modelCatalog.find((item) => item.id === model) ?? modelCatalog[0];
 
   if (!selectedModel) {
-    return <p className="tv-disclaim">No source-backed model pricing is available.</p>;
+    return <p className={styles.disclaimer}>No source-backed model pricing is available.</p>;
   }
 
   const { pricing } = selectedModel;
@@ -30,8 +32,8 @@ export function CostCalc() {
 
   return (
     <>
-      <div className="calc">
-        <div className="cfields">
+      <div className={styles.calculator}>
+        <div className={styles.fields}>
           <Field label="Model">
             <select onChange={(event) => setModel(event.target.value)} value={selectedModel.id}>
               {modelCatalog.map((item) => (
@@ -45,13 +47,13 @@ export function CostCalc() {
           <NumberField label="Input tokens" min={0} onChange={setInputTokens} value={inputTokens} />
           <NumberField label="Output tokens" min={0} onChange={setOutputTokens} value={outputTokens} />
         </div>
-        <div className="cout">
+        <div className={styles.results}>
           <Metric label="Input cost" value={formatUsd(inputCost)} />
           <Metric label="Output cost" value={formatUsd(outputCost)} />
           <Metric label="Total" strong value={formatUsd(inputCost + outputCost)} />
         </div>
       </div>
-      <p className="tv-disclaim">
+      <p className={styles.disclaimer}>
         Source-backed pricing checked {selectedModel.checkedAt}. Formula: (input/1e6 ×
         input_rate + output/1e6 × output_rate) × requests.{" "}
         <a href={selectedModel.sourceUrls[0]} rel="noreferrer" target="_blank">
@@ -77,16 +79,16 @@ export function TokenEstimator() {
 
   return (
     <>
-      <div className="estimator">
-        <textarea onChange={(event) => setText(event.target.value)} value={text} />
-        <div className="est-out">
+      <div>
+        <textarea className={styles.textarea} onChange={(event) => setText(event.target.value)} value={text} />
+        <div className={styles.estimatorOutput}>
           <Metric label="Characters" value={stats.chars.toLocaleString("en-US")} />
           <Metric label="Words" value={stats.words.toLocaleString("en-US")} />
           <Metric label="Est. tokens" strong value={stats.tokens.toLocaleString("en-US")} />
           <Metric label="Ratio" value="~4 chars/token" />
         </div>
       </div>
-      <p className="tv-disclaim">Heuristic only. Exact counts vary by tokenizer, model, and language.</p>
+      <p className={styles.disclaimer}>Heuristic only. Exact counts vary by tokenizer, model, and language.</p>
     </>
   );
 }
@@ -97,47 +99,47 @@ export function ModelCompare() {
 
   return (
     <>
-      <div className="model-grid">
+      <div className={styles.modelGrid}>
         {modelCatalog.map((item) => {
           return (
             <button
-              className={`mcard ${selected === item.id ? "sel" : ""}`}
+              className={`${styles.modelCard} ${selected === item.id ? styles.selected : ""}`}
               key={item.id}
               onClick={() => setSelected(item.id)}
               type="button"
             >
-              <div className="mcard-head">
+              <div className={styles.modelCardHead}>
                 <div>
                   <h3>{item.displayName}</h3>
                   <p>{item.id}</p>
                 </div>
-                <span className="radio-check" />
+                <span className={styles.radio} />
               </div>
-              <div className="mrow">
+              <div className={styles.modelRow}>
                 <span>provider</span>
                 <b>{providerLabels[item.provider]}</b>
               </div>
-              <div className="mrow">
+              <div className={styles.modelRow}>
                 <span>context</span>
                 <b>{formatContext(item.contextWindow)}</b>
               </div>
-              <div className="mrow">
+              <div className={styles.modelRow}>
                 <span>input / 1M</span>
                 <b>{formatUsdRate(item.pricing.inputPerMillionUsd)}</b>
               </div>
-              <div className="mrow">
+              <div className={styles.modelRow}>
                 <span>output / 1M</span>
                 <b>{formatUsdRate(item.pricing.outputPerMillionUsd)}</b>
               </div>
-              <div className="mrow">
+              <div className={styles.modelRow}>
                 <span>stream</span>
                 <CapabilityBadge value={supportBadge(item.supports.streaming)} />
               </div>
-              <div className="mrow">
+              <div className={styles.modelRow}>
                 <span>tools</span>
                 <CapabilityBadge value={supportBadge(item.supports.toolCalling)} />
               </div>
-              <div className="mrow">
+              <div className={styles.modelRow}>
                 <span>vision</span>
                 <CapabilityBadge value={supportBadge(item.supports.vision)} />
               </div>
@@ -146,7 +148,7 @@ export function ModelCompare() {
         })}
       </div>
       {selectedModel ? (
-        <p className="tv-disclaim">
+        <p className={styles.disclaimer}>
           Selected: {selectedModel.id}. Checked {selectedModel.checkedAt}.{" "}
           <a href={selectedModel.sourceUrls[0]} rel="noreferrer" target="_blank">
             Official source
@@ -160,9 +162,9 @@ export function ModelCompare() {
 export function ProviderMatrix() {
   return (
     <>
-      <div className="tbl-wrap">
-        <div className="tbl-scroll">
-          <table className="tbl">
+      <div className={styles.tableWrap}>
+        <div className={styles.tableScroll}>
+          <table className={styles.table}>
             <thead>
               <tr>
                 <th>Provider</th>
@@ -176,7 +178,7 @@ export function ProviderMatrix() {
               {providerMatrix.map((provider) => (
                 <tr key={provider.id}>
                   <td>
-                    <span className="pname">{provider.displayName}</span>
+                    <span className={styles.providerName}>{provider.displayName}</span>
                     <div className="mono muted">{provider.apiStyle}</div>
                   </td>
                   <td>
@@ -197,7 +199,7 @@ export function ProviderMatrix() {
           </table>
         </div>
       </div>
-      <p className="tv-disclaim">
+      <p className={styles.disclaimer}>
         AI Hooks does not bundle provider adapters. Provider capabilities are source-backed
         planning data, not package runtime behavior.
       </p>
@@ -207,7 +209,7 @@ export function ProviderMatrix() {
 
 function Field({ children, label }: { children: ReactNode; label: string }) {
   return (
-    <label className="field">
+    <label className={styles.field}>
       <span>{label}</span>
       {children}
     </label>
@@ -239,9 +241,9 @@ function NumberField({
 
 function Metric({ label, strong, value }: { label: string; strong?: boolean; value: string }) {
   return (
-    <div className={`co ${strong ? "total" : ""}`}>
-      <div className="lab">{label}</div>
-      <div className="val">{value}</div>
+    <div className={`${styles.metric} ${strong ? styles.metricTotal : ""}`}>
+      <div className={styles.metricLabel}>{label}</div>
+      <div className={styles.metricValue}>{value}</div>
     </div>
   );
 }
@@ -254,8 +256,12 @@ function CapabilityBadge({ value }: { value: CapabilityLevel }) {
   };
 
   return (
-    <span className={`bdg ${value === "full" ? "yes" : value === "partial" ? "part" : "no"}`}>
-      <span className="ic" />
+    <span
+      className={`${styles.badge} ${
+        value === "full" ? styles.badgeYes : value === "partial" ? styles.badgePartial : styles.badgeNo
+      }`}
+    >
+      <span className={styles.badgeDot} />
       {labels[value]}
     </span>
   );

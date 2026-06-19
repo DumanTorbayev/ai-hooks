@@ -1,0 +1,87 @@
+.panel {
+  overflow: hidden;
+  border: 1px solid var(--code-line);
+  border-radius: var(--radius);
+  background: var(--code-bg);
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid var(--code-line);
+  background: var(--code-bg-2);
+  padding: 7px 12px;
+}
+
+.file {
+  color: var(--code-mut);
+  font-family: var(--mono);
+  font-size: 11px;
+}
+
+.copyButton {
+  display: flex;
+  margin-left: auto;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--code-line);
+  border-radius: 5px;
+  background: transparent;
+  padding: 3px 9px;
+  color: var(--code-mut);
+  font-family: var(--mono);
+  font-size: 11px;
+}
+
+.copyButton:hover {
+  color: var(--code-ink);
+}
+
+.copyButton[data-state="copied"] {
+  border-color: #2f4a40;
+  color: var(--c-key);
+}
+
+.copyButton svg {
+  flex-shrink: 0;
+}
+
+.code {
+  overflow-x: auto;
+  margin: 0;
+  padding: 13px 15px;
+  color: var(--code-ink);
+  font-family: var(--mono);
+  font-size: 12.5px;
+  line-height: 1.7;
+}
+
+.tokenKeyword {
+  color: var(--c-key);
+}
+
+.tokenString {
+  color: var(--c-str);
+}
+
+.tokenComment {
+  color: var(--c-com);
+}
+
+.tokenFunction {
+  color: var(--c-fn);
+}
+
+.tokenType {
+  color: #b7cdfa;
+}
+
+.tokenNumber,
+.tokenPunctuation {
+  color: var(--c-pun);
+}
+
+.tokenPlain {
+  color: inherit;
+}

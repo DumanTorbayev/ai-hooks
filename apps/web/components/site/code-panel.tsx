@@ -2,6 +2,8 @@ import type { ReactNode } from "react";
 
 import { CopyButton } from "@/components/copy-button";
 
+import styles from "./code-panel.module.css";
+
 type CodePanelProps = {
   code: string;
   file: string;
@@ -9,12 +11,12 @@ type CodePanelProps = {
 
 export function CodePanel({ code, file }: CodePanelProps) {
   return (
-    <div className="codepanel">
-      <div className="cp-head">
-        <span className="cp-file">{file}</span>
-        <CopyButton className="cp-copy" value={code} />
+    <div className={styles.panel}>
+      <div className={styles.head}>
+        <span className={styles.file}>{file}</span>
+        <CopyButton className={styles.copyButton} value={code} />
       </div>
-      <pre className="code">
+      <pre className={styles.code}>
         <code>{highlightCode(code)}</code>
       </pre>
     </div>
@@ -80,15 +82,15 @@ function highlightCode(code: string) {
 }
 
 function getTokenClassName(token: string) {
-  if (token.startsWith("//")) return "tok-comment";
+  if (token.startsWith("//")) return styles.tokenComment;
   if (token.startsWith("\"") || token.startsWith("'") || token.startsWith("`")) {
-    return "tok-string";
+    return styles.tokenString;
   }
-  if (token.startsWith("@")) return "tok-string";
-  if (keywordTokens.has(token)) return "tok-keyword";
-  if (token.startsWith("use") && token.length > 3) return "tok-function";
-  if (/^[A-Z]/.test(token)) return "tok-type";
-  if (/^\d/.test(token)) return "tok-number";
-  if (/^[{}()[\].,;:=<>/+\-*]+$/.test(token)) return "tok-punctuation";
-  return "tok-plain";
+  if (token.startsWith("@")) return styles.tokenString;
+  if (keywordTokens.has(token)) return styles.tokenKeyword;
+  if (token.startsWith("use") && token.length > 3) return styles.tokenFunction;
+  if (/^[A-Z]/.test(token)) return styles.tokenType;
+  if (/^\d/.test(token)) return styles.tokenNumber;
+  if (/^[{}()[\].,;:=<>/+\-*]+$/.test(token)) return styles.tokenPunctuation;
+  return styles.tokenPlain;
 }
