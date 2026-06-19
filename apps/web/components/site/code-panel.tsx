@@ -7,9 +7,10 @@ import styles from "./code-panel.module.css";
 type CodePanelProps = {
   code: string;
   file: string;
+  showLineNumbers?: boolean;
 };
 
-export function CodePanel({ code, file }: CodePanelProps) {
+export function CodePanel({ code, file, showLineNumbers = true }: CodePanelProps) {
   return (
     <div className={styles.panel}>
       <div className={styles.head}>
@@ -17,7 +18,13 @@ export function CodePanel({ code, file }: CodePanelProps) {
         <CopyButton className={styles.copyButton} value={code} />
       </div>
       <pre className={styles.code}>
-        <code>{highlightCode(code)}</code>
+        <code>
+          {showLineNumbers ? (
+            highlightCodeLines(code)
+          ) : (
+            <span className={styles.plainCode}>{highlightCode(code)}</span>
+          )}
+        </code>
       </pre>
     </div>
   );
@@ -54,7 +61,18 @@ const keywordTokens = new Set([
 const tokenPattern =
   /(\/\/[^\n]*|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|`(?:\\.|[^`\\])*`|@[a-zA-Z0-9_/-]+|\b[A-Za-z_$][\w$]*\b|\b\d+(?:\.\d+)?\b|[{}()[\].,;:=<>/+\-*]+)/g;
 
-function highlightCode(code: string) {
+function highlightCodeLines(code: string) {
+  const lines = splitLines(highlightCode(code));
+
+  return lines.map((line, index) => (
+    <span className={styles.line} key={index}>
+      <span className={styles.lineNumber}>{index + 1}</span>
+      <span className={styles.lineCode}>{line.length > 0 ? line : "\n"}</span>
+    </span>
+  ));
+}
+
+function highlightCode(code: string): ReactNode[] {
   const output: ReactNode[] = [];
   let lastIndex = 0;
   let inJsxTag = false;
@@ -132,6 +150,31 @@ function highlightCode(code: string) {
   }
 
   return output;
+}
+
+function splitLines(nodes: ReactNode[]) {
+  const lines: ReactNode[][] = [[]];
+
+  for (const node of nodes) {
+    if (typeof node !== "string") {
+      lines[lines.length - 1].push(node);
+      continue;
+    }
+
+    const parts = node.split("\n");
+
+    for (let index = 0; index < parts.length; index += 1) {
+      if (index > 0) {
+        lines.push([]);
+      }
+
+      if (parts[index]) {
+        lines[lines.length - 1].push(parts[index]);
+      }
+    }
+  }
+
+  return lines;
 }
 
 function getTokenClassName(

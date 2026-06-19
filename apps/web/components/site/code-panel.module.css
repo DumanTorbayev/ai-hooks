@@ -50,19 +50,44 @@
 .code {
   overflow-x: auto;
   margin: 0;
-  padding: 13px 15px;
+  padding: 12px 0;
   color: var(--code-ink);
   font-family: var(--mono);
   font-size: 12.5px;
   line-height: 1.7;
 }
 
+.line {
+  display: grid;
+  grid-template-columns: 40px max-content;
+  min-width: max-content;
+  padding-right: 16px;
+}
+
+.lineNumber {
+  user-select: none;
+  color: #3f4653;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.lineCode {
+  display: inline-block;
+  min-height: 1.7em;
+  padding-left: 16px;
+}
+
+.plainCode {
+  display: block;
+  padding: 0 15px;
+}
+
 .tokenKeyword {
-  color: var(--c-key);
+  color: #ff7b72;
 }
 
 .tokenString {
-  color: var(--c-str);
+  color: #9ecbff;
 }
 
 .tokenComment {
@@ -70,32 +95,32 @@
 }
 
 .tokenFunction {
-  color: var(--c-fn);
+  color: #c9a5ff;
 }
 
 .tokenMethod {
-  color: var(--c-fn);
+  color: #7ee787;
 }
 
 .tokenProperty {
-  color: #b7cdfa;
+  color: #d6deeb;
 }
 
 .tokenJsxTag {
-  color: var(--c-fn);
+  color: #7ee787;
 }
 
 .tokenJsxAttribute {
-  color: #b7cdfa;
+  color: #ffd166;
 }
 
 .tokenType {
-  color: #b7cdfa;
+  color: #d6deeb;
 }
 
 .tokenNumber,
 .tokenPunctuation {
-  color: var(--c-pun);
+  color: #c9a5ff;
 }
 
 .tokenPlain {
