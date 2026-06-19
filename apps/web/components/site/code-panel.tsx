@@ -60,6 +60,8 @@ function highlightCode(code: string) {
   let inJsxTag = false;
   let jsxExpressionDepth = 0;
   let jsxTagNamePending = false;
+  let previousToken: string | undefined;
+  let activeJsxAttribute: string | undefined;
 
   for (const match of code.matchAll(tokenPattern)) {
     const token = match[0];
@@ -73,6 +75,11 @@ function highlightCode(code: string) {
       jsxExpressionDepth,
       inJsxTag,
       jsxTagNamePending,
+      memberTokenKind: getMemberTokenKind(code, token, index, previousToken, {
+        activeJsxAttribute,
+        inJsxTag,
+        jsxExpressionDepth,
+      }),
     });
 
     output.push(
@@ -88,20 +95,36 @@ function highlightCode(code: string) {
       jsxTagNamePending = false;
     }
 
+    if (
+      inJsxTag &&
+      jsxExpressionDepth === 0 &&
+      !jsxTagNamePending &&
+      isIdentifierToken(token) &&
+      isFollowedByAttributeAssignment(code, index + token.length)
+    ) {
+      activeJsxAttribute = token;
+    }
+
     if (inJsxTag) {
       jsxExpressionDepth = Math.max(
         0,
         jsxExpressionDepth + countCharacter(token, "{") - countCharacter(token, "}"),
       );
+
+      if (jsxExpressionDepth === 0 && token.includes("}")) {
+        activeJsxAttribute = undefined;
+      }
     }
 
     if (inJsxTag && token.includes(">")) {
       inJsxTag = false;
       jsxExpressionDepth = 0;
       jsxTagNamePending = false;
+      activeJsxAttribute = undefined;
     }
 
     lastIndex = index + token.length;
+    previousToken = token;
   }
 
   if (lastIndex < code.length) {
@@ -113,7 +136,12 @@ function highlightCode(code: string) {
 
 function getTokenClassName(
   token: string,
-  context: { inJsxTag: boolean; jsxExpressionDepth: number; jsxTagNamePending: boolean },
+  context: {
+    inJsxTag: boolean;
+    jsxExpressionDepth: number;
+    jsxTagNamePending: boolean;
+    memberTokenKind?: "method" | "property";
+  },
 ) {
   if (token.startsWith("//")) return styles.tokenComment;
   if (token.startsWith("\"") || token.startsWith("'") || token.startsWith("`")) {
@@ -121,6 +149,8 @@ function getTokenClassName(
   }
   if (token.startsWith("@")) return styles.tokenString;
   if (context.jsxTagNamePending && isIdentifierToken(token)) return styles.tokenJsxTag;
+  if (context.memberTokenKind === "method") return styles.tokenMethod;
+  if (context.memberTokenKind === "property") return styles.tokenProperty;
   if (context.inJsxTag && context.jsxExpressionDepth === 0 && isIdentifierToken(token)) {
     return styles.tokenJsxAttribute;
   }
@@ -130,6 +160,57 @@ function getTokenClassName(
   if (/^\d/.test(token)) return styles.tokenNumber;
   if (/^[{}()[\].,;:=<>/+\-*]+$/.test(token)) return styles.tokenPunctuation;
   return styles.tokenPlain;
+}
+
+function getMemberTokenKind(
+  code: string,
+  token: string,
+  index: number,
+  previousToken: string | undefined,
+  context: { activeJsxAttribute?: string; inJsxTag: boolean; jsxExpressionDepth: number },
+) {
+  if (previousToken !== "." || !isIdentifierToken(token)) {
+    return undefined;
+  }
+
+  if (
+    isFollowedByCall(code, index + token.length) ||
+    (context.inJsxTag &&
+      context.jsxExpressionDepth > 0 &&
+      Boolean(context.activeJsxAttribute?.match(/^on[A-Z]/)))
+  ) {
+    return "method";
+  }
+
+  return "property";
+}
+
+function isFollowedByCall(code: string, index: number) {
+  for (let currentIndex = index; currentIndex < code.length; currentIndex += 1) {
+    const character = code[currentIndex];
+
+    if (/\s/.test(character)) {
+      continue;
+    }
+
+    return character === "(";
+  }
+
+  return false;
+}
+
+function isFollowedByAttributeAssignment(code: string, index: number) {
+  for (let currentIndex = index; currentIndex < code.length; currentIndex += 1) {
+    const character = code[currentIndex];
+
+    if (/\s/.test(character)) {
+      continue;
+    }
+
+    return character === "=";
+  }
+
+  return false;
 }
 
 function isIdentifierToken(token: string) {

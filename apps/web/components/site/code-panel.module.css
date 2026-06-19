@@ -73,6 +73,14 @@
   color: var(--c-fn);
 }
 
+.tokenMethod {
+  color: var(--c-fn);
+}
+
+.tokenProperty {
+  color: #b7cdfa;
+}
+
 .tokenJsxTag {
   color: var(--c-fn);
 }
