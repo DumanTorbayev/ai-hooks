@@ -1,0 +1,311 @@
+.disclaimer {
+  margin-top: 12px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.calculator {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  background: var(--bg);
+  padding: 16px;
+}
+
+.field > span,
+.field label {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--ink-2);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.field input,
+.field select,
+.textarea {
+  width: 100%;
+  border: 1px solid var(--line-2);
+  border-radius: 6px;
+  outline: none;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 13px;
+}
+
+.field input,
+.field select {
+  padding: 8px 10px;
+}
+
+.field input:focus,
+.field select:focus,
+.textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.results {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  border-top: 1px solid var(--line);
+  background: var(--bg-2);
+  padding: 16px;
+}
+
+.metric {
+  min-width: 0;
+}
+
+.metricLabel,
+.estimatorOutput .metricLabel {
+  margin-bottom: 3px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.metricValue {
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.metricTotal .metricValue {
+  color: var(--green);
+}
+
+.textarea {
+  min-height: 120px;
+  padding: 11px 13px;
+  line-height: 1.55;
+  resize: vertical;
+}
+
+.estimatorOutput {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+  margin-top: 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bg-2);
+  padding: 14px 16px;
+}
+
+.estimatorOutput .metricValue {
+  font-size: 18px;
+}
+
+.modelGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.modelCard {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bg);
+  padding: 14px;
+  color: var(--ink);
+  text-align: left;
+  transition: border-color 0.12s, box-shadow 0.12s;
+}
+
+.modelCard:hover {
+  border-color: var(--line-2);
+}
+
+.selected {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.modelCardHead {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 9px;
+}
+
+.modelCardHead h3 {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.modelCardHead p {
+  margin: 2px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.radio {
+  width: 16px;
+  height: 16px;
+  margin-left: auto;
+  border: 1.5px solid var(--line-2);
+  border-radius: 50%;
+}
+
+.selected .radio {
+  position: relative;
+  border-color: var(--accent);
+  background: var(--accent);
+}
+
+.selected .radio::after {
+  position: absolute;
+  left: 4.5px;
+  top: 2px;
+  width: 4px;
+  height: 8px;
+  transform: rotate(45deg);
+  border: 2px solid #ffffff;
+  border-left: 0;
+  border-top: 0;
+  content: "";
+}
+
+.modelRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 3px 0;
+  color: var(--ink-2);
+  font-family: var(--mono);
+  font-size: 11.5px;
+}
+
+.modelRow b {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  padding: 2px 8px;
+  font-family: var(--mono);
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.badgeYes {
+  border-color: #c5ddd2;
+  background: var(--green-soft);
+  color: var(--green);
+}
+
+.badgePartial {
+  border-color: #e8d7b4;
+  background: var(--amber-soft);
+  color: var(--amber);
+}
+
+.badgeNo {
+  border-color: #e7c9c3;
+  background: var(--red-soft);
+  color: var(--red);
+}
+
+.badgeDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.tableWrap {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.tableScroll {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.table th,
+.table td {
+  border-bottom: 1px solid var(--line);
+  padding: 9px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.table thead th {
+  background: var(--bg-2);
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.providerName {
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+:global([data-theme="dark"]) .badgeYes {
+  border-color: #234a3d;
+}
+
+:global([data-theme="dark"]) .badgePartial {
+  border-color: #473a1c;
+}
+
+:global([data-theme="dark"]) .badgeNo {
+  border-color: #4a2722;
+}
+
+@media (max-width: 980px) {
+  .modelGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 760px) {
+  .fields,
+  .modelGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modelCard {
+    transition: none;
+  }
+}

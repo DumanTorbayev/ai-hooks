@@ -61,7 +61,7 @@ export default function DocsIndexPage() {
             <h3>
               <span className="hash">#</span> Installation
             </h3>
-            <CodePanel code="npm i @ai-hooks/react" file="terminal" />
+            <CodePanel code="npm i @ai-hooks/react" file="terminal" showLineNumbers={false} />
             <p className="doc-note">
               Then import a hook and point it at a route you control — your provider
               key stays on the server.

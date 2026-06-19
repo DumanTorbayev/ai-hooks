@@ -471,7 +471,7 @@ export function UsageAwareChat() {
       },
     ],
     notes: [
-      "Pricing data should be verified before public provider pages.",
+      "Bundled pricing rows include source URLs and a checkedAt date.",
       "You can pass explicit pricing for custom or private models.",
       "The hook does not send usage data anywhere.",
     ],
@@ -484,7 +484,7 @@ export function UsageAwareChat() {
     example: `import { useModelCost } from "@ai-hooks/react";
 
 export function CostMeter() {
-  const cost = useModelCost({ model: "mock-fast" });
+  const cost = useModelCost({ model: "gpt-5.4-mini" });
 
   return (
     <>

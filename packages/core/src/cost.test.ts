@@ -1,19 +1,20 @@
 import { describe, expect, it } from "vitest";
 
 import { estimateModelCost } from "./cost";
+import { DEFAULT_MODEL_ID } from "./models";
 
 describe("estimateModelCost", () => {
   it("uses model pricing when no explicit pricing is provided", () => {
     const estimate = estimateModelCost({
       inputTokens: 1_000,
-      model: "mock-fast",
+      model: DEFAULT_MODEL_ID,
       outputTokens: 500,
     });
 
-    expect(estimate.inputUsd).toBeCloseTo(0.00015);
-    expect(estimate.outputUsd).toBeCloseTo(0.0003);
-    expect(estimate.totalUsd).toBeCloseTo(0.00045);
-    expect(estimate.formatted).toBe("$0.00045");
+    expect(estimate.inputUsd).toBeCloseTo(0.00075);
+    expect(estimate.outputUsd).toBeCloseTo(0.00225);
+    expect(estimate.totalUsd).toBeCloseTo(0.003);
+    expect(estimate.formatted).toBe("$0.003");
   });
 
   it("prices cached input tokens separately when configured", () => {

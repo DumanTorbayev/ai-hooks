@@ -74,7 +74,7 @@ export default async function HookDocPage({ params }: HookDocPageProps) {
             <h3>
               <span className="hash">#</span> Import
             </h3>
-            <CodePanel code={rootImport} file="import" />
+            <CodePanel code={rootImport} file="import" showLineNumbers={false} />
           </section>
 
           <section className="dsec" id="usage">

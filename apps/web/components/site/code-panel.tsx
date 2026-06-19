@@ -2,20 +2,29 @@ import type { ReactNode } from "react";
 
 import { CopyButton } from "@/components/copy-button";
 
+import styles from "./code-panel.module.css";
+
 type CodePanelProps = {
   code: string;
   file: string;
+  showLineNumbers?: boolean;
 };
 
-export function CodePanel({ code, file }: CodePanelProps) {
+export function CodePanel({ code, file, showLineNumbers = true }: CodePanelProps) {
   return (
-    <div className="codepanel">
-      <div className="cp-head">
-        <span className="cp-file">{file}</span>
-        <CopyButton className="cp-copy" value={code} />
+    <div className={styles.panel}>
+      <div className={styles.head}>
+        <span className={styles.file}>{file}</span>
+        <CopyButton className={styles.copyButton} value={code} />
       </div>
-      <pre className="code">
-        <code>{highlightCode(code)}</code>
+      <pre className={styles.code}>
+        <code>
+          {showLineNumbers ? (
+            highlightCodeLines(code)
+          ) : (
+            <span className={styles.plainCode}>{highlightCode(code)}</span>
+          )}
+        </code>
       </pre>
     </div>
   );
@@ -52,9 +61,25 @@ const keywordTokens = new Set([
 const tokenPattern =
   /(\/\/[^\n]*|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|`(?:\\.|[^`\\])*`|@[a-zA-Z0-9_/-]+|\b[A-Za-z_$][\w$]*\b|\b\d+(?:\.\d+)?\b|[{}()[\].,;:=<>/+\-*]+)/g;
 
-function highlightCode(code: string) {
+function highlightCodeLines(code: string) {
+  const lines = splitLines(highlightCode(code));
+
+  return lines.map((line, index) => (
+    <span className={styles.line} key={index}>
+      <span className={styles.lineNumber}>{index + 1}</span>
+      <span className={styles.lineCode}>{line.length > 0 ? line : "\n"}</span>
+    </span>
+  ));
+}
+
+function highlightCode(code: string): ReactNode[] {
   const output: ReactNode[] = [];
   let lastIndex = 0;
+  let inJsxTag = false;
+  let jsxExpressionDepth = 0;
+  let jsxTagNamePending = false;
+  let previousToken: string | undefined;
+  let activeJsxAttribute: string | undefined;
 
   for (const match of code.matchAll(tokenPattern)) {
     const token = match[0];
@@ -64,12 +89,60 @@ function highlightCode(code: string) {
       output.push(code.slice(lastIndex, index));
     }
 
+    const tokenClassName = getTokenClassName(token, {
+      jsxExpressionDepth,
+      inJsxTag,
+      jsxTagNamePending,
+      memberTokenKind: getMemberTokenKind(code, token, index, previousToken, {
+        activeJsxAttribute,
+        inJsxTag,
+        jsxExpressionDepth,
+      }),
+    });
+
     output.push(
-      <span className={getTokenClassName(token)} key={`${index}-${token}`}>
+      <span className={tokenClassName} key={`${index}-${token}`}>
         {token}
       </span>,
     );
+
+    if (isJsxTagStart(code, token, index)) {
+      inJsxTag = true;
+      jsxTagNamePending = token !== "<>" && token !== "</>";
+    } else if (jsxTagNamePending && isIdentifierToken(token)) {
+      jsxTagNamePending = false;
+    }
+
+    if (
+      inJsxTag &&
+      jsxExpressionDepth === 0 &&
+      !jsxTagNamePending &&
+      isIdentifierToken(token) &&
+      isFollowedByAttributeAssignment(code, index + token.length)
+    ) {
+      activeJsxAttribute = token;
+    }
+
+    if (inJsxTag) {
+      jsxExpressionDepth = Math.max(
+        0,
+        jsxExpressionDepth + countCharacter(token, "{") - countCharacter(token, "}"),
+      );
+
+      if (jsxExpressionDepth === 0 && token.includes("}")) {
+        activeJsxAttribute = undefined;
+      }
+    }
+
+    if (inJsxTag && token.includes(">")) {
+      inJsxTag = false;
+      jsxExpressionDepth = 0;
+      jsxTagNamePending = false;
+      activeJsxAttribute = undefined;
+    }
+
     lastIndex = index + token.length;
+    previousToken = token;
   }
 
   if (lastIndex < code.length) {
@@ -79,16 +152,145 @@ function highlightCode(code: string) {
   return output;
 }
 
-function getTokenClassName(token: string) {
-  if (token.startsWith("//")) return "tok-comment";
-  if (token.startsWith("\"") || token.startsWith("'") || token.startsWith("`")) {
-    return "tok-string";
+function splitLines(nodes: ReactNode[]) {
+  const lines: ReactNode[][] = [[]];
+
+  for (const node of nodes) {
+    if (typeof node !== "string") {
+      lines[lines.length - 1].push(node);
+      continue;
+    }
+
+    const parts = node.split("\n");
+
+    for (let index = 0; index < parts.length; index += 1) {
+      if (index > 0) {
+        lines.push([]);
+      }
+
+      if (parts[index]) {
+        lines[lines.length - 1].push(parts[index]);
+      }
+    }
   }
-  if (token.startsWith("@")) return "tok-string";
-  if (keywordTokens.has(token)) return "tok-keyword";
-  if (token.startsWith("use") && token.length > 3) return "tok-function";
-  if (/^[A-Z]/.test(token)) return "tok-type";
-  if (/^\d/.test(token)) return "tok-number";
-  if (/^[{}()[\].,;:=<>/+\-*]+$/.test(token)) return "tok-punctuation";
-  return "tok-plain";
+
+  return lines;
+}
+
+function getTokenClassName(
+  token: string,
+  context: {
+    inJsxTag: boolean;
+    jsxExpressionDepth: number;
+    jsxTagNamePending: boolean;
+    memberTokenKind?: "method" | "property";
+  },
+) {
+  if (token.startsWith("//")) return styles.tokenComment;
+  if (token.startsWith("\"") || token.startsWith("'") || token.startsWith("`")) {
+    return styles.tokenString;
+  }
+  if (token.startsWith("@")) return styles.tokenString;
+  if (context.jsxTagNamePending && isIdentifierToken(token)) return styles.tokenJsxTag;
+  if (context.memberTokenKind === "method") return styles.tokenMethod;
+  if (context.memberTokenKind === "property") return styles.tokenProperty;
+  if (context.inJsxTag && context.jsxExpressionDepth === 0 && isIdentifierToken(token)) {
+    return styles.tokenJsxAttribute;
+  }
+  if (keywordTokens.has(token)) return styles.tokenKeyword;
+  if (token.startsWith("use") && token.length > 3) return styles.tokenFunction;
+  if (/^[A-Z]/.test(token)) return styles.tokenType;
+  if (/^\d/.test(token)) return styles.tokenNumber;
+  if (/^[{}()[\].,;:=<>/+\-*]+$/.test(token)) return styles.tokenPunctuation;
+  return styles.tokenPlain;
+}
+
+function getMemberTokenKind(
+  code: string,
+  token: string,
+  index: number,
+  previousToken: string | undefined,
+  context: { activeJsxAttribute?: string; inJsxTag: boolean; jsxExpressionDepth: number },
+) {
+  if (previousToken !== "." || !isIdentifierToken(token)) {
+    return undefined;
+  }
+
+  if (
+    isFollowedByCall(code, index + token.length) ||
+    (context.inJsxTag &&
+      context.jsxExpressionDepth > 0 &&
+      Boolean(context.activeJsxAttribute?.match(/^on[A-Z]/)))
+  ) {
+    return "method";
+  }
+
+  return "property";
+}
+
+function isFollowedByCall(code: string, index: number) {
+  for (let currentIndex = index; currentIndex < code.length; currentIndex += 1) {
+    const character = code[currentIndex];
+
+    if (/\s/.test(character)) {
+      continue;
+    }
+
+    return character === "(";
+  }
+
+  return false;
+}
+
+function isFollowedByAttributeAssignment(code: string, index: number) {
+  for (let currentIndex = index; currentIndex < code.length; currentIndex += 1) {
+    const character = code[currentIndex];
+
+    if (/\s/.test(character)) {
+      continue;
+    }
+
+    return character === "=";
+  }
+
+  return false;
+}
+
+function isIdentifierToken(token: string) {
+  return /^[A-Za-z_$][\w$]*$/.test(token);
+}
+
+function countCharacter(value: string, character: string) {
+  let count = 0;
+
+  for (const current of value) {
+    if (current === character) {
+      count += 1;
+    }
+  }
+
+  return count;
+}
+
+function isJsxTagStart(code: string, token: string, index: number) {
+  if (!token.startsWith("<")) {
+    return false;
+  }
+
+  const next = code[index + 1];
+  const nextAfterSlash = code[index + 2];
+
+  if (next === ">" || (next === "/" && nextAfterSlash === ">")) {
+    return true;
+  }
+
+  if (next === "/" && nextAfterSlash && /[A-Za-z]/.test(nextAfterSlash)) {
+    return true;
+  }
+
+  const previous = code[index - 1];
+  const hasJsxBoundary =
+    previous === undefined || /\s/.test(previous) || previous === "(" || previous === "[" || previous === "{";
+
+  return Boolean(hasJsxBoundary && next && /[A-Za-z]/.test(next));
 }

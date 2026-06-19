@@ -502,95 +502,11 @@ code {
 }
 
 .copybtn svg,
-.cp-copy svg,
 .send svg,
 .stopb svg,
 .home-note svg,
 .tcard .ic svg {
   flex-shrink: 0;
-}
-
-.codepanel {
-  overflow: hidden;
-  border: 1px solid var(--code-line);
-  border-radius: var(--radius);
-  background: var(--code-bg);
-}
-
-.cp-head {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  border-bottom: 1px solid var(--code-line);
-  background: var(--code-bg-2);
-  padding: 7px 12px;
-}
-
-.cp-file {
-  color: var(--code-mut);
-  font-family: var(--mono);
-  font-size: 11px;
-}
-
-.cp-copy {
-  display: flex;
-  margin-left: auto;
-  align-items: center;
-  gap: 6px;
-  border: 1px solid var(--code-line);
-  border-radius: 5px;
-  background: transparent;
-  padding: 3px 9px;
-  color: var(--code-mut);
-  font-family: var(--mono);
-  font-size: 11px;
-}
-
-.cp-copy:hover {
-  color: var(--code-ink);
-}
-
-.cp-copy[data-state="copied"] {
-  border-color: #2f4a40;
-  color: var(--c-key);
-}
-
-pre.code {
-  overflow-x: auto;
-  margin: 0;
-  padding: 13px 15px;
-  color: var(--code-ink);
-  font-family: var(--mono);
-  font-size: 12.5px;
-  line-height: 1.7;
-}
-
-pre.code .tok-keyword {
-  color: var(--c-key);
-}
-
-pre.code .tok-string {
-  color: var(--c-str);
-}
-
-pre.code .tok-comment {
-  color: var(--c-com);
-}
-
-pre.code .tok-function {
-  color: var(--c-fn);
-}
-
-pre.code .tok-type {
-  color: #b7cdfa;
-}
-
-pre.code .tok-number {
-  color: var(--c-pun);
-}
-
-pre.code .tok-punctuation {
-  color: var(--c-pun);
 }
 
 .k {
@@ -1821,255 +1737,6 @@ h1.h1 {
   text-transform: uppercase;
 }
 
-.calc {
-  overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-}
-
-.calc .cfields {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-  background: var(--bg);
-  padding: 16px;
-}
-
-.calc .field > span,
-.calc .field label {
-  display: block;
-  margin-bottom: 5px;
-  color: var(--ink-2);
-  font-size: 12px;
-  font-weight: 500;
-}
-
-.calc .field input,
-.calc .field select,
-.estimator textarea {
-  width: 100%;
-  border: 1px solid var(--line-2);
-  border-radius: 6px;
-  outline: none;
-  background: var(--bg);
-  color: var(--ink);
-  font-family: var(--mono);
-  font-size: 13px;
-}
-
-.calc .field input,
-.calc .field select {
-  padding: 8px 10px;
-}
-
-.calc .field input:focus,
-.calc .field select:focus,
-.estimator textarea:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-soft);
-}
-
-.calc .cout {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 24px;
-  border-top: 1px solid var(--line);
-  background: var(--bg-2);
-  padding: 16px;
-}
-
-.co .lab,
-.est-out .eo .lab,
-.calc .cout .co .lab {
-  margin-bottom: 3px;
-  color: var(--muted);
-  font-family: var(--mono);
-  font-size: 10.5px;
-  letter-spacing: 0;
-  text-transform: uppercase;
-}
-
-.co .val,
-.calc .cout .co .val {
-  color: var(--ink);
-  font-family: var(--mono);
-  font-size: 20px;
-  font-weight: 600;
-}
-
-.co.total .val,
-.calc .cout .co.total .val {
-  color: var(--green);
-}
-
-.tv-disclaim {
-  margin-top: 12px;
-  color: var(--muted);
-  font-family: var(--mono);
-  font-size: 11px;
-  line-height: 1.5;
-}
-
-.estimator textarea {
-  min-height: 120px;
-  padding: 11px 13px;
-  line-height: 1.55;
-  resize: vertical;
-}
-
-.est-out {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 22px;
-  margin-top: 14px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--bg-2);
-  padding: 14px 16px;
-}
-
-.est-out .val {
-  font-family: var(--mono);
-  font-size: 18px;
-  font-weight: 600;
-}
-
-.model-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-}
-
-.mcard {
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--bg);
-  padding: 14px;
-  color: var(--ink);
-  text-align: left;
-  transition: border-color 0.12s, box-shadow 0.12s;
-}
-
-.mcard:hover {
-  border-color: var(--line-2);
-}
-
-.mcard.sel {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-soft);
-}
-
-.mcard-head {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 9px;
-}
-
-.mcard-head h3 {
-  margin: 0;
-  font-family: var(--mono);
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.mcard-head p {
-  margin: 2px 0 0;
-  color: var(--muted);
-  font-size: 11px;
-}
-
-.radio-check {
-  width: 16px;
-  height: 16px;
-  margin-left: auto;
-  border: 1.5px solid var(--line-2);
-  border-radius: 50%;
-}
-
-.mcard.sel .radio-check {
-  position: relative;
-  border-color: var(--accent);
-  background: var(--accent);
-}
-
-.mcard.sel .radio-check::after {
-  position: absolute;
-  left: 4.5px;
-  top: 2px;
-  width: 4px;
-  height: 8px;
-  transform: rotate(45deg);
-  border: 2px solid #ffffff;
-  border-left: 0;
-  border-top: 0;
-  content: "";
-}
-
-.mcard .mrow {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  padding: 3px 0;
-  color: var(--ink-2);
-  font-family: var(--mono);
-  font-size: 11.5px;
-}
-
-.mcard .mrow b {
-  color: var(--ink);
-  font-weight: 500;
-}
-
-.bdg {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  border: 1px solid transparent;
-  border-radius: 5px;
-  padding: 2px 8px;
-  font-family: var(--mono);
-  font-size: 11px;
-  white-space: nowrap;
-}
-
-.bdg.yes {
-  border-color: #c5ddd2;
-  background: var(--green-soft);
-  color: var(--green);
-}
-
-.bdg.part {
-  border-color: #e8d7b4;
-  background: var(--amber-soft);
-  color: var(--amber);
-}
-
-.bdg.no {
-  border-color: #e7c9c3;
-  background: var(--red-soft);
-  color: var(--red);
-}
-
-.bdg .ic {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: currentColor;
-}
-
-[data-theme="dark"] .bdg.yes {
-  border-color: #234a3d;
-}
-
-[data-theme="dark"] .bdg.part {
-  border-color: #473a1c;
-}
-
-[data-theme="dark"] .bdg.no {
-  border-color: #4a2722;
-}
-
 .modal-bg {
   position: fixed;
   inset: 0;
@@ -2239,8 +1906,7 @@ h1.h1 {
     gap: 30px;
   }
 
-  .hooks-row,
-  .model-grid {
+  .hooks-row {
     grid-template-columns: repeat(2, 1fr);
   }
 }
@@ -2310,8 +1976,7 @@ h1.h1 {
     display: grid;
   }
 
-  .hooks-row,
-  .model-grid {
+  .hooks-row {
     grid-template-columns: 1fr;
   }
 
@@ -2322,10 +1987,6 @@ h1.h1 {
   .ex-card .ec-left {
     border-right: 0;
     border-bottom: 1px solid var(--line);
-  }
-
-  .calc .cfields {
-    grid-template-columns: 1fr;
   }
 
   h1.h1 {
@@ -2351,7 +2012,6 @@ h1.h1 {
 
   .dcard,
   .hrow-card,
-  .mcard,
   .tcard,
   .related-chip,
   .coffee-fab {

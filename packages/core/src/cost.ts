@@ -1,4 +1,4 @@
-import { getModelInfo, type ModelPricing } from "./models";
+import { DEFAULT_MODEL_ID, getModelInfo, type ModelPricing } from "./models";
 import type { MoneyEstimate, TokenUsage } from "./types";
 
 export type EstimateModelCostInput = TokenUsage & {
@@ -8,7 +8,7 @@ export type EstimateModelCostInput = TokenUsage & {
 };
 
 export function estimateModelCost(input: EstimateModelCostInput): MoneyEstimate {
-  const pricing = input.pricing ?? getModelInfo(input.model ?? "mock-fast").pricing;
+  const pricing = input.pricing ?? getModelInfo(input.model ?? DEFAULT_MODEL_ID).pricing;
 
   if (!pricing) {
     throw new Error("Model pricing is required to estimate cost.");
@@ -39,4 +39,3 @@ export function estimateModelCost(input: EstimateModelCostInput): MoneyEstimate 
     }).format(totalUsd),
   };
 }
-
