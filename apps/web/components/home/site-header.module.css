@@ -1,0 +1,187 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  height: var(--hd);
+  border-bottom: 1px solid var(--line);
+  background: var(--hd-bg);
+  backdrop-filter: saturate(160%) blur(8px);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  height: var(--hd);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink);
+  font-size: 14.5px;
+  font-weight: 600;
+}
+
+.glyph {
+  display: grid;
+  width: 23px;
+  height: 23px;
+  place-items: center;
+  border-radius: 6px;
+  background: var(--ink);
+  color: var(--bg);
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.glyph svg,
+.nav a svg,
+.searchButton svg,
+.github svg,
+.hamburger svg {
+  flex-shrink: 0;
+}
+
+.nav {
+  display: flex;
+  gap: 1px;
+  margin-left: 6px;
+}
+
+.nav a {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 6px;
+  padding: 6px 11px;
+  color: var(--ink-2);
+  font-size: 13.5px;
+  font-weight: 450;
+}
+
+.nav a:hover {
+  background: var(--bg-2);
+  color: var(--ink);
+}
+
+.nav a.active {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.searchButton {
+  display: flex;
+  min-width: 220px;
+  height: 34px;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--line-2);
+  border-radius: 7px;
+  background: var(--bg);
+  padding: 0 12px;
+  color: var(--muted);
+  font-size: 12.5px;
+  cursor: pointer;
+}
+
+.searchButton:hover {
+  border-color: var(--ink-2);
+}
+
+.kbd {
+  margin-left: auto;
+  border: 1px solid var(--line-2);
+  border-radius: 4px;
+  padding: 0 5px;
+  color: var(--ink-2);
+  font-family: var(--mono);
+  font-size: 10.5px;
+}
+
+.github,
+.hamburger {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border: 1px solid var(--line-2);
+  border-radius: 7px;
+  background: var(--bg);
+  color: var(--ink-2);
+}
+
+.github:hover,
+.hamburger:hover {
+  border-color: var(--ink-2);
+  color: var(--ink);
+}
+
+.hamburger {
+  display: none;
+  font-size: 18px;
+}
+
+.mobileMenu {
+  display: none;
+  flex-direction: column;
+  gap: 1px;
+  border-top: 1px solid var(--line);
+  padding: 10px 0 14px;
+}
+
+.mobileMenuOpen {
+  display: flex;
+}
+
+.mobileMenu a {
+  border-radius: 6px;
+  padding: 9px 12px;
+  color: var(--ink-2);
+  font-size: 14px;
+}
+
+.mobileMenu a:hover {
+  background: var(--bg-2);
+  color: var(--ink);
+}
+
+@media (max-width: 760px) {
+  .nav,
+  .searchButton,
+  .github {
+    display: none;
+  }
+
+  .menuOpen {
+    background: var(--bg);
+  }
+
+  .mobileMenu {
+    position: absolute;
+    top: var(--hd);
+    left: 0;
+    right: 0;
+    max-width: none;
+    border-bottom: 1px solid var(--line);
+    background: var(--bg);
+    box-shadow: var(--shadow-lg);
+    padding: 10px 16px 14px;
+  }
+
+  .hamburger {
+    display: grid;
+  }
+}

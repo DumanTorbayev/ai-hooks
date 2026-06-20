@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 
 import { MoonIcon, SunIcon } from "@/components/icons";
 
+import styles from "./theme-toggle.module.css";
+
 type Theme = "dark" | "light";
 
 export function ThemeToggle() {
@@ -32,14 +34,14 @@ export function ThemeToggle() {
     <button
       aria-label="Toggle theme"
       aria-pressed={theme === "dark"}
-      className="icon-toggle"
+      className={styles.toggle}
       onClick={toggleTheme}
       type="button"
     >
-      <span aria-hidden="true" className="moon">
+      <span aria-hidden="true" className={styles.moon}>
         <MoonIcon />
       </span>
-      <span aria-hidden="true" className="sun">
+      <span aria-hidden="true" className={styles.sun}>
         <SunIcon />
       </span>
     </button>

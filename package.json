@@ -6,10 +6,12 @@
     "dev": "pnpm --filter @ai-hooks/web dev",
     "build": "pnpm --filter @ai-hooks/core build && pnpm --filter @ai-hooks/react build && pnpm --filter @ai-hooks/web build",
     "test": "pnpm --filter @ai-hooks/core test && pnpm --filter @ai-hooks/react test",
+    "test:e2e": "playwright test",
     "typecheck": "pnpm --filter @ai-hooks/core typecheck && pnpm --filter @ai-hooks/react typecheck && pnpm --filter @ai-hooks/web typecheck",
     "lint": "pnpm -r lint"
   },
   "devDependencies": {
+    "@playwright/test": "^1.61.0",
     "@testing-library/react": "^16.3.2",
     "@types/node": "^22.15.0",
     "happy-dom": "^20.10.5",

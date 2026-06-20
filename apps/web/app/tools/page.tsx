@@ -6,6 +6,8 @@ import { PlanningToolIcon } from "@/components/site/tool-icon";
 import { planningTools } from "@/content/tools";
 import { createPageMetadata } from "@/lib/metadata";
 
+import styles from "@/components/site/docs-shell.module.css";
+
 export const metadata: Metadata = createPageMetadata({
   description: "Planning tools for AI UI costs, tokens, models, and providers.",
   path: "/tools",
@@ -16,27 +18,27 @@ export default function ToolsIndexPage() {
   return (
     <>
       <SiteHeader active="docs" />
-      <main className="wrap doc-layout">
+      <main className={`wrap ${styles.docsLayout}`}>
         <SidebarNav active={{ kind: "tools" }} />
-        <div className="doc-main">
-          <div className="crumbs">
+        <div className={styles.main}>
+          <div className={styles.crumbs}>
             <a href="/docs">Docs</a> / <span>Tools</span>
           </div>
-          <h1 className="page-title">Tools</h1>
-          <p className="page-lede">
+          <h1 className={styles.pageTitle}>Tools</h1>
+          <p className={styles.pageLede}>
             Reference utilities for planning an AI UI — cost, tokens, models,
             providers. These are <b>not part of the package API</b>; the hooks are.
           </p>
-          <div className="tool-cards">
+          <div className={styles.toolCards}>
             {planningTools.map((tool) => (
-              <a className="tcard" href={`/tools/${tool.id}`} key={tool.id}>
-                <div className="ic">
+              <a className={styles.toolCard} href={`/tools/${tool.id}`} key={tool.id}>
+                <div className={styles.toolIcon}>
                   <PlanningToolIcon id={tool.id} size={17} />
                 </div>
                 <div>
                   <h4>{tool.name}</h4>
                   <p>{tool.description}</p>
-                  <span className="planlabel">planning tool</span>
+                  <span className={styles.planLabel}>planning tool</span>
                 </div>
               </a>
             ))}

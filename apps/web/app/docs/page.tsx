@@ -5,6 +5,8 @@ import { SiteHeader } from "@/components/home/site-header";
 import { SidebarNav } from "@/components/site/sidebar-nav";
 import { createPageMetadata } from "@/lib/metadata";
 
+import styles from "@/components/site/docs-shell.module.css";
+
 export const metadata: Metadata = createPageMetadata({
   description: "Introduction to AI Hooks and its headless React hook model.",
   path: "/docs",
@@ -15,14 +17,14 @@ export default function DocsIndexPage() {
   return (
     <>
       <SiteHeader active="docs" />
-      <main className="wrap doc-layout">
+      <main className={`wrap ${styles.docsLayout}`}>
         <SidebarNav active={{ kind: "docs" }} />
-        <div className="doc-main">
-          <div className="crumbs">
+        <div className={styles.main}>
+          <div className={styles.crumbs}>
             <a href="/">Home</a> / <span>Documentation</span> / <span>Introduction</span>
           </div>
-          <h1 className="page-title">Introduction</h1>
-          <p className="page-lede">
+          <h1 className={styles.pageTitle}>Introduction</h1>
+          <p className={styles.pageLede}>
             AI Hooks is a small set of <b>headless React hooks</b> for building AI
             product interfaces — streaming chat, token usage, file inputs, and tool
             calls. It is <b>not</b> a hosted API, a proxy, or a UI kit: you keep your
@@ -30,39 +32,39 @@ export default function DocsIndexPage() {
             read its API, copy the usage, and ship.
           </p>
 
-          <div className="principles">
-            <div className="principle">
+          <div className={styles.principles}>
+            <div className={styles.principle}>
               <h4>
-                <span className="ic">⌘</span> Headless
+                <span className={styles.principleIcon}>⌘</span> Headless
               </h4>
               <p>Hooks return state and actions only. You render every pixel.</p>
             </div>
-            <div className="principle">
+            <div className={styles.principle}>
               <h4>
-                <span className="ic">⌘</span> Your keys
+                <span className={styles.principleIcon}>⌘</span> Your keys
               </h4>
               <p>The package never proxies model calls. Keys live on your server.</p>
             </div>
-            <div className="principle">
+            <div className={styles.principle}>
               <h4>
-                <span className="ic">⌘</span> Provider-agnostic
+                <span className={styles.principleIcon}>⌘</span> Provider-agnostic
               </h4>
               <p>Swap models across providers without touching UI code.</p>
             </div>
-            <div className="principle">
+            <div className={styles.principle}>
               <h4>
-                <span className="ic">⌘</span> Zero deps
+                <span className={styles.principleIcon}>⌘</span> Zero deps
               </h4>
               <p>Tree-shakeable, small, and framework-friendly.</p>
             </div>
           </div>
 
-          <section className="dsec" id="installation">
+          <section className={styles.section} id="installation">
             <h3>
-              <span className="hash">#</span> Installation
+              <span className={styles.hash}>#</span> Installation
             </h3>
             <CodePanel code="npm i @ai-hooks/react" file="terminal" showLineNumbers={false} />
-            <p className="doc-note">
+            <p className={styles.docNote}>
               Then import a hook and point it at a route you control — your provider
               key stays on the server.
             </p>
@@ -89,14 +91,14 @@ export function Chat() {
 }`}
               file="app/chat.tsx"
             />
-            <p className="doc-note">
+            <p className={styles.docNote}>
               Browse the full hook list in the sidebar — each entry links straight to
               its API reference.
             </p>
           </section>
 
-          <div className="tools-callout">
-            <div className="tc-txt">
+          <div className={styles.toolsCallout}>
+            <div className={styles.toolsCalloutText}>
               <b>Planning tools</b> — cost, tokens, models, providers. Reference
               utilities for designing an AI UI, <b>not part of the package API</b>.
               They live in the sidebar.
