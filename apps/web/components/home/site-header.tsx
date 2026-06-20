@@ -6,6 +6,8 @@ import { GitHubIcon, MenuIcon, SearchIcon } from "@/components/icons";
 import { CommandPalette } from "@/components/site/command-palette";
 import { ThemeToggle } from "@/components/site/theme-toggle";
 
+import styles from "./site-header.module.css";
+
 type SiteHeaderProps = {
   active?: "docs";
 };
@@ -28,30 +30,30 @@ export function SiteHeader({ active }: SiteHeaderProps) {
 
   return (
     <>
-      <header className={`site-header ${mobileOpen ? "menu-open" : ""}`}>
-        <div className="wrap hd-row">
-          <a className="brand" href="/">
-            <span className="glyph">⌘</span>
+      <header className={`${styles.header} ${mobileOpen ? styles.menuOpen : ""}`}>
+        <div className={`wrap ${styles.row}`}>
+          <a className={styles.brand} href="/">
+            <span className={styles.glyph}>⌘</span>
             <span>AI Hooks</span>
           </a>
 
-          <nav className="hd-nav" aria-label="Primary navigation">
-            <a className={active === "docs" ? "active" : undefined} href="/docs">
+          <nav className={styles.nav} aria-label="Primary navigation">
+            <a className={active === "docs" ? styles.active : undefined} href="/docs">
               Docs
             </a>
           </nav>
 
-          <div className="hd-spacer" />
+          <div className={styles.spacer} />
 
-          <div className="hd-right">
-            <button className="kbtn" onClick={() => setPaletteOpen(true)} type="button">
+          <div className={styles.actions}>
+            <button className={styles.searchButton} onClick={() => setPaletteOpen(true)} type="button">
               <SearchIcon size={13} />
-              Search docs <span className="kbd">⌘K</span>
+              Search docs <span className={styles.kbd}>⌘K</span>
             </button>
             <ThemeToggle />
             <a
               aria-label="GitHub repository"
-              className="gh"
+              className={styles.github}
               href="https://github.com/DumanTorbayev/ai-hooks"
               rel="noreferrer"
               target="_blank"
@@ -60,7 +62,7 @@ export function SiteHeader({ active }: SiteHeaderProps) {
             </a>
             <button
               aria-label="Open mobile menu"
-              className="hamburger"
+              className={styles.hamburger}
               onClick={() => setMobileOpen((current) => !current)}
               type="button"
             >
@@ -69,7 +71,7 @@ export function SiteHeader({ active }: SiteHeaderProps) {
           </div>
         </div>
 
-        <div className={`wrap m-menu ${mobileOpen ? "open" : ""}`}>
+        <div className={`wrap ${styles.mobileMenu} ${mobileOpen ? styles.mobileMenuOpen : ""}`}>
           <a href="/docs" onClick={() => setMobileOpen(false)}>
             Docs
           </a>

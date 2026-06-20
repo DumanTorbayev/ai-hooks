@@ -10,7 +10,7 @@ requests should go through your own server route and your own provider keys.
 - `@ai-hooks/core` - token estimation, mock streaming, source-backed model/provider registries, and cost utilities.
 - `@ai-hooks/react` - React hooks for chat streams, abort state, usage, storage, file upload, and tool calls.
 - `apps/web` - the public site, docs, cost calculator, model comparison, provider matrix, and mock streaming playground.
-- `examples/next-basic-chat` - a minimal example scaffold.
+- `examples/next-basic-chat` - example notes for the first chat starter.
 
 ## Current Stage
 
@@ -23,7 +23,7 @@ developer resource for practical AI UI work:
 - Model comparison pages.
 - Provider compatibility matrix.
 - Streaming playground.
-- Copy-paste AI chat UI examples.
+- Documentation-backed AI chat examples.
 
 The package should stay small and headless. Public demos should use mock data
 unless a user intentionally connects their own provider route.
@@ -103,7 +103,7 @@ examples/
 2. Keep model pricing and provider compatibility data current.
 3. Expand model comparison and provider compatibility coverage.
 4. Build a richer streaming playground.
-5. Publish copy-paste AI chat UI examples.
+5. Add runnable starter apps after the package API is stable.
 
 ## Status
 

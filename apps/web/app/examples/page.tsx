@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 
 import { SiteHeader } from "@/components/home/site-header";
-import { CopyButton } from "@/components/copy-button";
 import { InfoIcon } from "@/components/icons";
+import shell from "@/components/site/docs-shell.module.css";
 import { SidebarNav } from "@/components/site/sidebar-nav";
 import { createPageMetadata } from "@/lib/metadata";
+
+import styles from "./examples.module.css";
 
 export const metadata: Metadata = createPageMetadata({
   description: "Current AI Hooks examples that match the package and demo routes shipped today.",
@@ -12,47 +14,44 @@ export const metadata: Metadata = createPageMetadata({
   title: "Examples",
 });
 
-const cloneCommand = "npx @ai-hooks/example next-basic-chat";
-
 export default function ExamplesPage() {
   return (
     <>
       <SiteHeader />
-      <main className="wrap doc-layout">
+      <main className={`wrap ${shell.docsLayout}`}>
         <SidebarNav />
-        <div className="doc-main">
-          <div className="crumbs">
+        <div className={shell.main}>
+          <div className={shell.crumbs}>
             <a href="/docs">Docs</a> / <span>Examples</span>
           </div>
-          <h1 className="page-title">Examples</h1>
-          <p className="page-lede">
-            Runnable starting points built from the shipped hooks. There is one example
-            today — more appear here only once they ship.
+          <h1 className={shell.pageTitle}>Examples</h1>
+          <p className={shell.pageLede}>
+            Practical implementation notes for the hooks that exist today. Full
+            runnable starters will be listed here only after they ship in the repo.
           </p>
-          <div className="ex-note">
+          <div className={styles.note}>
             <InfoIcon />
             <div>
-              Examples run on a <b>mock streaming engine by default</b> so you can clone
-              and run them with no keys. To use a real model, add your own provider key
-              to the example&apos;s server route.
+              Current examples are <b>documentation-backed</b>. They use mock streams
+              in the public site and never require project-owned provider keys.
             </div>
           </div>
 
-          <article className="ex-card">
-            <div className="ec-head">
-              <span className="name">Next Basic Chat</span>
-              <div className="badges">
+          <article className={styles.card}>
+            <div className={styles.cardHead}>
+              <span className={styles.name}>Next Basic Chat</span>
+              <div className={styles.badges}>
                 <span className="status stable">stable</span>
                 <span className="cat-tag">Next.js</span>
                 <span className="cat-tag">mock-stream</span>
               </div>
             </div>
-            <div className="ec-body">
-              <div className="ec-left">
+            <div className={styles.cardBody}>
+              <div className={styles.left}>
                 <p>
-                  A minimal streaming chat built with <code>useChatStream</code> on a
-                  Next.js App Router route. Shows the send → stream → stop loop and an
-                  optional token counter.
+                  A minimal streaming chat pattern built with <code>useChatStream</code>
+                  and a Next.js App Router route. It shows the send → stream → stop loop
+                  and where token usage can be attached.
                 </p>
                 <ul>
                   <li>
@@ -68,44 +67,41 @@ export default function ExamplesPage() {
                     Mock route at <code>app/api/chat/route.ts</code>
                   </li>
                 </ul>
-                <div className="ec-actions">
+                <div className={styles.actions}>
                   <a className="btn primary sm" href="/docs/use-chat-stream">
                     Open useChatStream
                   </a>
-                  <CopyButton className="btn sm" value={cloneCommand} />
+                  <a className="btn sm" href="/docs/use-abort-controller">
+                    Stop generation
+                  </a>
                 </div>
               </div>
-              <div className="ec-right">
-                <div className="ex-mini">
-                  <div className="emh">app/page.tsx — preview</div>
-                  <div className="emb">
-                    <div className="pm user">
-                      <div className="av">YOU</div>
-                      <div className="b">Hello!</div>
+              <div className={styles.right}>
+                <div className={styles.mini}>
+                  <div className={styles.miniHead}>app/page.tsx — preview</div>
+                  <div className={styles.miniBody}>
+                    <div className={`${styles.message} ${styles.user}`}>
+                      <div className={styles.avatar}>YOU</div>
+                      <div className={styles.bubble}>Hello!</div>
                     </div>
-                    <div className="pm bot">
-                      <div className="av">AI</div>
-                      <div className="b">
-                        Streaming reply from the mock route<span className="cur" />
+                    <div className={`${styles.message} ${styles.bot}`}>
+                      <div className={styles.avatar}>AI</div>
+                      <div className={styles.bubble}>
+                        Streaming reply from the mock route<span className={styles.cursor} />
                       </div>
                     </div>
                   </div>
                 </div>
-                <div className="cmd">
-                  <div className="pre">
-                    <span className="sigil">$</span>
-                    <code>
-                      npx <span className="pkg">@ai-hooks/example</span> next-basic-chat
-                    </code>
-                  </div>
-                </div>
+                <a className="btn sm" href="/docs/use-conversation-storage">
+                  Add conversation storage →
+                </a>
               </div>
             </div>
           </article>
 
-          <div className="ex-empty">
-            More examples are in progress and will be listed here only once they ship.
-            This page never shows examples that do not exist yet.
+          <div className={styles.empty}>
+            A real runnable starter app and CLI command will be added here only after
+            they exist in the repository.
           </div>
         </div>
       </main>

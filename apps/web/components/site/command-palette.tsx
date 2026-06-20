@@ -7,6 +7,8 @@ import { SearchIcon } from "@/components/icons";
 import { hookDocs } from "@/content/hook-docs";
 import { planningTools } from "@/content/tools";
 
+import styles from "./command-palette.module.css";
+
 type PaletteItem = {
   description: string;
   group: "Hooks" | "Pages" | "Tools";
@@ -17,6 +19,10 @@ type PaletteItem = {
 const pageItems: PaletteItem[] = [
   { description: "Documentation introduction", group: "Pages", href: "/docs", label: "Introduction" },
 ];
+
+function cx(...classes: Array<string | false | undefined>) {
+  return classes.filter(Boolean).join(" ");
+}
 
 export function CommandPalette({
   onClose,
@@ -115,13 +121,20 @@ export function CommandPalette({
   }));
 
   return (
-    <div className="modal-bg show" onClick={onClose}>
-      <div className="palette" onClick={(event) => event.stopPropagation()}>
-        <div className="pin">
+    <div className={styles.backdrop} onClick={onClose}>
+      <div
+        aria-label="Search documentation"
+        aria-modal="true"
+        className={styles.palette}
+        onClick={(event) => event.stopPropagation()}
+        role="dialog"
+      >
+        <div className={styles.inputRow}>
           <SearchIcon />
           <input
             autoComplete="off"
             autoFocus
+            className={styles.input}
             onChange={(event) => {
               setQuery(event.target.value);
               setSelectedIndex(0);
@@ -129,22 +142,22 @@ export function CommandPalette({
             placeholder="Search hooks and tools..."
             value={query}
           />
-          <span className="esc">esc</span>
+          <span className={styles.escape}>esc</span>
         </div>
-        <div className="presults" role="listbox">
+        <div className={styles.results} role="listbox">
           {filteredItems.length === 0 ? (
-            <div className="pempty">No matches for {query}</div>
+            <div className={styles.empty}>No matches for {query}</div>
           ) : (
             groupedItems.map(({ group, items: groupItems }) =>
               groupItems.length ? (
                 <div key={group}>
-                  <div className="pgl">{group}</div>
+                  <div className={styles.groupLabel}>{group}</div>
                   {groupItems.map((item) => {
                     const globalIndex = filteredItems.indexOf(item);
                     return (
                       <button
                         aria-selected={globalIndex === selectedIndex}
-                        className={`pres ${globalIndex === selectedIndex ? "sel" : ""}`}
+                        className={cx(styles.result, globalIndex === selectedIndex && styles.selected)}
                         key={`${item.group}-${item.href}`}
                         onClick={() => {
                           router.push(item.href);
@@ -153,8 +166,8 @@ export function CommandPalette({
                         role="option"
                         type="button"
                       >
-                        <span className="pn">{formatPaletteLabel(item.label)}</span>
-                        <span className="pd">{item.description}</span>
+                        <span className={styles.name}>{formatPaletteLabel(item.label)}</span>
+                        <span className={styles.description}>{item.description}</span>
                       </button>
                     );
                   })}
@@ -175,7 +188,7 @@ function formatPaletteLabel(label: string) {
 
   return (
     <>
-      <span className="h">use</span>
+      <span className={styles.hookPrefix}>use</span>
       {label.slice(3)}
     </>
   );

@@ -8,6 +8,8 @@ import { displayCategory, statusClass, statusLabel } from "@/content/hook-meta";
 import { getHookDoc, hookDocs } from "@/content/hook-docs";
 import { createPageMetadata } from "@/lib/metadata";
 
+import styles from "@/components/site/docs-shell.module.css";
+
 type HookDocPageProps = {
   params: Promise<{
     slug: string;
@@ -51,16 +53,16 @@ export default async function HookDocPage({ params }: HookDocPageProps) {
   return (
     <>
       <SiteHeader active="docs" />
-      <main className="wrap detail-grid">
+      <main className={`wrap ${styles.detailLayout}`}>
         <SidebarNav active={{ kind: "hook", slug: doc.slug }} />
-        <article className="detail-main">
-          <div className="crumbs">
+        <article className={styles.detailMain}>
+          <div className={styles.crumbs}>
             <a href="/docs">Docs</a> / <span>{displayCategory(doc.category)}</span> /{" "}
             <span>{doc.name}</span>
           </div>
-          <div className="detail-title">
+          <div className={styles.detailTitle}>
             <h1>
-              <span className="h">use</span>
+              <span className={styles.hookPrefix}>use</span>
               {doc.name.replace("use", "")}
             </h1>
             <span className={`status ${statusClass(doc.status)}`}>
@@ -68,29 +70,29 @@ export default async function HookDocPage({ params }: HookDocPageProps) {
             </span>
             <span className="cat-tag">{displayCategory(doc.category)}</span>
           </div>
-          <p className="detail-purpose">{doc.purpose}</p>
+          <p className={styles.detailPurpose}>{doc.purpose}</p>
 
-          <section className="dsec" id="import">
+          <section className={styles.section} id="import">
             <h3>
-              <span className="hash">#</span> Import
+              <span className={styles.hash}>#</span> Import
             </h3>
             <CodePanel code={rootImport} file="import" showLineNumbers={false} />
           </section>
 
-          <section className="dsec" id="usage">
+          <section className={styles.section} id="usage">
             <h3>
-              <span className="hash">#</span> Usage
+              <span className={styles.hash}>#</span> Usage
             </h3>
             <CodePanel code={doc.example} file={`${doc.name}.tsx`} />
           </section>
 
-          <section className="dsec" id="options">
+          <section className={styles.section} id="options">
             <h3>
-              <span className="hash">#</span> Options
+              <span className={styles.hash}>#</span> Options
             </h3>
-            <div className="tbl-wrap">
-              <div className="tbl-scroll">
-                <table className="tbl">
+            <div className={styles.tableWrap}>
+              <div className={styles.tableScroll}>
+                <table className={styles.table}>
                   <thead>
                     <tr>
                       <th>Option</th>
@@ -104,10 +106,10 @@ export default async function HookDocPage({ params }: HookDocPageProps) {
                       doc.options.map((item) => (
                         <tr key={item.name}>
                           <td>
-                            <span className="pname">{item.name}</span>
+                            <span className={styles.paramName}>{item.name}</span>
                           </td>
                           <td>
-                            <span className="ptype">{item.type}</span>
+                            <span className={styles.paramType}>{item.type}</span>
                           </td>
                           <td className="mono">{item.defaultValue}</td>
                           <td>{item.description}</td>
@@ -124,13 +126,13 @@ export default async function HookDocPage({ params }: HookDocPageProps) {
             </div>
           </section>
 
-          <section className="dsec" id="returns">
+          <section className={styles.section} id="returns">
             <h3>
-              <span className="hash">#</span> Returns
+              <span className={styles.hash}>#</span> Returns
             </h3>
-            <div className="tbl-wrap">
-              <div className="tbl-scroll">
-                <table className="tbl">
+            <div className={styles.tableWrap}>
+              <div className={styles.tableScroll}>
+                <table className={styles.table}>
                   <thead>
                     <tr>
                       <th>Value</th>
@@ -142,10 +144,10 @@ export default async function HookDocPage({ params }: HookDocPageProps) {
                     {doc.returns.map((item) => (
                       <tr key={item.name}>
                         <td>
-                          <span className="pname">{item.name}</span>
+                          <span className={styles.paramName}>{item.name}</span>
                         </td>
                         <td>
-                          <span className="ptype">{item.type}</span>
+                          <span className={styles.paramType}>{item.type}</span>
                         </td>
                         <td>{item.description}</td>
                       </tr>
@@ -156,39 +158,39 @@ export default async function HookDocPage({ params }: HookDocPageProps) {
             </div>
           </section>
 
-          <section className="dsec" id="recipes">
+          <section className={styles.section} id="recipes">
             <h3>
-              <span className="hash">#</span> Recipes
+              <span className={styles.hash}>#</span> Recipes
             </h3>
             {doc.recipes.map((recipe, index) => (
-              <div className="recipe" key={recipe}>
-                <div className="rt">
-                  <span className="n">{index + 1}</span>
+              <div className={styles.recipe} key={recipe}>
+                <div className={styles.recipeTitle}>
+                  <span className={styles.recipeNumber}>{index + 1}</span>
                   {recipe}
                 </div>
               </div>
             ))}
           </section>
 
-          <section className="dsec" id="source">
+          <section className={styles.section} id="source">
             <h3>
-              <span className="hash">#</span> Source notes
+              <span className={styles.hash}>#</span> Source notes
             </h3>
             {doc.notes.map((item) => (
-              <div className="source-note" key={item}>
+              <div className={styles.sourceNote} key={item}>
                 {item}
               </div>
             ))}
           </section>
 
-          <section className="dsec" id="related">
+          <section className={styles.section} id="related">
             <h3>
-              <span className="hash">#</span> Related hooks
+              <span className={styles.hash}>#</span> Related hooks
             </h3>
-            <div className="related-row">
+            <div className={styles.relatedRow}>
               {relatedDocs.map((item) => (
-                <a className="related-chip" href={`/docs/${item.slug}`} key={item.slug}>
-                  <span className="h">use</span>
+                <a className={styles.relatedChip} href={`/docs/${item.slug}`} key={item.slug}>
+                  <span className={styles.hookPrefix}>use</span>
                   {item.name.replace("use", "")}
                 </a>
               ))}
@@ -196,8 +198,8 @@ export default async function HookDocPage({ params }: HookDocPageProps) {
           </section>
         </article>
 
-        <aside className="detail-side">
-          <div className="onthispage">
+        <aside className={styles.detailSide}>
+          <div className={styles.onThisPage}>
             <h4>On this page</h4>
             <a href="#import">Import</a>
             <a href="#usage">Usage</a>
@@ -207,23 +209,23 @@ export default async function HookDocPage({ params }: HookDocPageProps) {
             <a href="#source">Source notes</a>
             <a href="#related">Related</a>
           </div>
-          <div className="meta-card">
+          <div className={styles.metaCard}>
             <h4>Details</h4>
-            <div className="mrow">
+            <div className={styles.metaRow}>
               <span>Status</span>
-              <span className="v">{statusLabel(doc.status)}</span>
+              <span className={styles.metaValue}>{statusLabel(doc.status)}</span>
             </div>
-            <div className="mrow">
+            <div className={styles.metaRow}>
               <span>Category</span>
-              <span className="v">{displayCategory(doc.category)}</span>
+              <span className={styles.metaValue}>{displayCategory(doc.category)}</span>
             </div>
-            <div className="mrow">
+            <div className={styles.metaRow}>
               <span>Import</span>
-              <span className="v">@ai-hooks/react</span>
+              <span className={styles.metaValue}>@ai-hooks/react</span>
             </div>
-            <div className="mrow">
+            <div className={styles.metaRow}>
               <span>Bundle</span>
-              <span className="v">tree-shakeable</span>
+              <span className={styles.metaValue}>tree-shakeable</span>
             </div>
           </div>
         </aside>
