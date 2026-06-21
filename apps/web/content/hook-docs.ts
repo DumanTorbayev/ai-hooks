@@ -11,6 +11,11 @@ export type ApiReturnDoc = {
   type: string;
 };
 
+export type HookPairDoc = {
+  description: string;
+  hook: string;
+};
+
 export type HookDoc = {
   slug: string;
   name: string;
@@ -18,6 +23,10 @@ export type HookDoc = {
   category: "streaming" | "state" | "usage" | "files" | "agents";
   summary: string;
   purpose: string;
+  useWhen: string[];
+  avoidWhen: string[];
+  edgeCases: string[];
+  pairsWith: HookPairDoc[];
   returns: ApiReturnDoc[];
   options: ApiOptionDoc[];
   notes: string[];
@@ -35,6 +44,36 @@ export const hookDocs = [
     summary: "Stream assistant text into your own chat UI.",
     purpose:
       "Use this when your UI needs a composer state, a send action, streaming state, and callbacks for assistant deltas. The hook can run against a mock stream for demos or against your own server endpoint in production.",
+    useWhen: [
+      "You already have, or plan to create, a server route for model calls.",
+      "Your app owns the message UI and needs stream state, input state, and send behavior.",
+      "You want mock streaming for docs, tests, or UI work before provider wiring is ready.",
+    ],
+    avoidWhen: [
+      "You need a hosted chat API, browser-side provider calls, or managed API keys.",
+      "You want the hook to own long-term message storage or database writes.",
+      "Your route streams structured events that are not converted into text deltas yet.",
+    ],
+    edgeCases: [
+      "`endpoint` is required when `transport` is `fetch`.",
+      "`send` ignores empty input and concurrent sends while a stream is active.",
+      "The fetch transport reads streamed text chunks; parse provider SSE or JSON inside your route before forwarding deltas.",
+      "Pass an `AbortSignal` when the UI needs a real Stop button.",
+    ],
+    pairsWith: [
+      {
+        hook: "useConversationStorage",
+        description: "Persist user and assistant messages through the stream callbacks.",
+      },
+      {
+        hook: "useAbortController",
+        description: "Cancel an in-flight response and prepare the next signal.",
+      },
+      {
+        hook: "useTokenUsage",
+        description: "Accumulate provider usage metadata from `onUsage`.",
+      },
+    ],
     returns: [
       {
         description: "Current composer text.",
@@ -184,6 +223,28 @@ export function ChatPanel() {
     summary: "Add real stop-generation behavior to streaming requests.",
     purpose:
       "Use this when a user needs to cancel an in-flight fetch stream or provider request. The hook exposes a current signal and creates a fresh controller after aborting.",
+    useWhen: [
+      "A streaming chat needs a Stop button that actually cancels fetch work.",
+      "You want one reusable signal for a request lifecycle instead of creating controllers inline.",
+      "The UI needs to know when a controller was replaced after cancel/reset.",
+    ],
+    avoidWhen: [
+      "The async work you call does not accept or respect `AbortSignal`.",
+      "You need retry, timeout, or backoff orchestration rather than cancellation state.",
+      "A simple disabled button is enough because the request cannot be cancelled.",
+    ],
+    edgeCases: [
+      "`abort()` aborts the current controller and immediately creates a fresh one.",
+      "Always pass the latest `signal` into new requests after a reset.",
+      "`version` increments when the controller changes and is useful for effects/debug UI.",
+      "Provider SDK calls still need to wire the signal into their own cancellation API.",
+    ],
+    pairsWith: [
+      {
+        hook: "useChatStream",
+        description: "Pass `signal` into chat streaming and call `abort()` from the Stop button.",
+      },
+    ],
     returns: [
       {
         description: "Current abort signal for fetch or streaming work.",
@@ -242,6 +303,32 @@ export function Composer() {
     summary: "Persist conversation state in local storage.",
     purpose:
       "Use this when a demo, prototype, or client-side workflow needs durable messages without introducing a backend database.",
+    useWhen: [
+      "You need local conversation state that survives refreshes in demos or prototypes.",
+      "You want helper actions for appending user, assistant, and streamed assistant messages.",
+      "A browser `Storage` implementation is enough for the current workflow.",
+    ],
+    avoidWhen: [
+      "Messages are sensitive, account-scoped, or need server-side access control.",
+      "The product needs multi-device sync, audit history, or collaboration.",
+      "Local storage quota and JSON serialization limits are not acceptable.",
+    ],
+    edgeCases: [
+      "The final key is prefixed with `ai-hooks:`.",
+      "`clear()` resets to `initialMessages` when provided, not always to an empty list.",
+      "`appendToLastAssistantMessage` creates an assistant message if none exists yet.",
+      "Pass a custom `storage` in tests or non-standard browser shells.",
+    ],
+    pairsWith: [
+      {
+        hook: "useChatStream",
+        description: "Use chat callbacks to add user messages and append assistant deltas.",
+      },
+      {
+        hook: "useTokenUsage",
+        description: "Reset token counters when clearing a local conversation.",
+      },
+    ],
     returns: [
       {
         description: "Current message list.",
@@ -336,6 +423,32 @@ export function Thread() {
     summary: "Track token usage as product state.",
     purpose:
       "Use this when a chat, calculator, or dashboard needs visible input, output, cached, and total token counters.",
+    useWhen: [
+      "A provider response returns usage metadata and the UI should show running totals.",
+      "You need session-level input, output, cached-input, and total counters.",
+      "The same counters will feed a cost estimate or usage badge.",
+    ],
+    avoidWhen: [
+      "You need exact tokenization before a request is sent; use a tokenizer or estimator instead.",
+      "You need billing-grade usage reconciliation from the provider invoice.",
+      "No route or provider response exposes usage metadata yet.",
+    ],
+    edgeCases: [
+      "The hook accumulates only values passed to `add()`.",
+      "`cachedInputTokens` contributes to `totalTokens` and is accumulated when present.",
+      "`reset()` returns to the first argument passed to `useTokenUsage`.",
+      "The first argument is a `TokenUsage` object, not an options object.",
+    ],
+    pairsWith: [
+      {
+        hook: "useChatStream",
+        description: "Pass `usage.add` to `onUsage` when your route returns usage metadata.",
+      },
+      {
+        hook: "useModelCost",
+        description: "Convert usage counters into an estimated spend display.",
+      },
+    ],
     returns: [
       {
         description: "Accumulated input token count.",
@@ -371,7 +484,7 @@ export function Thread() {
     options: [
       {
         defaultValue: "{ inputTokens: 0, outputTokens: 0 }",
-        description: "Optional starting usage object.",
+        description: "Optional first argument used as the starting usage object.",
         name: "initialUsage",
         type: "TokenUsage",
       },
@@ -413,6 +526,28 @@ export function UsageAwareChat() {
     summary: "Estimate model spend from usage counters.",
     purpose:
       "Use this when the UI needs request, session, or monthly cost feedback based on model pricing and token usage.",
+    useWhen: [
+      "The product should show estimated spend beside chat or usage counters.",
+      "You want to compare the cost impact of different model choices in UI.",
+      "A custom or private model price can be passed explicitly.",
+    ],
+    avoidWhen: [
+      "You need invoice-grade billing, taxes, discounts, or organization-level credits.",
+      "Provider pricing must update automatically without a reviewed registry change.",
+      "Usage is unknown or estimated too loosely to make the cost meaningful.",
+    ],
+    edgeCases: [
+      "Bundled model pricing is source-backed but reviewed manually.",
+      "Pass `pricing` when your provider contract or model price differs from the registry.",
+      "`cachedInputTokens` are priced separately when the pricing row includes cached input.",
+      "`reset()` clears accumulated usage back to zero.",
+    ],
+    pairsWith: [
+      {
+        hook: "useTokenUsage",
+        description: "Feed accumulated usage into the cost estimate.",
+      },
+    ],
     returns: [
       {
         description: "Current accumulated token usage.",
@@ -508,6 +643,28 @@ export function CostMeter() {
     summary: "Validate local files before an AI workflow uses them.",
     purpose:
       "Use this when a chat UI accepts files but the app needs to enforce file count, size, and MIME or extension rules before upload.",
+    useWhen: [
+      "A composer accepts local files and needs client-side validation before submit.",
+      "You need a small list of selected file metadata for UI rendering.",
+      "The product wants to block unsupported file types before any network request.",
+    ],
+    avoidWhen: [
+      "You need actual uploads, file parsing, OCR, embeddings, or provider Files API calls.",
+      "You need malware scanning or server-side content validation.",
+      "The workflow must persist files after the browser session ends.",
+    ],
+    edgeCases: [
+      "`accept` supports exact MIME types, extensions like `.txt`, and wildcards like `image/*`.",
+      "`maxFiles` limits the retained list after adding accepted files.",
+      "`errors` contains validation errors from the most recent add attempt.",
+      "The hook keeps browser `File` objects; your route still decides how to upload or parse them.",
+    ],
+    pairsWith: [
+      {
+        hook: "useChatStream",
+        description: "Send selected file metadata or uploaded file ids through your own chat route.",
+      },
+    ],
     returns: [
       {
         description: "Accepted files with stable ids and metadata.",
@@ -604,6 +761,32 @@ export function FilePicker() {
     summary: "Track tool call lifecycle for agent UI.",
     purpose:
       "Use this when an AI interface needs to show which tools are running, completed, or failed while keeping execution handlers in your app.",
+    useWhen: [
+      "An agent UI needs a visible timeline of running, completed, and failed tool calls.",
+      "Tool handlers should stay inside your app boundary.",
+      "You want a small registry of callable tool names for debug or UI panels.",
+    ],
+    avoidWhen: [
+      "You need provider-specific tool schema generation or hosted execution.",
+      "Tools are long-running jobs that require queues, retries, or background workers.",
+      "Tool arguments are untrusted and have not been validated before side effects.",
+    ],
+    edgeCases: [
+      "`run()` throws for unknown tool names.",
+      "A failed handler updates the call status to `failed` and then rethrows.",
+      "`schema` exposes registered names only; provider-specific JSON schemas stay outside the hook.",
+      "Validate arguments before running side-effectful handlers.",
+    ],
+    pairsWith: [
+      {
+        hook: "useChatStream",
+        description: "Render tool-call progress next to streamed assistant output.",
+      },
+      {
+        hook: "useAbortController",
+        description: "Use cancellation state when a tool-triggering stream can be stopped.",
+      },
+    ],
     returns: [
       {
         description: "Running, completed, and failed tool calls.",

@@ -49,6 +49,10 @@ export default async function HookDocPage({ params }: HookDocPageProps) {
   const relatedDocs = hookDocs.filter((item) =>
     doc.related.some((relatedName) => relatedName === item.name),
   );
+  const pairedDocs = doc.pairsWith.map((pair) => ({
+    ...pair,
+    target: hookDocs.find((item) => item.name === pair.hook),
+  }));
 
   return (
     <>
@@ -84,6 +88,73 @@ export default async function HookDocPage({ params }: HookDocPageProps) {
               <span className={styles.hash}>#</span> Usage
             </h3>
             <CodePanel code={doc.example} file={`${doc.name}.tsx`} />
+          </section>
+
+          <section className={styles.section} id="when-to-use">
+            <h3>
+              <span className={styles.hash}>#</span> When to use
+            </h3>
+            <ul className={styles.guidanceList}>
+              {doc.useWhen.map((item) => (
+                <li key={item}>
+                  <InlineCodeText text={item} />
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          <section className={styles.section} id="when-not-to-use">
+            <h3>
+              <span className={styles.hash}>#</span> When not to use
+            </h3>
+            <ul className={styles.guidanceList}>
+              {doc.avoidWhen.map((item) => (
+                <li key={item}>
+                  <InlineCodeText text={item} />
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          <section className={styles.section} id="edge-cases">
+            <h3>
+              <span className={styles.hash}>#</span> Edge cases
+            </h3>
+            <ul className={styles.guidanceList}>
+              {doc.edgeCases.map((item) => (
+                <li key={item}>
+                  <InlineCodeText text={item} />
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          <section className={styles.section} id="pairs">
+            <h3>
+              <span className={styles.hash}>#</span> Pairs well with
+            </h3>
+            <div className={styles.pairGrid}>
+              {pairedDocs.map((item) =>
+                item.target ? (
+                  <a className={styles.pairCard} href={`/docs/${item.target.slug}`} key={item.hook}>
+                    <span>
+                      <span className={styles.hookPrefix}>use</span>
+                      {item.hook.replace("use", "")}
+                    </span>
+                    <p>
+                      <InlineCodeText text={item.description} />
+                    </p>
+                  </a>
+                ) : (
+                  <div className={styles.pairCard} key={item.hook}>
+                    <span>{item.hook}</span>
+                    <p>
+                      <InlineCodeText text={item.description} />
+                    </p>
+                  </div>
+                ),
+              )}
+            </div>
           </section>
 
           <section className={styles.section} id="options">
@@ -166,7 +237,7 @@ export default async function HookDocPage({ params }: HookDocPageProps) {
               <div className={styles.recipe} key={recipe}>
                 <div className={styles.recipeTitle}>
                   <span className={styles.recipeNumber}>{index + 1}</span>
-                  {recipe}
+                  <InlineCodeText text={recipe} />
                 </div>
               </div>
             ))}
@@ -178,7 +249,7 @@ export default async function HookDocPage({ params }: HookDocPageProps) {
             </h3>
             {doc.notes.map((item) => (
               <div className={styles.sourceNote} key={item}>
-                {item}
+                <InlineCodeText text={item} />
               </div>
             ))}
           </section>
@@ -203,6 +274,10 @@ export default async function HookDocPage({ params }: HookDocPageProps) {
             <h4>On this page</h4>
             <a href="#import">Import</a>
             <a href="#usage">Usage</a>
+            <a href="#when-to-use">When to use</a>
+            <a href="#when-not-to-use">When not to use</a>
+            <a href="#edge-cases">Edge cases</a>
+            <a href="#pairs">Pairs</a>
             <a href="#options">Options</a>
             <a href="#returns">Returns</a>
             <a href="#recipes">Recipes</a>
@@ -230,6 +305,22 @@ export default async function HookDocPage({ params }: HookDocPageProps) {
           </div>
         </aside>
       </main>
+    </>
+  );
+}
+
+function InlineCodeText({ text }: { text: string }) {
+  return (
+    <>
+      {text.split(/(`[^`]+`)/g).map((chunk, index) =>
+        chunk.startsWith("`") && chunk.endsWith("`") ? (
+          <code className={styles.inlineCode} key={`${chunk}-${index}`}>
+            {chunk.slice(1, -1)}
+          </code>
+        ) : (
+          chunk
+        ),
+      )}
     </>
   );
 }

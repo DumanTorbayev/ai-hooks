@@ -22,13 +22,16 @@ export default function HomePage() {
               </p>
               <InstallCommand />
               <div className="home-cta">
-                <a className="btn primary" href="/docs">
-                  Browse docs
+                <a className="btn primary" href="/docs/use-chat-stream">
+                  Start with useChatStream
+                </a>
+                <a className="btn" href="/docs">
+                  Browse all docs
                 </a>
               </div>
               <div className="home-note">
                 <CheckIcon size={14} />
-                Demos here run on a local mock stream. No keys, no network, no spend.
+                No hosted API: your route calls the provider, demos use local mock streams.
               </div>
             </div>
             <MockChatDemo />

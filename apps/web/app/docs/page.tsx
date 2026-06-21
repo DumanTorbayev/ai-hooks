@@ -28,8 +28,9 @@ export default function DocsIndexPage() {
             AI Hooks is a small set of <b>headless React hooks</b> for building AI
             product interfaces — streaming chat, token usage, file inputs, and tool
             calls. It is <b>not</b> a hosted API, a proxy, or a UI kit: you keep your
-            own server routes, provider keys, and markup. Find a hook in the sidebar,
-            read its API, copy the usage, and ship.
+            own server routes, provider keys, and markup. Start with{" "}
+            <a href="/docs/use-chat-stream">useChatStream</a>, then add storage,
+            cancellation, usage, files, or tools only when your UI needs them.
           </p>
 
           <div className={styles.principles}>
@@ -65,8 +66,8 @@ export default function DocsIndexPage() {
             </h3>
             <CodePanel code="npm i @ai-hooks/react" file="terminal" showLineNumbers={false} />
             <p className={styles.docNote}>
-              Then import a hook and point it at a route you control — your provider
-              key stays on the server.
+              Then import a hook and point it at a route you control. AI Hooks never
+              receives your prompts or keys; your server route calls the provider.
             </p>
             <CodePanel
               code={`import { useChatStream } from "@ai-hooks/react";
@@ -92,19 +93,20 @@ export function Chat() {
               file="app/chat.tsx"
             />
             <p className={styles.docNote}>
-              Browse the full hook list in the sidebar — each entry links straight to
-              its API reference.
+              This is the first hook most teams should open. It gives you composer
+              state, stream state, and callbacks; your app still owns the messages and
+              server route.
             </p>
           </section>
 
           <div className={styles.toolsCallout}>
             <div className={styles.toolsCalloutText}>
-              <b>Planning tools</b> — cost, tokens, models, providers. Reference
-              utilities for designing an AI UI, <b>not part of the package API</b>.
-              They live in the sidebar.
+              <b>Next:</b> open <a href="/docs/use-chat-stream">useChatStream</a> for the
+              first real API reference. Planning tools for cost, tokens, models, and
+              providers are reference utilities, <b>not part of the package API</b>.
             </div>
-            <a className="btn sm" href="/tools">
-              Open tools →
+            <a className="btn sm" href="/docs/use-chat-stream">
+              Open first hook →
             </a>
           </div>
         </div>
