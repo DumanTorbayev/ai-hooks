@@ -1,9 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import {
-  listProviderCompatibility,
-  type ProviderCapabilityKey,
-} from "./providers";
+import { listProviderCompatibility, type ProviderCapabilityKey } from "./providers";
 
 const capabilityKeys: ProviderCapabilityKey[] = [
   "streaming",

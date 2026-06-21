@@ -46,11 +46,7 @@ assistant deltas. It does not store messages for you and it does not call model
 providers from the browser.
 
 ```tsx
-import {
-  useAbortController,
-  useChatStream,
-  useConversationStorage,
-} from "@ai-hooks/react";
+import { useAbortController, useChatStream, useConversationStorage } from "@ai-hooks/react";
 
 export function ChatPanel() {
   const abort = useAbortController();
@@ -72,10 +68,7 @@ export function ChatPanel() {
         void chat.send();
       }}
     >
-      <textarea
-        value={chat.input}
-        onChange={(event) => chat.setInput(event.target.value)}
-      />
+      <textarea value={chat.input} onChange={(event) => chat.setInput(event.target.value)} />
       {chat.isStreaming ? (
         <button type="button" onClick={abort.abort}>
           Stop
@@ -117,15 +110,15 @@ server route and your own provider account.
 
 ## Current hooks
 
-| Hook | Status | Use it for |
-| --- | --- | --- |
-| `useChatStream` | Ready | Composer state, stream state, and assistant delta callbacks. |
-| `useAbortController` | Ready | Real stop-generation behavior with `AbortSignal`. |
-| `useConversationStorage` | Ready | Local conversation persistence for demos and prototypes. |
-| `useTokenUsage` | Ready | Accumulating provider usage metadata as UI state. |
-| `useModelCost` | Ready | Estimating spend from usage counters and model pricing. |
-| `useFileUpload` | Beta | Client-side file validation before an AI workflow. |
-| `useToolCalls` | Beta | Tool-call lifecycle state for agent UI. |
+| Hook                     | Status | Use it for                                                   |
+| ------------------------ | ------ | ------------------------------------------------------------ |
+| `useChatStream`          | Ready  | Composer state, stream state, and assistant delta callbacks. |
+| `useAbortController`     | Ready  | Real stop-generation behavior with `AbortSignal`.            |
+| `useConversationStorage` | Ready  | Local conversation persistence for demos and prototypes.     |
+| `useTokenUsage`          | Ready  | Accumulating provider usage metadata as UI state.            |
+| `useModelCost`           | Ready  | Estimating spend from usage counters and model pricing.      |
+| `useFileUpload`          | Beta   | Client-side file validation before an AI workflow.           |
+| `useToolCalls`           | Beta   | Tool-call lifecycle state for agent UI.                      |
 
 Every hook is documented at `/docs`. Each reference page covers API, usage, edge
 cases, when to use it, when not to use it, and which hooks pair well together.
@@ -135,12 +128,12 @@ cases, when to use it, when not to use it, and which hooks pair well together.
 The site also includes planning utilities. These are docs-side tools, not package
 APIs.
 
-| Tool | Route | Notes |
-| --- | --- | --- |
-| Cost calculator | `/tools/cost` | Estimate spend from token volume and pricing rows. |
-| Token estimator | `/tools/tokens` | Rough text and token planning before provider calls. |
-| Model comparison | `/tools/models` | Source-backed model capability and pricing registry. |
-| Provider matrix | `/tools/providers` | Source-backed provider capability matrix. |
+| Tool             | Route              | Notes                                                |
+| ---------------- | ------------------ | ---------------------------------------------------- |
+| Cost calculator  | `/tools/cost`      | Estimate spend from token volume and pricing rows.   |
+| Token estimator  | `/tools/tokens`    | Rough text and token planning before provider calls. |
+| Model comparison | `/tools/models`    | Source-backed model capability and pricing registry. |
+| Provider matrix  | `/tools/providers` | Source-backed provider capability matrix.            |
 
 Model and provider data is source-backed and manually reviewed. It is not a live
 auto-updating feed. Recheck it before release and whenever provider pricing changes.
@@ -180,6 +173,7 @@ examples/
 Run checks before committing:
 
 ```bash
+pnpm format
 pnpm typecheck
 pnpm lint
 pnpm test

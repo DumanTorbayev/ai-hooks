@@ -662,7 +662,8 @@ export function CostMeter() {
     pairsWith: [
       {
         hook: "useChatStream",
-        description: "Send selected file metadata or uploaded file ids through your own chat route.",
+        description:
+          "Send selected file metadata or uploaded file ids through your own chat route.",
       },
     ],
     returns: [

@@ -14,10 +14,7 @@ export function estimateModelCost(input: EstimateModelCostInput): MoneyEstimate 
     throw new Error("Model pricing is required to estimate cost.");
   }
 
-  const billableInputTokens = Math.max(
-    input.inputTokens - (input.cachedInputTokens ?? 0),
-    0,
-  );
+  const billableInputTokens = Math.max(input.inputTokens - (input.cachedInputTokens ?? 0), 0);
   const cachedInputTokens = input.cachedInputTokens ?? 0;
 
   const inputUsd =

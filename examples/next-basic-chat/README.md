@@ -9,4 +9,3 @@ This example will show the smallest production-shaped chat integration:
 - persisted conversation with `useConversationStorage`.
 
 The example is intentionally not wired to a real provider yet. Public demos should not spend project-owned AI credits by default.
-

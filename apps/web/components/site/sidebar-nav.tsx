@@ -11,7 +11,10 @@ import { planningTools, type PlanningToolId } from "@/content/tools";
 import styles from "./sidebar-nav.module.css";
 
 type SidebarNavProps = {
-  active?: { kind: "docs" } | { kind: "hook"; slug: string } | { id?: PlanningToolId; kind: "tools" };
+  active?:
+    | { kind: "docs" }
+    | { kind: "hook"; slug: string }
+    | { id?: PlanningToolId; kind: "tools" };
 };
 
 function cx(...classes: Array<string | false | undefined>) {
@@ -34,7 +37,10 @@ export function SidebarNav({ active }: SidebarNavProps) {
         <nav aria-label="Documentation navigation">
           <div className={styles.group}>
             <div className={styles.label}>Get started</div>
-            <a className={cx(styles.link, active?.kind === "docs" && styles.linkActive)} href="/docs">
+            <a
+              className={cx(styles.link, active?.kind === "docs" && styles.linkActive)}
+              href="/docs"
+            >
               <IntroIcon /> Introduction
             </a>
           </div>

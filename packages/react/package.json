@@ -41,7 +41,9 @@
       "import": "./dist/use-tool-calls.js"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "test": "vitest run --config vitest.config.ts",

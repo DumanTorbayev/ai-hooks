@@ -17,20 +17,19 @@ type PaletteItem = {
 };
 
 const pageItems: PaletteItem[] = [
-  { description: "Documentation introduction", group: "Pages", href: "/docs", label: "Introduction" },
+  {
+    description: "Documentation introduction",
+    group: "Pages",
+    href: "/docs",
+    label: "Introduction",
+  },
 ];
 
 function cx(...classes: Array<string | false | undefined>) {
   return classes.filter(Boolean).join(" ");
 }
 
-export function CommandPalette({
-  onClose,
-  open,
-}: {
-  onClose: () => void;
-  open: boolean;
-}) {
+export function CommandPalette({ onClose, open }: { onClose: () => void; open: boolean }) {
   const router = useRouter();
   const [query, setQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -157,7 +156,10 @@ export function CommandPalette({
                     return (
                       <button
                         aria-selected={globalIndex === selectedIndex}
-                        className={cx(styles.result, globalIndex === selectedIndex && styles.selected)}
+                        className={cx(
+                          styles.result,
+                          globalIndex === selectedIndex && styles.selected,
+                        )}
                         key={`${item.group}-${item.href}`}
                         onClick={() => {
                           router.push(item.href);

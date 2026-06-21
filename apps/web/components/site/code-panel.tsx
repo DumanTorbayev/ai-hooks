@@ -187,7 +187,7 @@ function getTokenClassName(
   },
 ) {
   if (token.startsWith("//")) return styles.tokenComment;
-  if (token.startsWith("\"") || token.startsWith("'") || token.startsWith("`")) {
+  if (token.startsWith('"') || token.startsWith("'") || token.startsWith("`")) {
     return styles.tokenString;
   }
   if (token.startsWith("@")) return styles.tokenString;
@@ -290,7 +290,11 @@ function isJsxTagStart(code: string, token: string, index: number) {
 
   const previous = code[index - 1];
   const hasJsxBoundary =
-    previous === undefined || /\s/.test(previous) || previous === "(" || previous === "[" || previous === "{";
+    previous === undefined ||
+    /\s/.test(previous) ||
+    previous === "(" ||
+    previous === "[" ||
+    previous === "{";
 
   return Boolean(hasJsxBoundary && next && /[A-Za-z]/.test(next));
 }

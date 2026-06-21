@@ -3,21 +3,11 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@ai-hooks/core": [
-        "../../packages/core/src"
-      ],
-      "@ai-hooks/core/*": [
-        "../../packages/core/src/*"
-      ],
-      "@ai-hooks/react": [
-        "../../packages/react/src"
-      ],
-      "@ai-hooks/react/*": [
-        "../../packages/react/src/*"
-      ],
-      "@/*": [
-        "./*"
-      ]
+      "@ai-hooks/core": ["../../packages/core/src"],
+      "@ai-hooks/core/*": ["../../packages/core/src/*"],
+      "@ai-hooks/react": ["../../packages/react/src"],
+      "@ai-hooks/react/*": ["../../packages/react/src/*"],
+      "@/*": ["./*"]
     },
     "plugins": [
       {
@@ -26,13 +16,6 @@
     ],
     "incremental": true
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
 }

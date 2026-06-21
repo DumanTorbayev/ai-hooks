@@ -25,4 +25,3 @@ export type StreamDelta = {
   type: "text";
   value: string;
 };
-

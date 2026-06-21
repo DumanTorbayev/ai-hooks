@@ -2,7 +2,12 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { SiteHeader } from "@/components/home/site-header";
-import { CostCalc, ModelCompare, ProviderMatrix, TokenEstimator } from "@/components/site/planning-tools";
+import {
+  CostCalc,
+  ModelCompare,
+  ProviderMatrix,
+  TokenEstimator,
+} from "@/components/site/planning-tools";
 import { SidebarNav } from "@/components/site/sidebar-nav";
 import { planningTools, type PlanningToolId } from "@/content/tools";
 import { createPageMetadata } from "@/lib/metadata";

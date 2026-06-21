@@ -14,4 +14,3 @@ export function estimateTokens(input: EstimateTokensInput): number {
 
   return Math.ceil(trimmed.length / charsPerToken);
 }
-

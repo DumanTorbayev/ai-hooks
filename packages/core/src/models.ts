@@ -1,9 +1,4 @@
-export type AiProvider =
-  | "openai"
-  | "anthropic"
-  | "google"
-  | "mistral"
-  | "openrouter";
+export type AiProvider = "openai" | "anthropic" | "google" | "mistral" | "openrouter";
 
 export type ModelSupport = {
   streaming: boolean;
@@ -50,10 +45,7 @@ const googleSources = [
   "https://ai.google.dev/gemini-api/docs/pricing",
 ];
 
-const mistralSources = [
-  "https://docs.mistral.ai/models/overview",
-  "https://mistral.ai/pricing/",
-];
+const mistralSources = ["https://docs.mistral.ai/models/overview", "https://mistral.ai/pricing/"];
 
 const checkedAt = "2026-06-18";
 

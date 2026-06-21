@@ -94,4 +94,3 @@ function matchesAccept(file: File, pattern: string) {
 
   return file.type === pattern || file.name.endsWith(pattern);
 }
-

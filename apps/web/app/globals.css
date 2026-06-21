@@ -441,7 +441,9 @@ h1.h1 {
   border-radius: var(--radius);
   background: var(--bg);
   padding: 13px 14px;
-  transition: border-color 0.12s, box-shadow 0.12s;
+  transition:
+    border-color 0.12s,
+    box-shadow 0.12s;
 }
 
 .hrow-card:hover {
@@ -730,14 +732,19 @@ h1.h1 {
   border: 1px solid #e0c200;
   border-radius: 24px;
   background: #ffdd00;
-  box-shadow: 0 6px 20px -6px rgba(0, 0, 0, 0.3), 0 2px 6px rgba(0, 0, 0, 0.15);
+  box-shadow:
+    0 6px 20px -6px rgba(0, 0, 0, 0.3),
+    0 2px 6px rgba(0, 0, 0, 0.15);
   padding: 11px 17px;
   color: #17181b;
   font-family: var(--sans);
   font-size: 13.5px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.12s, transform 0.08s, box-shadow 0.12s;
+  transition:
+    background 0.12s,
+    transform 0.08s,
+    box-shadow 0.12s;
 }
 
 .coffee-fab svg {
@@ -747,7 +754,9 @@ h1.h1 {
 
 .coffee-fab:hover {
   background: #ffe24d;
-  box-shadow: 0 9px 28px -6px rgba(0, 0, 0, 0.4), 0 2px 6px rgba(0, 0, 0, 0.18);
+  box-shadow:
+    0 9px 28px -6px rgba(0, 0, 0, 0.4),
+    0 2px 6px rgba(0, 0, 0, 0.18);
 }
 
 .coffee-fab:active {

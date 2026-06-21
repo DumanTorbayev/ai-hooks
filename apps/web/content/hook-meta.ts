@@ -21,4 +21,3 @@ export function statusClass(status: HookDoc["status"]) {
 export function statusLabel(status: HookDoc["status"]) {
   return status === "ready" ? "stable" : "beta";
 }
-

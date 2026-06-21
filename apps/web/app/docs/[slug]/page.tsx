@@ -69,9 +69,7 @@ export default async function HookDocPage({ params }: HookDocPageProps) {
               <span className={styles.hookPrefix}>use</span>
               {doc.name.replace("use", "")}
             </h1>
-            <span className={`status ${statusClass(doc.status)}`}>
-              {statusLabel(doc.status)}
-            </span>
+            <span className={`status ${statusClass(doc.status)}`}>{statusLabel(doc.status)}</span>
             <span className="cat-tag">{displayCategory(doc.category)}</span>
           </div>
           <p className={styles.detailPurpose}>{doc.purpose}</p>

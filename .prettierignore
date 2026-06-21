@@ -1,0 +1,10 @@
+node_modules
+pnpm-lock.yaml
+.next
+.turbo
+.vercel
+dist
+coverage
+playwright-report
+test-results
+*.tsbuildinfo
