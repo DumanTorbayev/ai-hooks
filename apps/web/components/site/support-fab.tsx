@@ -1,4 +1,4 @@
-import { CoffeeIcon } from "@/components/icons";
+import { SupportIcon } from "@/components/icons";
 import { siteConfig } from "@/content/site";
 
 export function SupportFab() {
@@ -8,14 +8,14 @@ export function SupportFab() {
 
   return (
     <a
-      aria-label="Buy me a coffee"
-      className="coffee-fab"
+      aria-label="Support project"
+      className="support-fab"
       href={siteConfig.supportUrl}
       rel="noreferrer"
       target="_blank"
     >
-      <CoffeeIcon />
-      <span className="lbl">Buy me a coffee</span>
+      <SupportIcon />
+      <span className="lbl">Support project</span>
     </a>
   );
 }

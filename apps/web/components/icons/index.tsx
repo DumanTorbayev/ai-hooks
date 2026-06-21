@@ -66,12 +66,10 @@ export function MenuIcon(props: IconProps) {
   );
 }
 
-export function CoffeeIcon(props: IconProps) {
+export function SupportIcon(props: IconProps) {
   return (
     <svg {...iconProps({ size: 17, ...props })}>
-      <path d="M2 6h9v4a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V6z" />
-      <path d="M11 7h2a1.5 1.5 0 0 1 0 3h-2" />
-      <path d="M4 2v1.5M6.5 2v1.5M9 2v1.5" />
+      <path d="M8 13.5s-5-3-5-7a2.7 2.7 0 0 1 5-1.4 2.7 2.7 0 0 1 5 1.4c0 4-5 7-5 7z" />
     </svg>
   );
 }
