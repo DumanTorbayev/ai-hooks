@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { CheckIcon } from "@/components/icons";
 import { SiteHeader } from "@/components/home/site-header";
 import { MockChatDemo } from "@/components/mock-chat-demo";
@@ -22,12 +24,12 @@ export default function HomePage() {
               </p>
               <InstallCommand />
               <div className="home-cta">
-                <a className="btn primary" href="/docs/use-chat-stream">
+                <Link className="btn primary" href="/docs/use-chat-stream">
                   Start with useChatStream
-                </a>
-                <a className="btn" href="/docs">
+                </Link>
+                <Link className="btn" href="/docs">
                   Browse all docs
-                </a>
+                </Link>
               </div>
               <div className="home-note">
                 <CheckIcon size={14} />
@@ -45,13 +47,13 @@ export default function HomePage() {
                 <span className="eyebrow">// the package</span>
                 <h2>Shipped hooks</h2>
               </div>
-              <a className="link" href="/docs">
+              <Link className="link" href="/docs">
                 All docs →
-              </a>
+              </Link>
             </div>
             <div className="hooks-row">
               {hookDocs.map((doc) => (
-                <a className="hrow-card" href={`/docs/${doc.slug}`} key={doc.slug}>
+                <Link className="hrow-card" href={`/docs/${doc.slug}`} key={doc.slug}>
                   <div className="top">
                     <span className="hn">
                       <span className="h">use</span>
@@ -63,7 +65,7 @@ export default function HomePage() {
                   </div>
                   <p>{doc.summary}</p>
                   <span className="cat-tag cat">{displayCategory(doc.category)}</span>
-                </a>
+                </Link>
               ))}
             </div>
           </div>

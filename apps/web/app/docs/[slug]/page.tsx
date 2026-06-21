@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { SiteHeader } from "@/components/home/site-header";
@@ -61,7 +62,7 @@ export default async function HookDocPage({ params }: HookDocPageProps) {
         <SidebarNav active={{ kind: "hook", slug: doc.slug }} />
         <article className={styles.detailMain}>
           <div className={styles.crumbs}>
-            <a href="/docs">Docs</a> / <span>{displayCategory(doc.category)}</span> /{" "}
+            <Link href="/docs">Docs</Link> / <span>{displayCategory(doc.category)}</span> /{" "}
             <span>{doc.name}</span>
           </div>
           <div className={styles.detailTitle}>
@@ -134,7 +135,11 @@ export default async function HookDocPage({ params }: HookDocPageProps) {
             <div className={styles.pairGrid}>
               {pairedDocs.map((item) =>
                 item.target ? (
-                  <a className={styles.pairCard} href={`/docs/${item.target.slug}`} key={item.hook}>
+                  <Link
+                    className={styles.pairCard}
+                    href={`/docs/${item.target.slug}`}
+                    key={item.hook}
+                  >
                     <span>
                       <span className={styles.hookPrefix}>use</span>
                       {item.hook.replace("use", "")}
@@ -142,7 +147,7 @@ export default async function HookDocPage({ params }: HookDocPageProps) {
                     <p>
                       <InlineCodeText text={item.description} />
                     </p>
-                  </a>
+                  </Link>
                 ) : (
                   <div className={styles.pairCard} key={item.hook}>
                     <span>{item.hook}</span>
@@ -258,10 +263,10 @@ export default async function HookDocPage({ params }: HookDocPageProps) {
             </h3>
             <div className={styles.relatedRow}>
               {relatedDocs.map((item) => (
-                <a className={styles.relatedChip} href={`/docs/${item.slug}`} key={item.slug}>
+                <Link className={styles.relatedChip} href={`/docs/${item.slug}`} key={item.slug}>
                   <span className={styles.hookPrefix}>use</span>
                   {item.name.replace("use", "")}
-                </a>
+                </Link>
               ))}
             </div>
           </section>
