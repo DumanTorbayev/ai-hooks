@@ -45,7 +45,12 @@ export function CostCalc() {
           </Field>
           <NumberField label="Requests" min={1} onChange={setRequests} value={requests} />
           <NumberField label="Input tokens" min={0} onChange={setInputTokens} value={inputTokens} />
-          <NumberField label="Output tokens" min={0} onChange={setOutputTokens} value={outputTokens} />
+          <NumberField
+            label="Output tokens"
+            min={0}
+            onChange={setOutputTokens}
+            value={outputTokens}
+          />
         </div>
         <div className={styles.results}>
           <Metric label="Input cost" value={formatUsd(inputCost)} />
@@ -54,8 +59,8 @@ export function CostCalc() {
         </div>
       </div>
       <p className={styles.disclaimer}>
-        Source-backed pricing checked {selectedModel.checkedAt}. Formula: (input/1e6 ×
-        input_rate + output/1e6 × output_rate) × requests.{" "}
+        Source-backed pricing checked {selectedModel.checkedAt}. Formula: (input/1e6 × input_rate +
+        output/1e6 × output_rate) × requests.{" "}
         <a href={selectedModel.sourceUrls[0]} rel="noreferrer" target="_blank">
           Official source
         </a>
@@ -80,7 +85,11 @@ export function TokenEstimator() {
   return (
     <>
       <div>
-        <textarea className={styles.textarea} onChange={(event) => setText(event.target.value)} value={text} />
+        <textarea
+          className={styles.textarea}
+          onChange={(event) => setText(event.target.value)}
+          value={text}
+        />
         <div className={styles.estimatorOutput}>
           <Metric label="Characters" value={stats.chars.toLocaleString("en-US")} />
           <Metric label="Words" value={stats.words.toLocaleString("en-US")} />
@@ -88,7 +97,9 @@ export function TokenEstimator() {
           <Metric label="Ratio" value="~4 chars/token" />
         </div>
       </div>
-      <p className={styles.disclaimer}>Heuristic only. Exact counts vary by tokenizer, model, and language.</p>
+      <p className={styles.disclaimer}>
+        Heuristic only. Exact counts vary by tokenizer, model, and language.
+      </p>
     </>
   );
 }
@@ -182,16 +193,24 @@ export function ProviderMatrix() {
                     <div className="mono muted">{provider.apiStyle}</div>
                   </td>
                   <td>
-                    <CapabilityBadge value={providerCapabilityBadge(provider.capabilities.streaming.level)} />
+                    <CapabilityBadge
+                      value={providerCapabilityBadge(provider.capabilities.streaming.level)}
+                    />
                   </td>
                   <td>
-                    <CapabilityBadge value={providerCapabilityBadge(provider.capabilities.toolCalling.level)} />
+                    <CapabilityBadge
+                      value={providerCapabilityBadge(provider.capabilities.toolCalling.level)}
+                    />
                   </td>
                   <td>
-                    <CapabilityBadge value={providerCapabilityBadge(provider.capabilities.visionInput.level)} />
+                    <CapabilityBadge
+                      value={providerCapabilityBadge(provider.capabilities.visionInput.level)}
+                    />
                   </td>
                   <td>
-                    <CapabilityBadge value={providerCapabilityBadge(provider.capabilities.structuredOutput.level)} />
+                    <CapabilityBadge
+                      value={providerCapabilityBadge(provider.capabilities.structuredOutput.level)}
+                    />
                   </td>
                 </tr>
               ))}
@@ -200,8 +219,8 @@ export function ProviderMatrix() {
         </div>
       </div>
       <p className={styles.disclaimer}>
-        AI Hooks does not bundle provider adapters. Provider capabilities are source-backed
-        planning data, not package runtime behavior.
+        AI Hooks does not bundle provider adapters. Provider capabilities are source-backed planning
+        data, not package runtime behavior.
       </p>
     </>
   );
@@ -258,7 +277,11 @@ function CapabilityBadge({ value }: { value: CapabilityLevel }) {
   return (
     <span
       className={`${styles.badge} ${
-        value === "full" ? styles.badgeYes : value === "partial" ? styles.badgePartial : styles.badgeNo
+        value === "full"
+          ? styles.badgeYes
+          : value === "partial"
+            ? styles.badgePartial
+            : styles.badgeNo
       }`}
     >
       <span className={styles.badgeDot} />

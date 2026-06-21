@@ -16,9 +16,9 @@ export default function HomePage() {
               <span className="eyebrow">React hooks · MIT · React 18 + 19</span>
               <h1 className="h1">React hooks for building AI product interfaces.</h1>
               <p className="lede">
-                A small, headless toolkit of hooks for streaming chat, token usage, file
-                inputs, and tool calls. <b>You own the server routes and the provider keys</b>
-                {" "}— AI Hooks ships UI logic, not a hosted API.
+                A small, headless toolkit of hooks for streaming chat, token usage, file inputs, and
+                tool calls. <b>You own the server routes and the provider keys</b> — AI Hooks ships
+                UI logic, not a hosted API.
               </p>
               <InstallCommand />
               <div className="home-cta">

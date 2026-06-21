@@ -46,7 +46,11 @@ export function SiteHeader({ active }: SiteHeaderProps) {
           <div className={styles.spacer} />
 
           <div className={styles.actions}>
-            <button className={styles.searchButton} onClick={() => setPaletteOpen(true)} type="button">
+            <button
+              className={styles.searchButton}
+              onClick={() => setPaletteOpen(true)}
+              type="button"
+            >
               <SearchIcon size={13} />
               Search docs <span className={styles.kbd}>⌘K</span>
             </button>

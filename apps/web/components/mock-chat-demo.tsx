@@ -25,8 +25,7 @@ export function MockChatDemo() {
       role: "user",
     },
     {
-      content:
-        "It returns `messages`, `send()`, `isStreaming`, and `stop()` — you render the UI.",
+      content: "It returns `messages`, `send()`, `isStreaming`, and `stop()` — you render the UI.",
       role: "assistant",
     },
   ]);

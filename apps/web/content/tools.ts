@@ -43,8 +43,8 @@ export type ModelWithPricing = ModelInfo & { pricing: ModelPricing };
 
 export const defaultModelId = DEFAULT_MODEL_ID;
 
-export const modelCatalog = listModels().filter(
-  (model): model is ModelWithPricing => Boolean(model.pricing),
+export const modelCatalog = listModels().filter((model): model is ModelWithPricing =>
+  Boolean(model.pricing),
 );
 
 export const providerMatrix = listProviderCompatibility();

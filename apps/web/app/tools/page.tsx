@@ -26,8 +26,8 @@ export default function ToolsIndexPage() {
           </div>
           <h1 className={styles.pageTitle}>Tools</h1>
           <p className={styles.pageLede}>
-            Reference utilities for planning an AI UI — cost, tokens, models,
-            providers. These are <b>not part of the package API</b>; the hooks are.
+            Reference utilities for planning an AI UI — cost, tokens, models, providers. These are{" "}
+            <b>not part of the package API</b>; the hooks are.
           </p>
           <div className={styles.toolCards}>
             {planningTools.map((tool) => (

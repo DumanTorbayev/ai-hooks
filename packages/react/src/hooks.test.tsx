@@ -142,9 +142,7 @@ describe("React hooks", () => {
       return (
         <>
           <output data-testid="count">{conversation.messages.length}</output>
-          <output data-testid="last">
-            {conversation.messages.at(-1)?.content ?? "empty"}
-          </output>
+          <output data-testid="last">{conversation.messages.at(-1)?.content ?? "empty"}</output>
           <button type="button" onClick={() => conversation.addUserMessage("Hello")}>
             Add user
           </button>
@@ -243,7 +241,9 @@ describe("React hooks", () => {
 
       return (
         <>
-          <output data-testid="schema">{toolCalls.schema.map((tool) => tool.name).join(",")}</output>
+          <output data-testid="schema">
+            {toolCalls.schema.map((tool) => tool.name).join(",")}
+          </output>
           <output data-testid="status">{toolCalls.activeCalls[0]?.status ?? "idle"}</output>
           <output data-testid="result">{result}</output>
           <button

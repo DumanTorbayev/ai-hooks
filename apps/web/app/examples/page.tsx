@@ -26,14 +26,14 @@ export default function ExamplesPage() {
           </div>
           <h1 className={shell.pageTitle}>Examples</h1>
           <p className={shell.pageLede}>
-            Practical implementation notes for the hooks that exist today. Full
-            runnable starters will be listed here only after they ship in the repo.
+            Practical implementation notes for the hooks that exist today. Full runnable starters
+            will be listed here only after they ship in the repo.
           </p>
           <div className={styles.note}>
             <InfoIcon />
             <div>
-              Current examples are <b>documentation-backed</b>. They use mock streams
-              in the public site and never require project-owned provider keys.
+              Current examples are <b>documentation-backed</b>. They use mock streams in the public
+              site and never require project-owned provider keys.
             </div>
           </div>
 
@@ -50,8 +50,8 @@ export default function ExamplesPage() {
               <div className={styles.left}>
                 <p>
                   A minimal streaming chat pattern built with <code>useChatStream</code>
-                  and a Next.js App Router route. It shows the send → stream → stop loop
-                  and where token usage can be attached.
+                  and a Next.js App Router route. It shows the send → stream → stop loop and where
+                  token usage can be attached.
                 </p>
                 <ul>
                   <li>
@@ -87,7 +87,8 @@ export default function ExamplesPage() {
                     <div className={`${styles.message} ${styles.bot}`}>
                       <div className={styles.avatar}>AI</div>
                       <div className={styles.bubble}>
-                        Streaming reply from the mock route<span className={styles.cursor} />
+                        Streaming reply from the mock route
+                        <span className={styles.cursor} />
                       </div>
                     </div>
                   </div>
@@ -100,8 +101,8 @@ export default function ExamplesPage() {
           </article>
 
           <div className={styles.empty}>
-            A real runnable starter app and CLI command will be added here only after
-            they exist in the repository.
+            A real runnable starter app and CLI command will be added here only after they exist in
+            the repository.
           </div>
         </div>
       </main>
