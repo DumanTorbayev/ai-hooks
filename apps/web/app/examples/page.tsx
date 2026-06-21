@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 import { SiteHeader } from "@/components/home/site-header";
 import { InfoIcon } from "@/components/icons";
@@ -22,7 +23,7 @@ export default function ExamplesPage() {
         <SidebarNav />
         <div className={shell.main}>
           <div className={shell.crumbs}>
-            <a href="/docs">Docs</a> / <span>Examples</span>
+            <Link href="/docs">Docs</Link> / <span>Examples</span>
           </div>
           <h1 className={shell.pageTitle}>Examples</h1>
           <p className={shell.pageLede}>
@@ -68,12 +69,12 @@ export default function ExamplesPage() {
                   </li>
                 </ul>
                 <div className={styles.actions}>
-                  <a className="btn primary sm" href="/docs/use-chat-stream">
+                  <Link className="btn primary sm" href="/docs/use-chat-stream">
                     Open useChatStream
-                  </a>
-                  <a className="btn sm" href="/docs/use-abort-controller">
+                  </Link>
+                  <Link className="btn sm" href="/docs/use-abort-controller">
                     Stop generation
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className={styles.right}>
@@ -93,9 +94,9 @@ export default function ExamplesPage() {
                     </div>
                   </div>
                 </div>
-                <a className="btn sm" href="/docs/use-conversation-storage">
+                <Link className="btn sm" href="/docs/use-conversation-storage">
                   Add conversation storage →
-                </a>
+                </Link>
               </div>
             </div>
           </article>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 import { SiteHeader } from "@/components/home/site-header";
 import { SidebarNav } from "@/components/site/sidebar-nav";
@@ -22,7 +23,7 @@ export default function ToolsIndexPage() {
         <SidebarNav active={{ kind: "tools" }} />
         <div className={styles.main}>
           <div className={styles.crumbs}>
-            <a href="/docs">Docs</a> / <span>Tools</span>
+            <Link href="/docs">Docs</Link> / <span>Tools</span>
           </div>
           <h1 className={styles.pageTitle}>Tools</h1>
           <p className={styles.pageLede}>
@@ -31,7 +32,7 @@ export default function ToolsIndexPage() {
           </p>
           <div className={styles.toolCards}>
             {planningTools.map((tool) => (
-              <a className={styles.toolCard} href={`/tools/${tool.id}`} key={tool.id}>
+              <Link className={styles.toolCard} href={`/tools/${tool.id}`} key={tool.id}>
                 <div className={styles.toolIcon}>
                   <PlanningToolIcon id={tool.id} size={17} />
                 </div>
@@ -40,7 +41,7 @@ export default function ToolsIndexPage() {
                   <p>{tool.description}</p>
                   <span className={styles.planLabel}>planning tool</span>
                 </div>
-              </a>
+              </Link>
             ))}
           </div>
         </div>

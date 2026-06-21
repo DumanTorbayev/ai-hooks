@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import { GitHubIcon, MenuIcon, SearchIcon } from "@/components/icons";
@@ -32,15 +33,15 @@ export function SiteHeader({ active }: SiteHeaderProps) {
     <>
       <header className={`${styles.header} ${mobileOpen ? styles.menuOpen : ""}`}>
         <div className={`wrap ${styles.row}`}>
-          <a className={styles.brand} href="/">
+          <Link className={styles.brand} href="/">
             <span className={styles.glyph}>⌘</span>
             <span>AI Hooks</span>
-          </a>
+          </Link>
 
           <nav className={styles.nav} aria-label="Primary navigation">
-            <a className={active === "docs" ? styles.active : undefined} href="/docs">
+            <Link className={active === "docs" ? styles.active : undefined} href="/docs">
               Docs
-            </a>
+            </Link>
           </nav>
 
           <div className={styles.spacer} />
@@ -76,9 +77,9 @@ export function SiteHeader({ active }: SiteHeaderProps) {
         </div>
 
         <div className={`wrap ${styles.mobileMenu} ${mobileOpen ? styles.mobileMenuOpen : ""}`}>
-          <a href="/docs" onClick={() => setMobileOpen(false)}>
+          <Link href="/docs" onClick={() => setMobileOpen(false)}>
             Docs
-          </a>
+          </Link>
           <a
             href="https://github.com/DumanTorbayev/ai-hooks"
             onClick={() => setMobileOpen(false)}

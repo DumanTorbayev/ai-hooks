@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 import { CodePanel } from "@/components/site/code-panel";
 import { SiteHeader } from "@/components/home/site-header";
@@ -21,15 +22,15 @@ export default function DocsIndexPage() {
         <SidebarNav active={{ kind: "docs" }} />
         <div className={styles.main}>
           <div className={styles.crumbs}>
-            <a href="/">Home</a> / <span>Documentation</span> / <span>Introduction</span>
+            <Link href="/">Home</Link> / <span>Documentation</span> / <span>Introduction</span>
           </div>
           <h1 className={styles.pageTitle}>Introduction</h1>
           <p className={styles.pageLede}>
             AI Hooks is a small set of <b>headless React hooks</b> for building AI product
             interfaces — streaming chat, token usage, file inputs, and tool calls. It is <b>not</b>{" "}
             a hosted API, a proxy, or a UI kit: you keep your own server routes, provider keys, and
-            markup. Start with <a href="/docs/use-chat-stream">useChatStream</a>, then add storage,
-            cancellation, usage, files, or tools only when your UI needs them.
+            markup. Start with <Link href="/docs/use-chat-stream">useChatStream</Link>, then add
+            storage, cancellation, usage, files, or tools only when your UI needs them.
           </p>
 
           <div className={styles.principles}>
@@ -99,13 +100,13 @@ export function Chat() {
 
           <div className={styles.toolsCallout}>
             <div className={styles.toolsCalloutText}>
-              <b>Next:</b> open <a href="/docs/use-chat-stream">useChatStream</a> for the first real
-              API reference. Planning tools for cost, tokens, models, and providers are reference
-              utilities, <b>not part of the package API</b>.
+              <b>Next:</b> open <Link href="/docs/use-chat-stream">useChatStream</Link> for the
+              first real API reference. Planning tools for cost, tokens, models, and providers are
+              reference utilities, <b>not part of the package API</b>.
             </div>
-            <a className="btn sm" href="/docs/use-chat-stream">
+            <Link className="btn sm" href="/docs/use-chat-stream">
               Open first hook →
-            </a>
+            </Link>
           </div>
         </div>
       </main>

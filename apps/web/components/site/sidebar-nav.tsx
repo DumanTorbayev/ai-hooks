@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 
 import { IntroIcon } from "@/components/icons";
@@ -37,12 +38,12 @@ export function SidebarNav({ active }: SidebarNavProps) {
         <nav aria-label="Documentation navigation">
           <div className={styles.group}>
             <div className={styles.label}>Get started</div>
-            <a
+            <Link
               className={cx(styles.link, active?.kind === "docs" && styles.linkActive)}
               href="/docs"
             >
               <IntroIcon /> Introduction
-            </a>
+            </Link>
           </div>
 
           <div className={styles.group}>
@@ -60,7 +61,7 @@ export function SidebarNav({ active }: SidebarNavProps) {
                     {category} <span className={styles.count}>{items.length}</span>
                   </div>
                   {items.map((doc) => (
-                    <a
+                    <Link
                       className={cx(
                         styles.link,
                         styles.hookLink,
@@ -74,7 +75,7 @@ export function SidebarNav({ active }: SidebarNavProps) {
                         className={cx(styles.statusDot, styles[statusClass(doc.status)])}
                         title={statusLabel(doc.status)}
                       />
-                    </a>
+                    </Link>
                   ))}
                 </div>
               );
@@ -84,7 +85,7 @@ export function SidebarNav({ active }: SidebarNavProps) {
           <div className={styles.group}>
             <div className={styles.label}>Tools · planning</div>
             {planningTools.map((tool) => (
-              <a
+              <Link
                 className={cx(
                   styles.link,
                   active?.kind === "tools" && active.id === tool.id && styles.linkActive,
@@ -94,7 +95,7 @@ export function SidebarNav({ active }: SidebarNavProps) {
               >
                 <PlanningToolIcon id={tool.id} />
                 {tool.name}
-              </a>
+              </Link>
             ))}
           </div>
         </nav>

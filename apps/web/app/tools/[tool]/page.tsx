@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { SiteHeader } from "@/components/home/site-header";
@@ -52,7 +53,8 @@ export default async function ToolPage({ params }: ToolPageProps) {
         <SidebarNav active={{ id: tool.id, kind: "tools" }} />
         <div className={`${styles.main} ${styles.toolMain}`}>
           <div className={styles.crumbs}>
-            <a href="/docs">Docs</a> / <a href="/tools">Tools</a> / <span>{tool.name}</span>
+            <Link href="/docs">Docs</Link> / <Link href="/tools">Tools</Link> /{" "}
+            <span>{tool.name}</span>
           </div>
           <div className={styles.planningFlag}>Planning tool · not part of the package API</div>
           <h1 className={styles.pageTitle}>{tool.name}</h1>
