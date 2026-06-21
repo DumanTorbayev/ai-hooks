@@ -1,0 +1,263 @@
+.preview {
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  border: 1px solid var(--line-2);
+  border-radius: 9px;
+  background: var(--bg);
+  box-shadow: var(--shadow-pop);
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg-2);
+  padding: 8px 12px;
+}
+
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--line-2);
+}
+
+.title {
+  margin-left: 3px;
+  color: var(--ink-2);
+  font-family: var(--mono);
+  font-size: 11px;
+}
+
+.title b {
+  color: var(--ink);
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: auto;
+  border: 1px solid #c5ddd2;
+  border-radius: 20px;
+  background: var(--green-soft);
+  padding: 2px 8px;
+  color: var(--green);
+  font-family: var(--mono);
+  font-size: 10px;
+}
+
+:global([data-theme="dark"]) .badge {
+  border-color: #234a3d;
+}
+
+.badgeDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--green);
+}
+
+.scroll {
+  display: flex;
+  overflow-y: auto;
+  height: 228px;
+  flex-direction: column;
+  gap: 11px;
+  background: linear-gradient(180deg, var(--bg), var(--bg-2));
+  padding: 13px;
+}
+
+.scroll::-webkit-scrollbar {
+  width: 7px;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background: var(--line-2);
+}
+
+.message {
+  display: flex;
+  gap: 9px;
+}
+
+.avatar {
+  display: grid;
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  place-items: center;
+  border-radius: 6px;
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.user .avatar {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.bot .avatar {
+  border: 1px solid #cdd4f3;
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+}
+
+:global([data-theme="dark"]) .bot .avatar {
+  border-color: #2c3354;
+}
+
+.body {
+  padding-top: 1px;
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+.user .body {
+  color: var(--ink-2);
+}
+
+.role {
+  margin-bottom: 3px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.body code {
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--bg-2);
+  padding: 1px 4px;
+  font-size: 11px;
+}
+
+.cursor {
+  display: inline-block;
+  width: 6px;
+  height: 13px;
+  margin-left: 1px;
+  animation: blink 1s steps(1) infinite;
+  background: var(--accent);
+  vertical-align: -2px;
+}
+
+.composer {
+  border-top: 1px solid var(--line);
+  background: var(--bg);
+  padding: 9px 10px;
+}
+
+.inner {
+  display: flex;
+  align-items: flex-end;
+  gap: 7px;
+  border: 1px solid var(--line-2);
+  border-radius: 8px;
+  padding: 5px 5px 5px 11px;
+  transition: border-color 0.12s;
+}
+
+.inner:focus-within {
+  border-color: var(--accent);
+}
+
+.inner textarea {
+  flex: 1;
+  max-height: 60px;
+  border: 0;
+  outline: none;
+  background: transparent;
+  resize: none;
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+.inner textarea::placeholder {
+  color: var(--muted);
+}
+
+.send {
+  display: grid;
+  width: 30px;
+  height: 28px;
+  flex-shrink: 0;
+  place-items: center;
+  border: 0;
+  border-radius: 6px;
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.send:disabled {
+  background: var(--line-2);
+}
+
+.stop {
+  display: none;
+  height: 28px;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--red);
+  border-radius: 6px;
+  background: var(--red-soft);
+  padding: 0 10px;
+  color: var(--red);
+  font-family: var(--mono);
+  font-size: 11px;
+}
+
+.stopVisible {
+  display: flex;
+}
+
+.send svg,
+.stop svg {
+  flex-shrink: 0;
+}
+
+.foot {
+  display: flex;
+  gap: 13px;
+  margin-top: 6px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+}
+
+.key {
+  border: 1px solid var(--line-2);
+  border-radius: 4px;
+  padding: 0 5px;
+  color: var(--ink-2);
+}
+
+.usage {
+  margin-left: auto;
+}
+
+.usage b {
+  color: var(--ink-2);
+  font-weight: 500;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor {
+    animation: none;
+  }
+}
