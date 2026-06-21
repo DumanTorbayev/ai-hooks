@@ -1,123 +1,207 @@
 # AI Hooks
 
-Headless React primitives and UI patterns for building AI product interfaces.
+Headless React hooks for building AI product interfaces.
 
-AI Hooks is not a hosted LLM proxy. The public demo uses mock streams. Production
-requests should go through your own server route and your own provider keys.
+AI Hooks helps you build streaming chat, token usage, file input, cost, and tool-call
+UI without turning the library into a hosted API. You keep your server routes,
+provider keys, database, and markup. The package ships UI logic and small state
+primitives.
 
-## What Is Inside
+## The 10-second version
 
-- `@ai-hooks/core` - token estimation, mock streaming, source-backed model/provider registries, and cost utilities.
-- `@ai-hooks/react` - React hooks for chat streams, abort state, usage, storage, file upload, and tool calls.
-- `apps/web` - the public site, docs, cost calculator, model comparison, provider matrix, and mock streaming playground.
-- `examples/next-basic-chat` - example notes for the first chat starter.
+- Install the React package.
+- Start with `useChatStream`.
+- Point it at your own `/api/chat` route.
+- Keep provider keys on your server.
+- Add storage, cancellation, usage, files, or tool-call state only when the UI needs them.
 
-## Current Stage
+## Install
 
-The project is in the early MVP stage. The first priority is to ship a useful
-developer resource for practical AI UI work:
+Release install target:
 
-- React hooks for AI interfaces.
-- LLM cost calculator.
-- Token estimator.
-- Model comparison pages.
-- Provider compatibility matrix.
-- Streaming playground.
-- Documentation-backed AI chat examples.
+```bash
+npm i @ai-hooks/react
+```
 
-The package should stay small and headless. Public demos should use mock data
-unless a user intentionally connects their own provider route.
+The project is still in MVP. The package is kept private until the API, docs, and
+release process are ready.
 
-## Current Hooks
-
-- `useChatStream`
-- `useAbortController`
-- `useConversationStorage`
-- `useTokenUsage`
-- `useModelCost`
-- `useFileUpload`
-- `useToolCalls`
-
-Planned hooks include `useVoiceInput`, citations helpers, and provider adapter
-utilities.
-
-## Current Utilities
-
-- `/docs` - public docs index for current MVP hooks with focused hook reference
-  pages.
-- `/tools/cost` - local LLM cost calculator for request and token spend planning.
-- `/tools/tokens` - local prompt/token planning utility with text stats.
-- `/tools/models` - model capability and pricing registry view with source URLs
-  and checked dates.
-- `/tools/providers` - source-backed provider capability matrix for adapter and
-  UI planning.
-
-## Development
-
-This is a pnpm monorepo.
+For local development:
 
 ```bash
 pnpm install
 pnpm dev
 ```
 
-The local web app runs at:
+The local docs site runs at:
 
 ```bash
 http://127.0.0.1:3100
 ```
 
-Copy `.env.example` to `.env.local` and set `NEXT_PUBLIC_SUPPORT_URL` to enable
-the optional support button.
+## First hook: useChatStream
+
+`useChatStream` gives you composer state, stream state, and callbacks for appending
+assistant deltas. It does not store messages for you and it does not call model
+providers from the browser.
+
+```tsx
+import {
+  useAbortController,
+  useChatStream,
+  useConversationStorage,
+} from "@ai-hooks/react";
+
+export function ChatPanel() {
+  const abort = useAbortController();
+  const conversation = useConversationStorage({ key: "support-chat" });
+
+  const chat = useChatStream({
+    endpoint: "/api/chat",
+    signal: abort.signal,
+    messages: conversation.messages,
+    onUserMessage: conversation.addUserMessage,
+    onAssistantStart: () => conversation.addAssistantMessage(""),
+    onAssistantDelta: conversation.appendToLastAssistantMessage,
+  });
+
+  return (
+    <form
+      onSubmit={(event) => {
+        event.preventDefault();
+        void chat.send();
+      }}
+    >
+      <textarea
+        value={chat.input}
+        onChange={(event) => chat.setInput(event.target.value)}
+      />
+      {chat.isStreaming ? (
+        <button type="button" onClick={abort.abort}>
+          Stop
+        </button>
+      ) : (
+        <button type="submit">Send</button>
+      )}
+    </form>
+  );
+}
+```
+
+Your server route owns the provider call:
+
+```ts
+// app/api/chat/route.ts
+export async function POST(request: Request) {
+  const { messages, prompt } = await request.json();
+
+  // Call OpenAI, Anthropic, Google, or another provider here.
+  // Keep provider keys on the server and stream plain text deltas back to the UI.
+
+  return new Response("Your streamed response");
+}
+```
+
+## No hosted API
+
+AI Hooks is intentionally not a model proxy.
+
+- No project-owned model spend in public demos.
+- No browser-side provider keys.
+- No hidden telemetry.
+- No hosted chat endpoint.
+- No database or account layer.
+
+Public demos use mock streams. Production requests should go through your own
+server route and your own provider account.
+
+## Current hooks
+
+| Hook | Status | Use it for |
+| --- | --- | --- |
+| `useChatStream` | Ready | Composer state, stream state, and assistant delta callbacks. |
+| `useAbortController` | Ready | Real stop-generation behavior with `AbortSignal`. |
+| `useConversationStorage` | Ready | Local conversation persistence for demos and prototypes. |
+| `useTokenUsage` | Ready | Accumulating provider usage metadata as UI state. |
+| `useModelCost` | Ready | Estimating spend from usage counters and model pricing. |
+| `useFileUpload` | Beta | Client-side file validation before an AI workflow. |
+| `useToolCalls` | Beta | Tool-call lifecycle state for agent UI. |
+
+Every hook is documented at `/docs`. Each reference page covers API, usage, edge
+cases, when to use it, when not to use it, and which hooks pair well together.
+
+## Planning tools
+
+The site also includes planning utilities. These are docs-side tools, not package
+APIs.
+
+| Tool | Route | Notes |
+| --- | --- | --- |
+| Cost calculator | `/tools/cost` | Estimate spend from token volume and pricing rows. |
+| Token estimator | `/tools/tokens` | Rough text and token planning before provider calls. |
+| Model comparison | `/tools/models` | Source-backed model capability and pricing registry. |
+| Provider matrix | `/tools/providers` | Source-backed provider capability matrix. |
+
+Model and provider data is source-backed and manually reviewed. It is not a live
+auto-updating feed. Recheck it before release and whenever provider pricing changes.
+
+## MVP readiness
+
+Ready for the current MVP:
+
+- Seven React hooks with root exports and subpath exports.
+- Headless API shape: no UI kit dependency and no runtime provider SDK dependency.
+- Docs site with hook references and copyable code blocks.
+- Mock streaming demo that does not spend project-owned model credits.
+- Planning tools for costs, tokens, models, and providers.
+- Typecheck, unit tests, production build, and Playwright smoke tests.
+
+Not release-ready yet:
+
+- The npm package is still private.
+- Runnable starter apps are still minimal.
+- Provider adapters are intentionally not part of the core package yet.
+- Model and provider registries need a final pre-release source review.
+
+## Repository structure
+
+```text
+apps/
+  web/                 Next.js docs site, examples, and planning tools
+packages/
+  core/                Framework-agnostic utilities and registries
+  react/               React hooks package
+examples/
+  next-basic-chat/     Starter notes for the first chat example
+```
+
+## Development
 
 Run checks before committing:
 
 ```bash
 pnpm typecheck
+pnpm lint
+pnpm test
 pnpm build
+pnpm test:e2e
 ```
 
-## Project Structure
-
-```text
-apps/
-  web/                 Next.js site and playground
-packages/
-  core/                Framework-agnostic AI utilities
-  react/               React hooks package
-examples/
-  next-basic-chat/     Example app notes
-```
-
-## Design Principles
-
-- Tree-shakable root exports with subpath exports for strict bundle control.
-- Provider-agnostic core APIs.
-- No hidden telemetry.
-- No project-owned model spend in public demos.
-- Real provider adapters should stay separate from the core package.
-
-## Roadmap
-
-1. Improve docs for every hook.
-2. Keep model pricing and provider compatibility data current.
-3. Expand model comparison and provider compatibility coverage.
-4. Build a richer streaming playground.
-5. Add runnable starter apps after the package API is stable.
-
-## Status
-
-Early MVP. APIs and examples may change while the project shape is being
-validated.
-
-## Development Workflow
-
-Each completed work block should be committed and pushed:
+Optional support button:
 
 ```bash
-pnpm typecheck
-pnpm build
-git add .
-git commit -m "<type>: <summary>"
-git push
+cp .env.example .env.local
 ```
+
+Set `NEXT_PUBLIC_SUPPORT_URL` in `.env.local` to enable the Buy me a coffee link
+on the docs site.
+
+## Contributing
+
+The project is early. Useful contributions should keep the package small,
+headless, and provider-agnostic:
+
+- Improve hook docs with real API behavior and edge cases.
+- Add focused tests around hook behavior.
+- Keep examples tied to shipped hooks only.
+- Avoid adding provider SDKs to the core React package.
