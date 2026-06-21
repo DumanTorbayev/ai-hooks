@@ -138,6 +138,18 @@ APIs.
 Model and provider data is source-backed and manually reviewed. It is not a live
 auto-updating feed. Recheck it before release and whenever provider pricing changes.
 
+## Support
+
+AI Hooks is applying to Open Source Collective for transparent project funding.
+Support will fund documentation, examples, tests, release work, infrastructure,
+and long-term maintenance.
+
+Support link:
+
+```text
+https://opencollective.com/ai-hooks
+```
+
 ## MVP readiness
 
 Ready for the current MVP:
@@ -187,8 +199,8 @@ Optional support button:
 cp .env.example .env.local
 ```
 
-Set `NEXT_PUBLIC_SUPPORT_URL` in `.env.local` to enable the Buy me a coffee link
-on the docs site.
+Set `NEXT_PUBLIC_SUPPORT_URL` in `.env.local` to enable the support link on the
+docs site.
 
 ## Contributing
 

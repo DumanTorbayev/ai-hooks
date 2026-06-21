@@ -721,7 +721,7 @@ h1.h1 {
   font-weight: 500;
 }
 
-.coffee-fab {
+.support-fab {
   position: fixed;
   right: 22px;
   bottom: 22px;
@@ -747,19 +747,19 @@ h1.h1 {
     box-shadow 0.12s;
 }
 
-.coffee-fab svg {
+.support-fab svg {
   flex-shrink: 0;
   color: #17181b;
 }
 
-.coffee-fab:hover {
+.support-fab:hover {
   background: #ffe24d;
   box-shadow:
     0 9px 28px -6px rgba(0, 0, 0, 0.4),
     0 2px 6px rgba(0, 0, 0, 0.18);
 }
 
-.coffee-fab:active {
+.support-fab:active {
   transform: translateY(1px);
 }
 
@@ -787,14 +787,14 @@ h1.h1 {
     font-size: 28px;
   }
 
-  .coffee-fab {
+  .support-fab {
     right: 16px;
     bottom: 16px;
     border-radius: 50%;
     padding: 13px;
   }
 
-  .coffee-fab .lbl {
+  .support-fab .lbl {
     display: none;
   }
 }
@@ -805,7 +805,7 @@ h1.h1 {
   }
 
   .hrow-card,
-  .coffee-fab {
+  .support-fab {
     transition: none;
   }
 }
