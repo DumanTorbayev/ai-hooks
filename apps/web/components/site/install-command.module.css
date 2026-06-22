@@ -1,0 +1,59 @@
+.command {
+  display: inline-flex;
+  align-items: stretch;
+  overflow: hidden;
+  border: 1px solid var(--code-line);
+  border-radius: var(--radius);
+  background: var(--code-bg);
+  box-shadow: var(--shadow);
+}
+
+.pre {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 13px;
+}
+
+.sigil {
+  color: var(--c-key);
+  font-family: var(--mono);
+  font-size: 13px;
+}
+
+.command code {
+  color: var(--code-ink);
+  font-family: var(--mono);
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.packageName {
+  color: var(--c-str);
+}
+
+.copyButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 0;
+  border-left: 1px solid var(--code-line);
+  background: transparent;
+  padding: 0 13px;
+  color: var(--code-mut);
+  font-family: var(--mono);
+  font-size: 11.5px;
+}
+
+.copyButton:hover {
+  background: var(--code-bg-2);
+  color: var(--code-ink);
+}
+
+.copyButton[data-state="copied"] {
+  color: var(--c-key);
+}
+
+.copyButton svg {
+  flex-shrink: 0;
+}

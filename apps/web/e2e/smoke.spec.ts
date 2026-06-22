@@ -56,6 +56,24 @@ test.describe("public site smoke", () => {
     await expect(page.getByRole("button", { name: "Copied to clipboard" }).first()).toBeVisible();
   });
 
+  test("home page explains the product and streams the mock chat", async ({ page }) => {
+    await page.goto("/");
+
+    await expect(page.getByText("UI logic, not a hosted API")).toBeVisible();
+    await expect(page.getByText("npm i @ai-hooks/react")).toBeVisible();
+    await expect(page.getByRole("link", { name: "Start with useChatStream" })).toBeVisible();
+
+    const preview = page.getByRole("region", { name: "Mock useChatStream preview" });
+    await expect(preview.getByText("useChatStream — preview")).toBeVisible();
+
+    await preview.getByPlaceholder("Message the mock model...").fill("Show me the API shape");
+    await preview.getByRole("button", { name: "send" }).click();
+
+    await expect(preview.getByText("Show me the API shape")).toBeVisible();
+    await expect(preview.getByRole("button", { name: "Stop" })).toBeVisible();
+    await expect(preview.getByText(/Good question/)).toBeVisible();
+  });
+
   test("mobile menu overlays instead of pushing content", async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto("/");

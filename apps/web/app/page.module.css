@@ -1,0 +1,156 @@
+.hero {
+  border-bottom: 1px solid var(--line);
+  padding: 46px 0 36px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 420px);
+  align-items: start;
+  gap: 46px;
+}
+
+.title {
+  margin: 13px 0 14px;
+  font-size: 34px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.1;
+}
+
+.lede {
+  max-width: 480px;
+  margin: 0 0 22px;
+  color: var(--ink-2);
+  font-size: 15.5px;
+  line-height: 1.55;
+}
+
+.lede b {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px 0 16px;
+}
+
+.note {
+  display: flex;
+  max-width: 430px;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--bg-2);
+  padding: 8px 11px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 11.5px;
+  line-height: 1.5;
+}
+
+.note svg {
+  flex-shrink: 0;
+  color: var(--green);
+}
+
+.hooks {
+  padding: 36px 0 44px;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.sectionHeader h2 {
+  margin: 6px 0 0;
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.hooksRow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.hookCard {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bg);
+  padding: 13px 14px;
+  transition:
+    border-color 0.12s,
+    box-shadow 0.12s;
+}
+
+.hookCard:hover {
+  border-color: var(--line-2);
+  box-shadow: var(--shadow);
+}
+
+.hookCardTop {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.hookName {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.hookNamePrefix {
+  color: var(--accent);
+}
+
+.hookSummary {
+  margin: 0;
+  color: var(--ink-2);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.hookCategory {
+  margin-top: auto;
+}
+
+@media (max-width: 980px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .hooksRow {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 760px) {
+  .hooksRow {
+    grid-template-columns: 1fr;
+  }
+
+  .title {
+    font-size: 28px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hookCard {
+    transition: none;
+  }
+}
