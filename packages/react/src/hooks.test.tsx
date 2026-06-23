@@ -225,6 +225,45 @@ describe("React hooks", () => {
     expect(screen.getByTestId("errors").textContent).toBe("");
   });
 
+  it("loads stored conversation messages without overwriting them on mount", async () => {
+    const storage = createMemoryStorage();
+    storage.setItem(
+      "ai-hooks:existing-conversation",
+      JSON.stringify([
+        {
+          content: "Stored message",
+          createdAt: "2026-06-17T00:00:00.000Z",
+          id: "stored-1",
+          role: "assistant",
+        },
+      ]),
+    );
+
+    function ExistingConversationDemo() {
+      const conversation = useConversationStorage({
+        initialMessages: [
+          {
+            content: "Initial message",
+            createdAt: "2026-06-17T00:00:00.000Z",
+            id: "initial-1",
+            role: "system",
+          },
+        ],
+        key: "existing-conversation",
+        storage,
+      });
+
+      return <output data-testid="last">{conversation.messages.at(-1)?.content ?? "empty"}</output>;
+    }
+
+    render(<ExistingConversationDemo />);
+
+    await waitFor(() => {
+      expect(screen.getByTestId("last").textContent).toBe("Stored message");
+    });
+    expect(storage.getItem("ai-hooks:existing-conversation")).toContain("Stored message");
+  });
+
   it("tracks tool call lifecycle", async () => {
     function ToolCallsDemo() {
       const tools = useMemo(

@@ -1,6 +1,19 @@
 {
   "name": "ai-hooks-project",
   "private": true,
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DumanTorbayev/ai-hooks.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DumanTorbayev/ai-hooks/issues"
+  },
+  "homepage": "https://ai-hooks.vercel.app",
+  "funding": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/ai-hooks"
+  },
   "packageManager": "pnpm@10.33.2",
   "scripts": {
     "dev": "pnpm --filter @ai-hooks/web dev",
