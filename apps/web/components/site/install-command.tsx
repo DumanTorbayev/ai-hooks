@@ -6,14 +6,17 @@ const installCommand = "npm i @ai-hooks/react";
 
 export function InstallCommand() {
   return (
-    <div className={styles.command} aria-label="Install command">
-      <div className={styles.pre}>
-        <span className={styles.sigil}>$</span>
-        <code>
-          npm i <span className={styles.packageName}>@ai-hooks/react</span>
-        </code>
+    <div className={styles.wrap}>
+      <span className={styles.label}>release install target</span>
+      <div className={styles.command} aria-label="Install command">
+        <div className={styles.pre}>
+          <span className={styles.sigil}>$</span>
+          <code>
+            npm i <span className={styles.packageName}>@ai-hooks/react</span>
+          </code>
+        </div>
+        <CopyButton className={styles.copyButton} copiedLabel="Copied" value={installCommand} />
       </div>
-      <CopyButton className={styles.copyButton} copiedLabel="Copied" value={installCommand} />
     </div>
   );
 }

@@ -54,9 +54,9 @@ export default function DocsIndexPage() {
             </div>
             <div className={styles.principle}>
               <h4>
-                <span className={styles.principleIcon}>⌘</span> Zero deps
+                <span className={styles.principleIcon}>⌘</span> No provider SDKs
               </h4>
-              <p>Tree-shakeable, small, and framework-friendly.</p>
+              <p>The hooks stay small and do not bundle model-provider clients.</p>
             </div>
           </div>
 
@@ -65,6 +65,10 @@ export default function DocsIndexPage() {
               <span className={styles.hash}>#</span> Installation
             </h3>
             <CodePanel code="npm i @ai-hooks/react" file="terminal" showLineNumbers={false} />
+            <p className={styles.docNote}>
+              This is the release install target. During the current MVP, the package remains
+              private until the API, examples, and release checks are ready.
+            </p>
             <p className={styles.docNote}>
               Then import a hook and point it at a route you control. AI Hooks never receives your
               prompts or keys; your server route calls the provider.
