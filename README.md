@@ -174,7 +174,7 @@ packages/
   core/                Framework-agnostic utilities and registries
   react/               React hooks package
 examples/
-  next-basic-chat/     Starter notes for the first chat example
+  next-basic-chat/     Runnable Next.js starter with a mock streaming route
 ```
 
 ## Development
