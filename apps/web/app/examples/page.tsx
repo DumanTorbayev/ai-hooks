@@ -42,7 +42,7 @@ export default function ExamplesPage() {
             <div className={styles.cardHead}>
               <span className={styles.name}>Next Basic Chat</span>
               <div className={styles.badges}>
-                <span className="status stable">stable</span>
+                <span className="cat-tag">implementation note</span>
                 <span className="cat-tag">Next.js</span>
                 <span className="cat-tag">mock-stream</span>
               </div>
@@ -50,9 +50,9 @@ export default function ExamplesPage() {
             <div className={styles.cardBody}>
               <div className={styles.left}>
                 <p>
-                  A minimal streaming chat pattern built with <code>useChatStream</code>
-                  and a Next.js App Router route. It shows the send → stream → stop loop and where
-                  token usage can be attached.
+                  A minimal streaming chat pattern for <code>useChatStream</code> and a Next.js App
+                  Router route. It shows the send → stream → stop loop and where token usage can be
+                  attached.
                 </p>
                 <ul>
                   <li>

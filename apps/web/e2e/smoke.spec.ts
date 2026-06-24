@@ -83,6 +83,7 @@ test.describe("public site smoke", () => {
     await expect(page.getByText("UI logic, not a hosted API")).toBeVisible();
     await expect(page.getByText("npm i @ai-hooks/react")).toBeVisible();
     await expect(page.getByRole("link", { name: "Start with useChatStream" })).toBeVisible();
+    await expect(page.getByRole("link", { name: "Support project" })).toHaveCount(0);
 
     const preview = page.getByRole("region", { name: "Mock useChatStream preview" });
     await expect(preview.getByText("useChatStream — preview")).toBeVisible();

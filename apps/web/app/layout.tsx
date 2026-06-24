@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 
-import { SupportFab } from "@/components/site/support-fab";
 import { createPageMetadata } from "@/lib/metadata";
 import "./globals.css";
 
@@ -22,10 +21,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           `}
         </Script>
       </head>
-      <body>
-        {children}
-        <SupportFab />
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
