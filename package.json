@@ -8,7 +8,8 @@
     "test": "pnpm --filter @ai-hooks/core test && pnpm --filter @ai-hooks/react test",
     "test:e2e": "playwright test",
     "typecheck": "pnpm --filter @ai-hooks/core typecheck && pnpm --filter @ai-hooks/react typecheck && pnpm --filter @ai-hooks/web typecheck",
-    "lint": "pnpm -r lint && pnpm lint:eslint && pnpm format:check",
+    "check:exports": "node scripts/check-package-exports.mjs",
+    "lint": "pnpm -r lint && pnpm check:exports && pnpm lint:eslint && pnpm format:check",
     "lint:eslint": "eslint . --max-warnings 0",
     "format": "prettier --write .",
     "format:check": "prettier --check ."

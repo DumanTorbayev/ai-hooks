@@ -9,7 +9,7 @@ primitives.
 
 ## The 10-second version
 
-- Install the React package.
+- Use the release install target once the package is published.
 - Start with `useChatStream`.
 - Point it at your own `/api/chat` route.
 - Keep provider keys on your server.
@@ -183,6 +183,7 @@ Run checks before committing:
 
 ```bash
 pnpm format
+pnpm check:exports
 pnpm typecheck
 pnpm lint
 pnpm test
