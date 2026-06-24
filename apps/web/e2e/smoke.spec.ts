@@ -1,5 +1,7 @@
 import { expect, test } from "@playwright/test";
 
+import { hookDocs } from "../content/hook-docs";
+
 const pages = [
   { path: "/", title: "React hooks for building AI product interfaces." },
   { path: "/docs", title: "Introduction" },
@@ -11,6 +13,11 @@ const pages = [
   { path: "/tools/models", title: "Model comparison" },
   { path: "/tools/providers", title: "Provider matrix" },
 ] as const;
+
+const hookReferencePages = hookDocs.map((doc) => ({
+  path: `/docs/${doc.slug}`,
+  title: doc.name,
+}));
 
 test.describe("public site smoke", () => {
   for (const item of pages) {
@@ -33,6 +40,17 @@ test.describe("public site smoke", () => {
     });
   }
 
+  for (const item of hookReferencePages) {
+    test(`${item.path} hook reference renders`, async ({ page }) => {
+      await page.goto(item.path);
+      await expect(page.getByRole("heading", { level: 1, name: item.title })).toBeVisible();
+      await expect(page.getByRole("heading", { level: 3, name: /Import/ })).toBeVisible();
+      await expect(page.getByRole("heading", { level: 3, name: /Usage/ })).toBeVisible();
+      await expect(page.getByRole("heading", { level: 3, name: /Options/ })).toBeVisible();
+      await expect(page.getByRole("heading", { level: 3, name: /Returns/ })).toBeVisible();
+    });
+  }
+
   test("search opens as a dialog and filters hooks", async ({ page }) => {
     await page.goto("/docs");
     await page.getByRole("button", { name: "Search docs ⌘K" }).click();
@@ -42,6 +60,9 @@ test.describe("public site smoke", () => {
 
     await dialog.getByPlaceholder("Search hooks and tools...").fill("storage");
     await expect(dialog.getByRole("option", { name: /useConversationStorage/ })).toBeVisible();
+
+    await dialog.getByPlaceholder("Search hooks and tools...").fill("examples");
+    await expect(dialog.getByRole("option", { name: /Examples/ })).toBeVisible();
 
     await page.keyboard.press("Escape");
     await expect(dialog).toBeHidden();

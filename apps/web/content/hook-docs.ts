@@ -318,6 +318,7 @@ export function Composer() {
       "`clear()` resets to `initialMessages` when provided, not always to an empty list.",
       "`appendToLastAssistantMessage` creates an assistant message if none exists yet.",
       "Pass a custom `storage` in tests or non-standard browser shells.",
+      "Invalid stored JSON falls back to `initialMessages` instead of crashing the UI.",
     ],
     pairsWith: [
       {

@@ -1,5 +1,5 @@
 import type { AiMessage, AiRole } from "@ai-hooks/core/types";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 export type ConversationStorageOptions = {
   key: string;
@@ -11,20 +11,34 @@ export function useConversationStorage(options: ConversationStorageOptions) {
   const storage = options.storage;
   const storageKey = `ai-hooks:${options.key}`;
   const [messages, setMessages] = useState<AiMessage[]>(options.initialMessages ?? []);
+  const [loadedStorageKey, setLoadedStorageKey] = useState<string | null>(null);
+  const initialMessagesRef = useRef(options.initialMessages ?? []);
 
   useEffect(() => {
-    const targetStorage = storage ?? globalThis.localStorage;
-    const value = targetStorage.getItem(storageKey);
+    initialMessagesRef.current = options.initialMessages ?? [];
+  }, [options.initialMessages]);
+
+  useEffect(() => {
+    const targetStorage = getTargetStorage(storage);
+    const value = targetStorage?.getItem(storageKey);
 
     if (value) {
-      setMessages(JSON.parse(value) as AiMessage[]);
+      setMessages(parseStoredMessages(value, initialMessagesRef.current));
+    } else {
+      setMessages(initialMessagesRef.current);
     }
+
+    setLoadedStorageKey(storageKey);
   }, [storage, storageKey]);
 
   useEffect(() => {
-    const targetStorage = storage ?? globalThis.localStorage;
-    targetStorage.setItem(storageKey, JSON.stringify(messages));
-  }, [messages, storage, storageKey]);
+    if (loadedStorageKey !== storageKey) {
+      return;
+    }
+
+    const targetStorage = getTargetStorage(storage);
+    targetStorage?.setItem(storageKey, JSON.stringify(messages));
+  }, [loadedStorageKey, messages, storage, storageKey]);
 
   const add = useCallback((message: AiMessage) => {
     setMessages((current) => [...current, message]);
@@ -55,8 +69,8 @@ export function useConversationStorage(options: ConversationStorageOptions) {
   }, []);
 
   const clear = useCallback(() => {
-    setMessages(options.initialMessages ?? []);
-  }, [options.initialMessages]);
+    setMessages(initialMessagesRef.current);
+  }, []);
 
   return useMemo(
     () => ({
@@ -70,6 +84,27 @@ export function useConversationStorage(options: ConversationStorageOptions) {
     }),
     [add, addMessage, appendToLastAssistantMessage, clear, messages],
   );
+}
+
+function getTargetStorage(storage: Storage | undefined) {
+  if (storage) {
+    return storage;
+  }
+
+  try {
+    return globalThis.localStorage;
+  } catch {
+    return undefined;
+  }
+}
+
+function parseStoredMessages(value: string, fallback: AiMessage[]) {
+  try {
+    const parsed = JSON.parse(value);
+    return Array.isArray(parsed) ? (parsed as AiMessage[]) : fallback;
+  } catch {
+    return fallback;
+  }
 }
 
 function createMessage(role: AiRole, content: string): AiMessage {

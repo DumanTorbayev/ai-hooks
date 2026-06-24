@@ -18,10 +18,28 @@ type PaletteItem = {
 
 const pageItems: PaletteItem[] = [
   {
+    description: "Package positioning and first hook",
+    group: "Pages",
+    href: "/",
+    label: "Home",
+  },
+  {
     description: "Documentation introduction",
     group: "Pages",
     href: "/docs",
     label: "Introduction",
+  },
+  {
+    description: "Current docs-backed implementation notes",
+    group: "Pages",
+    href: "/examples",
+    label: "Examples",
+  },
+  {
+    description: "Cost, token, model, and provider planning utilities",
+    group: "Pages",
+    href: "/tools",
+    label: "Tools",
   },
 ];
 
