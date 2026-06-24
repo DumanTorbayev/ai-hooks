@@ -140,15 +140,12 @@ auto-updating feed. Recheck it before release and whenever provider pricing chan
 
 ## Support
 
-AI Hooks is applying to Open Source Collective for transparent project funding.
-Support will fund documentation, examples, tests, release work, infrastructure,
-and long-term maintenance.
+AI Hooks is applying to Open Source Collective for transparent project funding. The public site does
+not show a support button yet; funding UI should be added only after the collective is approved and
+the project is ready to explain exactly what support funds.
 
-Support link:
-
-```text
-https://opencollective.com/ai-hooks
-```
+Future support should fund documentation, examples, tests, release work, infrastructure, and
+long-term maintenance.
 
 ## MVP readiness
 
@@ -192,15 +189,6 @@ pnpm test
 pnpm build
 pnpm test:e2e
 ```
-
-Optional support button:
-
-```bash
-cp .env.example .env.local
-```
-
-Set `NEXT_PUBLIC_SUPPORT_URL` in `.env.local` to enable the support link on the
-docs site.
 
 ## Contributing
 
