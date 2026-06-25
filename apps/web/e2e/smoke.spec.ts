@@ -77,6 +77,16 @@ test.describe("public site smoke", () => {
     await expect(page.getByRole("button", { name: "Copied to clipboard" }).first()).toBeVisible();
   });
 
+  test("examples page points to the runnable Next example", async ({ page }) => {
+    await page.goto("/examples");
+
+    await expect(page.getByText("runnable", { exact: true })).toBeVisible();
+    await expect(
+      page.getByText("pnpm --filter @ai-hooks/example-next-basic-chat dev"),
+    ).toBeVisible();
+    await expect(page.getByRole("link", { name: "Open example →" })).toBeVisible();
+  });
+
   test("home page explains the product and streams the mock chat", async ({ page }) => {
     await page.goto("/");
 

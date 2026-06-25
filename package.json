@@ -4,10 +4,10 @@
   "packageManager": "pnpm@10.33.2",
   "scripts": {
     "dev": "pnpm --filter @ai-hooks/web dev",
-    "build": "pnpm --filter @ai-hooks/core build && pnpm --filter @ai-hooks/react build && pnpm --filter @ai-hooks/web build",
+    "build": "pnpm --filter @ai-hooks/core build && pnpm --filter @ai-hooks/react build && pnpm --filter @ai-hooks/web build && pnpm --filter @ai-hooks/example-next-basic-chat build",
     "test": "pnpm --filter @ai-hooks/core test && pnpm --filter @ai-hooks/react test",
     "test:e2e": "playwright test",
-    "typecheck": "pnpm --filter @ai-hooks/core typecheck && pnpm --filter @ai-hooks/react typecheck && pnpm --filter @ai-hooks/web typecheck",
+    "typecheck": "pnpm --filter @ai-hooks/core typecheck && pnpm --filter @ai-hooks/react typecheck && pnpm --filter @ai-hooks/web typecheck && pnpm --filter @ai-hooks/example-next-basic-chat typecheck",
     "check:exports": "node scripts/check-package-exports.mjs",
     "lint": "pnpm -r lint && pnpm check:exports && pnpm lint:eslint && pnpm format:check",
     "lint:eslint": "eslint . --max-warnings 0",
