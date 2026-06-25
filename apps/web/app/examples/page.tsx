@@ -27,7 +27,7 @@ export default function ExamplesPage() {
           </div>
           <h1 className={shell.pageTitle}>Examples</h1>
           <p className={shell.pageLede}>
-            Runnable starters and implementation notes for the hooks that exist today. Examples use
+            Runnable examples and implementation notes for the hooks that exist today. Examples use
             mock routes by default and keep provider keys on your server.
           </p>
           <div className={styles.note}>

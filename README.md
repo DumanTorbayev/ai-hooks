@@ -161,7 +161,7 @@ Ready for the current MVP:
 Not release-ready yet:
 
 - The npm package is still private.
-- Runnable starter apps are still minimal.
+- Runnable examples are still minimal.
 - Provider adapters are intentionally not part of the core package yet.
 - Model and provider registries need a final pre-release source review.
 
@@ -174,7 +174,7 @@ packages/
   core/                Framework-agnostic utilities and registries
   react/               React hooks package
 examples/
-  next-basic-chat/     Runnable Next.js starter with a mock streaming route
+  next-basic-chat/     Runnable Next.js example with a mock streaming route
 ```
 
 ## Development

@@ -77,7 +77,7 @@ test.describe("public site smoke", () => {
     await expect(page.getByRole("button", { name: "Copied to clipboard" }).first()).toBeVisible();
   });
 
-  test("examples page points to the runnable Next starter", async ({ page }) => {
+  test("examples page points to the runnable Next example", async ({ page }) => {
     await page.goto("/examples");
 
     await expect(page.getByText("runnable", { exact: true })).toBeVisible();
