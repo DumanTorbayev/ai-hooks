@@ -46,8 +46,12 @@ test.describe("public site smoke", () => {
       await expect(page.getByRole("heading", { level: 1, name: item.title })).toBeVisible();
       await expect(page.getByRole("heading", { level: 3, name: /Import/ })).toBeVisible();
       await expect(page.getByRole("heading", { level: 3, name: /Usage/ })).toBeVisible();
+      await expect(page.getByText("Package boundary:")).toBeVisible();
       await expect(page.getByRole("heading", { level: 3, name: /Options/ })).toBeVisible();
       await expect(page.getByRole("heading", { level: 3, name: /Returns/ })).toBeVisible();
+      await expect(
+        page.getByRole("heading", { level: 3, name: /Server\/provider notes/ }),
+      ).toBeVisible();
     });
   }
 
@@ -80,6 +84,7 @@ test.describe("public site smoke", () => {
   test("examples page points to the runnable Next example", async ({ page }) => {
     await page.goto("/examples");
 
+    await expect(page.getByText("Runnable examples and implementation notes")).toBeVisible();
     await expect(page.getByText("runnable", { exact: true })).toBeVisible();
     await expect(
       page.getByText("pnpm --filter @ai-hooks/example-next-basic-chat dev"),

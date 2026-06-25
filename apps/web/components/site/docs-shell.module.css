@@ -167,10 +167,27 @@
 
 .detailPurpose {
   max-width: 640px;
-  margin: 0 0 22px;
+  margin: 0 0 12px;
   color: var(--ink-2);
   font-size: 15px;
   line-height: 1.5;
+}
+
+.boundaryNote {
+  max-width: 720px;
+  margin: 0 0 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bg-2);
+  padding: 10px 12px;
+  color: var(--ink-2);
+  font-size: 12.8px;
+  line-height: 1.55;
+}
+
+.boundaryNote b {
+  color: var(--ink);
+  font-weight: 600;
 }
 
 .tableWrap {
