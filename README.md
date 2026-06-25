@@ -192,6 +192,9 @@ pnpm build
 pnpm test:e2e
 ```
 
+`pnpm typecheck` and `pnpm lint` are expected to pass from a fresh clone without a previous Next.js
+build. `pnpm build` runs the full Next.js validation step, including generated route types.
+
 ## Contributing
 
 The project is early. Useful contributions should keep the package small,
