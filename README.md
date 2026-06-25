@@ -121,7 +121,8 @@ server route and your own provider account.
 | `useToolCalls`           | Beta   | Tool-call lifecycle state for agent UI.                      |
 
 Every hook is documented at `/docs`. Each reference page covers API, usage, edge
-cases, when to use it, when not to use it, and which hooks pair well together.
+cases, when to use it, when not to use it, package boundaries, and which hooks pair
+well together.
 
 ## Planning tools
 

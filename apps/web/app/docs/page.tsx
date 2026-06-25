@@ -30,7 +30,9 @@ export default function DocsIndexPage() {
             interfaces — streaming chat, token usage, file inputs, and tool calls. It is <b>not</b>{" "}
             a hosted API, a proxy, or a UI kit: you keep your own server routes, provider keys, and
             markup. Start with <Link href="/docs/use-chat-stream">useChatStream</Link>, then add
-            storage, cancellation, usage, files, or tools only when your UI needs them.
+            storage, cancellation, usage, files, or tools only when your UI needs them. Every hook
+            reference includes a package boundary so it is clear what AI Hooks handles and what
+            stays in your app.
           </p>
 
           <div className={styles.principles}>
@@ -57,6 +59,18 @@ export default function DocsIndexPage() {
                 <span className={styles.principleIcon}>⌘</span> No provider SDKs
               </h4>
               <p>The hooks stay small and do not bundle model-provider clients.</p>
+            </div>
+            <div className={styles.principle}>
+              <h4>
+                <span className={styles.principleIcon}>⌘</span> Clear boundary
+              </h4>
+              <p>Each hook documents what the package owns and what your app owns.</p>
+            </div>
+            <div className={styles.principle}>
+              <h4>
+                <span className={styles.principleIcon}>⌘</span> Composable
+              </h4>
+              <p>Start with one hook, then add storage, usage, files, or tools only when needed.</p>
             </div>
           </div>
 

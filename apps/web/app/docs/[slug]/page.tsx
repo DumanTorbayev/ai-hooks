@@ -75,6 +75,10 @@ export default async function HookDocPage({ params }: HookDocPageProps) {
           </div>
           <p className={styles.detailPurpose}>{doc.purpose}</p>
 
+          <div className={styles.boundaryNote}>
+            <b>Package boundary:</b> <InlineCodeText text={doc.boundary} />
+          </div>
+
           <section className={styles.section} id="import">
             <h3>
               <span className={styles.hash}>#</span> Import
@@ -246,9 +250,9 @@ export default async function HookDocPage({ params }: HookDocPageProps) {
             ))}
           </section>
 
-          <section className={styles.section} id="source">
+          <section className={styles.section} id="server-notes">
             <h3>
-              <span className={styles.hash}>#</span> Source notes
+              <span className={styles.hash}>#</span> Server/provider notes
             </h3>
             {doc.notes.map((item) => (
               <div className={styles.sourceNote} key={item}>
@@ -284,7 +288,7 @@ export default async function HookDocPage({ params }: HookDocPageProps) {
             <a href="#options">Options</a>
             <a href="#returns">Returns</a>
             <a href="#recipes">Recipes</a>
-            <a href="#source">Source notes</a>
+            <a href="#server-notes">Server/provider notes</a>
             <a href="#related">Related</a>
           </div>
           <div className={styles.metaCard}>

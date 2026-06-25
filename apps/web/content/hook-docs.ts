@@ -23,6 +23,7 @@ export type HookDoc = {
   category: "streaming" | "state" | "usage" | "files" | "agents";
   summary: string;
   purpose: string;
+  boundary: string;
   useWhen: string[];
   avoidWhen: string[];
   edgeCases: string[];
@@ -44,6 +45,8 @@ export const hookDocs = [
     summary: "Stream assistant text into your own chat UI.",
     purpose:
       "Use this when your UI needs a composer state, a send action, streaming state, and callbacks for assistant deltas. The hook can run against a mock stream for demos or against your own server endpoint in production.",
+    boundary:
+      "AI Hooks manages composer and stream state. Your server route still calls the model provider and forwards text deltas; provider keys never belong in the browser.",
     useWhen: [
       "You already have, or plan to create, a server route for model calls.",
       "Your app owns the message UI and needs stream state, input state, and send behavior.",
@@ -223,6 +226,8 @@ export function ChatPanel() {
     summary: "Add real stop-generation behavior to streaming requests.",
     purpose:
       "Use this when a user needs to cancel an in-flight fetch stream or provider request. The hook exposes a current signal and creates a fresh controller after aborting.",
+    boundary:
+      "AI Hooks creates and resets AbortController state. Your fetch call or provider client must accept the signal for cancellation to take effect.",
     useWhen: [
       "A streaming chat needs a Stop button that actually cancels fetch work.",
       "You want one reusable signal for a request lifecycle instead of creating controllers inline.",
@@ -303,6 +308,8 @@ export function Composer() {
     summary: "Persist conversation state in local storage.",
     purpose:
       "Use this when a demo, prototype, or client-side workflow needs durable messages without introducing a backend database.",
+    boundary:
+      "AI Hooks stores messages in browser storage only. Use server storage for account history, sensitive messages, multi-device sync, or audit requirements.",
     useWhen: [
       "You need local conversation state that survives refreshes in demos or prototypes.",
       "You want helper actions for appending user, assistant, and streamed assistant messages.",
@@ -424,6 +431,8 @@ export function Thread() {
     summary: "Track token usage as product state.",
     purpose:
       "Use this when a chat, calculator, or dashboard needs visible input, output, cached, and total token counters.",
+    boundary:
+      "AI Hooks accumulates the usage values you pass in. Provider metadata, tokenizer output, or estimator values still come from your route or planning tools.",
     useWhen: [
       "A provider response returns usage metadata and the UI should show running totals.",
       "You need session-level input, output, cached-input, and total counters.",
@@ -527,6 +536,8 @@ export function UsageAwareChat() {
     summary: "Estimate model spend from usage counters.",
     purpose:
       "Use this when the UI needs request, session, or monthly cost feedback based on model pricing and token usage.",
+    boundary:
+      "AI Hooks estimates cost from supplied usage and reviewed pricing rows. It is not billing reconciliation and pricing data does not update live.",
     useWhen: [
       "The product should show estimated spend beside chat or usage counters.",
       "You want to compare the cost impact of different model choices in UI.",
@@ -644,6 +655,8 @@ export function CostMeter() {
     summary: "Validate local files before an AI workflow uses them.",
     purpose:
       "Use this when a chat UI accepts files but the app needs to enforce file count, size, and MIME or extension rules before upload.",
+    boundary:
+      "AI Hooks validates local File objects only. Uploading, parsing, OCR, storage, and provider file APIs stay inside your app boundary.",
     useWhen: [
       "A composer accepts local files and needs client-side validation before submit.",
       "You need a small list of selected file metadata for UI rendering.",
@@ -763,6 +776,8 @@ export function FilePicker() {
     summary: "Track tool call lifecycle for agent UI.",
     purpose:
       "Use this when an AI interface needs to show which tools are running, completed, or failed while keeping execution handlers in your app.",
+    boundary:
+      "AI Hooks tracks tool-call lifecycle state. Tool schemas, argument validation, permissions, execution, retries, and side effects stay in your app.",
     useWhen: [
       "An agent UI needs a visible timeline of running, completed, and failed tool calls.",
       "Tool handlers should stay inside your app boundary.",
