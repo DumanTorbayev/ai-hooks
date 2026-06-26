@@ -26,6 +26,28 @@ export function SearchIcon(props: IconProps) {
   );
 }
 
+export function AiHooksLogo({ size = 15, ...props }: IconProps) {
+  return (
+    <svg
+      aria-hidden={props["aria-hidden"] ?? true}
+      fill="none"
+      height={size}
+      viewBox="0 0 24 24"
+      width={size}
+      {...props}
+    >
+      <path
+        d="M7 6.5v10.1c0 1.3 1 2.4 2.4 2.4h1.1M17 17.5V7.4C17 6 16 5 14.6 5h-1.1M7.4 12h9.2"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2.1"
+      />
+      <circle cx="12" cy="12" r="1.8" fill="var(--logo-dot, currentColor)" />
+    </svg>
+  );
+}
+
 export function MoonIcon(props: IconProps) {
   return (
     <svg {...iconProps(props, 1.4)}>
