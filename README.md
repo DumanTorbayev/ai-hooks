@@ -185,6 +185,7 @@ Run checks before committing:
 ```bash
 pnpm format
 pnpm check:exports
+pnpm check:packages
 pnpm typecheck
 pnpm lint
 pnpm test
@@ -194,6 +195,8 @@ pnpm test:e2e
 
 `pnpm typecheck` and `pnpm lint` are expected to pass from a fresh clone without a previous Next.js
 build. `pnpm build` runs the full Next.js validation step, including generated route types.
+`pnpm check:packages` builds `@ai-hooks/core` and `@ai-hooks/react`, then runs npm pack dry-runs to
+verify package metadata, tarball size, and published file contents.
 
 ## Contributing
 
