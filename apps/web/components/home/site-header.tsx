@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-import { GitHubIcon, MenuIcon, SearchIcon } from "@/components/icons";
+import { AiHooksLogo, GitHubIcon, MenuIcon, SearchIcon } from "@/components/icons";
 import { CommandPalette } from "@/components/site/command-palette";
 import { ThemeToggle } from "@/components/site/theme-toggle";
 
@@ -34,7 +34,9 @@ export function SiteHeader({ active }: SiteHeaderProps) {
       <header className={`${styles.header} ${mobileOpen ? styles.menuOpen : ""}`}>
         <div className={`wrap ${styles.row}`}>
           <Link className={styles.brand} href="/">
-            <span className={styles.glyph}>⌘</span>
+            <span className={styles.glyph}>
+              <AiHooksLogo />
+            </span>
             <span>AI Hooks</span>
           </Link>
 
@@ -48,12 +50,17 @@ export function SiteHeader({ active }: SiteHeaderProps) {
 
           <div className={styles.actions}>
             <button
+              aria-label="Search docs ⌘K"
               className={styles.searchButton}
               onClick={() => setPaletteOpen(true)}
               type="button"
             >
               <SearchIcon size={13} />
-              Search docs <span className={styles.kbd}>⌘K</span>
+              <span className={styles.searchLabel}>Search docs</span>
+              <span aria-hidden="true" className={styles.kbd}>
+                <span>⌘</span>
+                <span>K</span>
+              </span>
             </button>
             <ThemeToggle />
             <a
