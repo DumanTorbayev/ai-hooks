@@ -1,8 +1,28 @@
 {
   "name": "@ai-hooks/react",
   "version": "0.0.0",
+  "description": "Headless React hooks for building AI product interfaces.",
   "private": true,
+  "license": "MIT",
   "type": "module",
+  "homepage": "https://ai-hooks.vercel.app",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DumanTorbayev/ai-hooks.git",
+    "directory": "packages/react"
+  },
+  "bugs": {
+    "url": "https://github.com/DumanTorbayev/ai-hooks/issues"
+  },
+  "keywords": [
+    "ai",
+    "llm",
+    "react",
+    "hooks",
+    "streaming",
+    "chat",
+    "typescript"
+  ],
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "sideEffects": false,
@@ -44,6 +64,9 @@
   "files": [
     "dist"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "test": "vitest run --config vitest.config.ts",

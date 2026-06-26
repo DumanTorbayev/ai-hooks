@@ -9,6 +9,7 @@
     "test:e2e": "playwright test",
     "typecheck": "pnpm --filter @ai-hooks/core typecheck && pnpm --filter @ai-hooks/react typecheck && pnpm --filter @ai-hooks/web typecheck && pnpm --filter @ai-hooks/example-next-basic-chat typecheck",
     "check:exports": "node scripts/check-package-exports.mjs",
+    "check:packages": "pnpm --filter @ai-hooks/core build && pnpm --filter @ai-hooks/react build && node scripts/check-package-packs.mjs",
     "lint": "pnpm -r lint && pnpm check:exports && pnpm lint:eslint && pnpm format:check",
     "lint:eslint": "eslint . --max-warnings 0",
     "format": "prettier --write .",

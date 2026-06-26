@@ -1,8 +1,27 @@
 {
   "name": "@ai-hooks/core",
   "version": "0.0.0",
+  "description": "Framework-agnostic AI UI utilities for AI Hooks.",
   "private": true,
+  "license": "MIT",
   "type": "module",
+  "homepage": "https://ai-hooks.vercel.app",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DumanTorbayev/ai-hooks.git",
+    "directory": "packages/core"
+  },
+  "bugs": {
+    "url": "https://github.com/DumanTorbayev/ai-hooks/issues"
+  },
+  "keywords": [
+    "ai",
+    "llm",
+    "tokens",
+    "streaming",
+    "model-cost",
+    "typescript"
+  ],
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "sideEffects": false,
@@ -40,6 +59,9 @@
   "files": [
     "dist"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "test": "vitest run --config vitest.config.ts",

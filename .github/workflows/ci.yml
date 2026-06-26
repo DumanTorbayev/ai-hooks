@@ -37,6 +37,9 @@ jobs:
       - name: Typecheck
         run: pnpm typecheck
 
+      - name: Package tarball audit
+        run: pnpm check:packages
+
       - name: Lint and format
         run: pnpm lint
 
