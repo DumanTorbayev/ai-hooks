@@ -55,7 +55,7 @@ export function SiteHeader({ active }: SiteHeaderProps) {
               onClick={() => setPaletteOpen(true)}
               type="button"
             >
-              <SearchIcon size={13} />
+              <SearchIcon size={15} />
               <span className={styles.searchLabel}>Search docs</span>
               <span aria-hidden="true" className={styles.kbd}>
                 <span>⌘</span>
