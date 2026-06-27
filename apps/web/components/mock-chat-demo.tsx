@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { SendIcon, StopIcon } from "@/components/icons";
 
-import styles from "./mock-chat-demo.module.css";
+import css from "./mock-chat-demo.module.css";
 
 type Message = {
   content: string;
@@ -114,39 +114,39 @@ export function MockChatDemo() {
   }
 
   return (
-    <section className={styles.preview} aria-label="Mock useChatStream preview">
-      <div className={styles.head}>
-        <span className={styles.dot} />
-        <span className={styles.dot} />
-        <span className={styles.dot} />
-        <span className={styles.title}>
+    <section className={css.preview} aria-label="Mock useChatStream preview">
+      <div className={css.head}>
+        <span className={css.dot} />
+        <span className={css.dot} />
+        <span className={css.dot} />
+        <span className={css.title}>
           <b>useChatStream</b> — preview
         </span>
-        <span className={styles.badge}>
-          <span className={styles.badgeDot} /> mock
+        <span className={css.badge}>
+          <span className={css.badge_dot} /> mock
         </span>
       </div>
-      <div className={styles.scroll}>
+      <div className={css.scroll}>
         {messages.map((message, index) => (
           <article
-            className={`${styles.message} ${message.role === "user" ? styles.user : styles.bot}`}
+            className={`${css.message} ${message.role === "user" ? css.user : css.bot}`}
             key={index}
           >
-            <div className={styles.avatar}>{message.role === "user" ? "YOU" : "AI"}</div>
-            <div className={styles.body}>
-              <div className={styles.role}>
+            <div className={css.avatar}>{message.role === "user" ? "YOU" : "AI"}</div>
+            <div className={css.body}>
+              <div className={css.role}>
                 {message.role === "assistant" && message.streaming
                   ? "assistant · streaming"
                   : message.role}
               </div>
               {renderInlineCode(message.content)}
-              {message.streaming ? <span className={styles.cursor} /> : null}
+              {message.streaming ? <span className={css.cursor} /> : null}
             </div>
           </article>
         ))}
       </div>
-      <div className={styles.composer}>
-        <div className={styles.inner}>
+      <div className={css.composer}>
+        <div className={css.inner}>
           <textarea
             onChange={(event) => setInput(event.target.value)}
             onKeyDown={(event) => {
@@ -161,7 +161,7 @@ export function MockChatDemo() {
           />
           {isStreaming ? (
             <button
-              className={`${styles.stop} ${styles.stopVisible}`}
+              className={`${css.stop} ${css.stop_visible}`}
               onClick={() => stop()}
               type="button"
             >
@@ -170,7 +170,7 @@ export function MockChatDemo() {
           ) : (
             <button
               aria-label="send"
-              className={styles.send}
+              className={css.send}
               disabled={!input.trim()}
               onClick={send}
               type="button"
@@ -179,14 +179,14 @@ export function MockChatDemo() {
             </button>
           )}
         </div>
-        <div className={styles.foot}>
+        <div className={css.foot}>
           <span>
-            <span className={styles.key}>Enter</span> send
+            <span className={css.key}>Enter</span> send
           </span>
           <span>
-            <span className={styles.key}>Shift</span> newline
+            <span className={css.key}>Shift</span> newline
           </span>
-          <span className={styles.usage}>
+          <span className={css.usage}>
             tokens <b>{tokens.toLocaleString("en-US")}</b> / 128k
           </span>
         </div>

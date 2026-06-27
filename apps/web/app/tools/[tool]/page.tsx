@@ -13,7 +13,7 @@ import { SidebarNav } from "@/components/site/sidebar-nav";
 import { planningTools, type PlanningToolId } from "@/content/tools";
 import { createPageMetadata } from "@/lib/metadata";
 
-import styles from "@/components/site/docs-shell.module.css";
+import css from "@/components/site/docs-shell.module.css";
 
 type ToolPageProps = {
   params: Promise<{ tool: PlanningToolId }>;
@@ -49,16 +49,16 @@ export default async function ToolPage({ params }: ToolPageProps) {
   return (
     <>
       <SiteHeader active="docs" />
-      <main className={`wrap ${styles.docsLayout}`}>
+      <main className={`wrap ${css.docs_layout}`}>
         <SidebarNav active={{ id: tool.id, kind: "tools" }} />
-        <div className={`${styles.main} ${styles.toolMain}`}>
-          <div className={styles.crumbs}>
+        <div className={`${css.main} ${css.tool_main}`}>
+          <div className={css.crumbs}>
             <Link href="/docs">Docs</Link> / <Link href="/tools">Tools</Link> /{" "}
             <span>{tool.name}</span>
           </div>
-          <div className={styles.planningFlag}>Planning tool · not part of the package API</div>
-          <h1 className={styles.pageTitle}>{tool.name}</h1>
-          <p className={styles.pageLede}>{tool.description}</p>
+          <div className={css.planning_flag}>Planning tool · not part of the package API</div>
+          <h1 className={css.page_title}>{tool.name}</h1>
+          <p className={css.page_lede}>{tool.description}</p>
           {tool.id === "cost" ? <CostCalc /> : null}
           {tool.id === "tokens" ? <TokenEstimator /> : null}
           {tool.id === "models" ? <ModelCompare /> : null}

@@ -42,11 +42,11 @@
   white-space: nowrap;
 }
 
-.packageName {
+.package_name {
   color: var(--c-str);
 }
 
-.copyButton {
+.copy_button {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -59,15 +59,15 @@
   font-size: 11.5px;
 }
 
-.copyButton:hover {
+.copy_button:hover {
   background: var(--code-bg-2);
   color: var(--code-ink);
 }
 
-.copyButton[data-state="copied"] {
+.copy_button[data-state="copied"] {
   color: var(--c-key);
 }
 
-.copyButton svg {
+.copy_button svg {
   flex-shrink: 0;
 }

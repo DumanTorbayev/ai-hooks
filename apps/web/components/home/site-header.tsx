@@ -7,7 +7,7 @@ import { AiHooksLogo, GitHubIcon, MenuIcon, SearchIcon } from "@/components/icon
 import { CommandPalette } from "@/components/site/command-palette";
 import { ThemeToggle } from "@/components/site/theme-toggle";
 
-import styles from "./site-header.module.css";
+import css from "./site-header.module.css";
 
 type SiteHeaderProps = {
   active?: "docs";
@@ -31,41 +31,41 @@ export function SiteHeader({ active }: SiteHeaderProps) {
 
   return (
     <>
-      <header className={`${styles.header} ${mobileOpen ? styles.menuOpen : ""}`}>
-        <div className={`wrap ${styles.row}`}>
-          <Link className={styles.brand} href="/">
-            <span className={styles.glyph}>
+      <header className={`${css.header} ${mobileOpen ? css.menu_open : ""}`}>
+        <div className={`wrap ${css.row}`}>
+          <Link className={css.brand} href="/">
+            <span className={css.glyph}>
               <AiHooksLogo />
             </span>
             <span>AI Hooks</span>
           </Link>
 
-          <nav className={styles.nav} aria-label="Primary navigation">
-            <Link className={active === "docs" ? styles.active : undefined} href="/docs">
+          <nav className={css.nav} aria-label="Primary navigation">
+            <Link className={active === "docs" ? css.active : undefined} href="/docs">
               Docs
             </Link>
           </nav>
 
-          <div className={styles.spacer} />
+          <div className={css.spacer} />
 
-          <div className={styles.actions}>
+          <div className={css.actions}>
             <button
               aria-label="Search docs ⌘K"
-              className={styles.searchButton}
+              className={css.search_button}
               onClick={() => setPaletteOpen(true)}
               type="button"
             >
               <SearchIcon size={15} />
-              <span className={styles.searchLabel}>Search docs</span>
-              <span aria-hidden="true" className={styles.kbd}>
-                <span>⌘</span>
+              <span className={css.search_label}>Search docs</span>
+              <span aria-hidden="true" className={css.kbd}>
+                <span className={css.cmd_icon}>⌘</span>
                 <span>K</span>
               </span>
             </button>
             <ThemeToggle />
             <a
               aria-label="GitHub repository"
-              className={styles.github}
+              className={css.github}
               href="https://github.com/DumanTorbayev/ai-hooks"
               rel="noreferrer"
               target="_blank"
@@ -74,7 +74,7 @@ export function SiteHeader({ active }: SiteHeaderProps) {
             </a>
             <button
               aria-label="Open mobile menu"
-              className={styles.hamburger}
+              className={css.hamburger}
               onClick={() => setMobileOpen((current) => !current)}
               type="button"
             >
@@ -83,7 +83,7 @@ export function SiteHeader({ active }: SiteHeaderProps) {
           </div>
         </div>
 
-        <div className={`wrap ${styles.mobileMenu} ${mobileOpen ? styles.mobileMenuOpen : ""}`}>
+        <div className={`wrap ${css.mobile_menu} ${mobileOpen ? css.mobile_menu_open : ""}`}>
           <Link href="/docs" onClick={() => setMobileOpen(false)}>
             Docs
           </Link>

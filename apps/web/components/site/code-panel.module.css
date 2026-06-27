@@ -20,7 +20,7 @@
   font-size: 11px;
 }
 
-.copyButton {
+.copy_button {
   display: flex;
   margin-left: auto;
   align-items: center;
@@ -34,16 +34,16 @@
   font-size: 11px;
 }
 
-.copyButton:hover {
+.copy_button:hover {
   color: var(--code-ink);
 }
 
-.copyButton[data-state="copied"] {
+.copy_button[data-state="copied"] {
   border-color: #2f4a40;
   color: var(--c-key);
 }
 
-.copyButton svg {
+.copy_button svg {
   flex-shrink: 0;
 }
 
@@ -64,65 +64,65 @@
   padding-right: 16px;
 }
 
-.lineNumber {
+.line_number {
   user-select: none;
   color: #3f4653;
   font-variant-numeric: tabular-nums;
   text-align: right;
 }
 
-.lineCode {
+.line_code {
   display: inline-block;
   min-height: 1.7em;
   padding-left: 16px;
 }
 
-.plainCode {
+.plain_code {
   display: block;
   padding: 0 15px;
 }
 
-.tokenKeyword {
+.token_keyword {
   color: #ff7b72;
 }
 
-.tokenString {
+.token_string {
   color: #9ecbff;
 }
 
-.tokenComment {
+.token_comment {
   color: var(--c-com);
 }
 
-.tokenFunction {
+.token_function {
   color: #c9a5ff;
 }
 
-.tokenMethod {
+.token_method {
   color: #7ee787;
 }
 
-.tokenProperty {
+.token_property {
   color: #d6deeb;
 }
 
-.tokenJsxTag {
+.token_jsx_tag {
   color: #7ee787;
 }
 
-.tokenJsxAttribute {
+.token_jsx_attribute {
   color: #ffd166;
 }
 
-.tokenType {
+.token_type {
   color: #d6deeb;
 }
 
-.tokenNumber,
-.tokenPunctuation {
+.token_number,
+.token_punctuation {
   color: #c9a5ff;
 }
 
-.tokenPlain {
+.token_plain {
   color: inherit;
 }

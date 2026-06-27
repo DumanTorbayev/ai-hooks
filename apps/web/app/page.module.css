@@ -62,7 +62,7 @@
   padding: 36px 0 44px;
 }
 
-.sectionHeader {
+.section_header {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
@@ -70,20 +70,20 @@
   margin-bottom: 18px;
 }
 
-.sectionHeader h2 {
+.section_header h2 {
   margin: 6px 0 0;
   font-size: 19px;
   font-weight: 600;
   letter-spacing: 0;
 }
 
-.hooksRow {
+.hooks_row {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 12px;
 }
 
-.hookCard {
+.hook_card {
   display: flex;
   flex-direction: column;
   gap: 7px;
@@ -96,35 +96,35 @@
     box-shadow 0.12s;
 }
 
-.hookCard:hover {
+.hook_card:hover {
   border-color: var(--line-2);
   box-shadow: var(--shadow);
 }
 
-.hookCardTop {
+.hook_card_top {
   display: flex;
   align-items: center;
   gap: 7px;
 }
 
-.hookName {
+.hook_name {
   font-family: var(--mono);
   font-size: 13px;
   font-weight: 600;
 }
 
-.hookNamePrefix {
+.hook_name_prefix {
   color: var(--accent);
 }
 
-.hookSummary {
+.hook_summary {
   margin: 0;
   color: var(--ink-2);
   font-size: 12px;
   line-height: 1.45;
 }
 
-.hookCategory {
+.hook_category {
   margin-top: auto;
 }
 
@@ -134,13 +134,13 @@
     gap: 30px;
   }
 
-  .hooksRow {
+  .hooks_row {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 760px) {
-  .hooksRow {
+  .hooks_row {
     grid-template-columns: 1fr;
   }
 
@@ -150,7 +150,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hookCard {
+  .hook_card {
     transition: none;
   }
 }
