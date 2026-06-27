@@ -7,7 +7,7 @@ import shell from "@/components/site/docs-shell.module.css";
 import { SidebarNav } from "@/components/site/sidebar-nav";
 import { createPageMetadata } from "@/lib/metadata";
 
-import styles from "./examples.module.css";
+import css from "./examples.module.css";
 
 export const metadata: Metadata = createPageMetadata({
   description: "Runnable AI Hooks examples that match the package and demo routes shipped today.",
@@ -30,7 +30,7 @@ export default function ExamplesPage() {
             Runnable examples and implementation notes for the hooks that exist today. Examples use
             mock routes by default and keep provider keys on your server.
           </p>
-          <div className={styles.note}>
+          <div className={css.note}>
             <InfoIcon />
             <div>
               Current examples use <b>mock streams by default</b>. They never require project-owned
@@ -38,17 +38,17 @@ export default function ExamplesPage() {
             </div>
           </div>
 
-          <article className={styles.card}>
-            <div className={styles.cardHead}>
-              <span className={styles.name}>Next Basic Chat</span>
-              <div className={styles.badges}>
+          <article className={css.card}>
+            <div className={css.card_head}>
+              <span className={css.name}>Next Basic Chat</span>
+              <div className={css.badges}>
                 <span className="status stable">runnable</span>
                 <span className="cat-tag">Next.js</span>
                 <span className="cat-tag">mock-stream</span>
               </div>
             </div>
-            <div className={styles.cardBody}>
-              <div className={styles.left}>
+            <div className={css.card_body}>
+              <div className={css.left}>
                 <p>
                   A minimal App Router chat built with <code>useChatStream</code>,{" "}
                   <code>useAbortController</code>, and <code>useConversationStorage</code>. It shows
@@ -68,7 +68,7 @@ export default function ExamplesPage() {
                     Mock route at <code>app/api/chat/route.ts</code>
                   </li>
                 </ul>
-                <div className={styles.actions}>
+                <div className={css.actions}>
                   <Link className="btn primary sm" href="/docs/use-chat-stream">
                     Open useChatStream
                   </Link>
@@ -80,31 +80,31 @@ export default function ExamplesPage() {
                   </Link>
                 </div>
               </div>
-              <div className={styles.right}>
-                <div className={styles.mini}>
-                  <div className={styles.miniHead}>app/page.tsx — preview</div>
-                  <div className={styles.miniBody}>
-                    <div className={`${styles.message} ${styles.user}`}>
-                      <div className={styles.avatar}>YOU</div>
-                      <div className={styles.bubble}>Hello!</div>
+              <div className={css.right}>
+                <div className={css.mini}>
+                  <div className={css.mini_head}>app/page.tsx — preview</div>
+                  <div className={css.mini_body}>
+                    <div className={`${css.message} ${css.user}`}>
+                      <div className={css.avatar}>YOU</div>
+                      <div className={css.bubble}>Hello!</div>
                     </div>
-                    <div className={`${styles.message} ${styles.bot}`}>
-                      <div className={styles.avatar}>AI</div>
-                      <div className={styles.bubble}>
+                    <div className={`${css.message} ${css.bot}`}>
+                      <div className={css.avatar}>AI</div>
+                      <div className={css.bubble}>
                         Streaming reply from the mock route
-                        <span className={styles.cursor} />
+                        <span className={css.cursor} />
                       </div>
                     </div>
                   </div>
                 </div>
-                <code className={styles.command}>
+                <code className={css.command}>
                   pnpm --filter @ai-hooks/example-next-basic-chat dev
                 </code>
               </div>
             </div>
           </article>
 
-          <div className={styles.empty}>
+          <div className={css.empty}>
             More examples will be listed here only after they exist in the repository and pass the
             same build checks.
           </div>

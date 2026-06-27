@@ -7,7 +7,7 @@ import { SearchIcon } from "@/components/icons";
 import { hookDocs } from "@/content/hook-docs";
 import { planningTools } from "@/content/tools";
 
-import styles from "./command-palette.module.css";
+import css from "./command-palette.module.css";
 
 type PaletteItem = {
   description: string;
@@ -138,20 +138,20 @@ export function CommandPalette({ onClose, open }: { onClose: () => void; open: b
   }));
 
   return (
-    <div className={styles.backdrop} onClick={onClose}>
+    <div className={css.backdrop} onClick={onClose}>
       <div
         aria-label="Search documentation"
         aria-modal="true"
-        className={styles.palette}
+        className={css.palette}
         onClick={(event) => event.stopPropagation()}
         role="dialog"
       >
-        <div className={styles.inputRow}>
+        <div className={css.input_row}>
           <SearchIcon />
           <input
             autoComplete="off"
             autoFocus
-            className={styles.input}
+            className={css.input}
             onChange={(event) => {
               setQuery(event.target.value);
               setSelectedIndex(0);
@@ -159,25 +159,22 @@ export function CommandPalette({ onClose, open }: { onClose: () => void; open: b
             placeholder="Search hooks and tools..."
             value={query}
           />
-          <span className={styles.escape}>esc</span>
+          <span className={css.escape}>esc</span>
         </div>
-        <div className={styles.results} role="listbox">
+        <div className={css.results} role="listbox">
           {filteredItems.length === 0 ? (
-            <div className={styles.empty}>No matches for {query}</div>
+            <div className={css.empty}>No matches for {query}</div>
           ) : (
             groupedItems.map(({ group, items: groupItems }) =>
               groupItems.length ? (
                 <div key={group}>
-                  <div className={styles.groupLabel}>{group}</div>
+                  <div className={css.group_label}>{group}</div>
                   {groupItems.map((item) => {
                     const globalIndex = filteredItems.indexOf(item);
                     return (
                       <button
                         aria-selected={globalIndex === selectedIndex}
-                        className={cx(
-                          styles.result,
-                          globalIndex === selectedIndex && styles.selected,
-                        )}
+                        className={cx(css.result, globalIndex === selectedIndex && css.selected)}
                         key={`${item.group}-${item.href}`}
                         onClick={() => {
                           router.push(item.href);
@@ -186,8 +183,8 @@ export function CommandPalette({ onClose, open }: { onClose: () => void; open: b
                         role="option"
                         type="button"
                       >
-                        <span className={styles.name}>{formatPaletteLabel(item.label)}</span>
-                        <span className={styles.description}>{item.description}</span>
+                        <span className={css.name}>{formatPaletteLabel(item.label)}</span>
+                        <span className={css.description}>{item.description}</span>
                       </button>
                     );
                   })}
@@ -208,7 +205,7 @@ function formatPaletteLabel(label: string) {
 
   return (
     <>
-      <span className={styles.hookPrefix}>use</span>
+      <span className={css.hook_prefix}>use</span>
       {label.slice(3)}
     </>
   );

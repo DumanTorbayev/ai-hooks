@@ -7,25 +7,25 @@ import { InstallCommand } from "@/components/site/install-command";
 import { displayCategory, statusClass, statusLabel } from "@/content/hook-meta";
 import { hookDocs } from "@/content/hook-docs";
 
-import styles from "./page.module.css";
+import css from "./page.module.css";
 
 export default function HomePage() {
   return (
     <>
       <SiteHeader />
       <main>
-        <section className={styles.hero}>
-          <div className={`wrap ${styles.grid}`}>
+        <section className={css.hero}>
+          <div className={`wrap ${css.grid}`}>
             <div>
               <span className="eyebrow">React hooks · MIT · React 18 + 19</span>
-              <h1 className={styles.title}>React hooks for building AI product interfaces.</h1>
-              <p className={styles.lede}>
+              <h1 className={css.title}>React hooks for building AI product interfaces.</h1>
+              <p className={css.lede}>
                 A small, headless toolkit of hooks for streaming chat, token usage, file inputs, and
                 tool calls. <b>You own the server routes and the provider keys</b> — AI Hooks ships
                 UI logic, not a hosted API.
               </p>
               <InstallCommand />
-              <div className={styles.cta}>
+              <div className={css.cta}>
                 <Link className="btn primary" href="/docs/use-chat-stream">
                   Start with useChatStream
                 </Link>
@@ -33,7 +33,7 @@ export default function HomePage() {
                   Browse all docs
                 </Link>
               </div>
-              <div className={styles.note}>
+              <div className={css.note}>
                 <CheckIcon size={14} />
                 No hosted API: your route calls the provider, demos use local mock streams.
               </div>
@@ -42,9 +42,9 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className={styles.hooks}>
+        <section className={css.hooks}>
           <div className="wrap">
-            <div className={styles.sectionHeader}>
+            <div className={css.section_header}>
               <div>
                 <span className="eyebrow">// the package</span>
                 <h2>Shipped hooks</h2>
@@ -53,20 +53,20 @@ export default function HomePage() {
                 All docs →
               </Link>
             </div>
-            <div className={styles.hooksRow}>
+            <div className={css.hooks_row}>
               {hookDocs.map((doc) => (
-                <Link className={styles.hookCard} href={`/docs/${doc.slug}`} key={doc.slug}>
-                  <div className={styles.hookCardTop}>
-                    <span className={styles.hookName}>
-                      <span className={styles.hookNamePrefix}>use</span>
+                <Link className={css.hook_card} href={`/docs/${doc.slug}`} key={doc.slug}>
+                  <div className={css.hook_card_top}>
+                    <span className={css.hook_name}>
+                      <span className={css.hook_name_prefix}>use</span>
                       {doc.name.replace("use", "")}
                     </span>
                     <span className={`status ${statusClass(doc.status)}`}>
                       {statusLabel(doc.status)}
                     </span>
                   </div>
-                  <p className={styles.hookSummary}>{doc.summary}</p>
-                  <span className={`cat-tag ${styles.hookCategory}`}>
+                  <p className={css.hook_summary}>{doc.summary}</p>
+                  <span className={`cat-tag ${css.hook_category}`}>
                     {displayCategory(doc.category)}
                   </span>
                 </Link>

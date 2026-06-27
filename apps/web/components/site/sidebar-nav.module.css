@@ -17,7 +17,7 @@
   transition: transform 0.15s;
 }
 
-.toggleOpen .chevron {
+.toggle_open .chevron {
   transform: rotate(180deg);
 }
 
@@ -92,18 +92,18 @@
   color: var(--ink);
 }
 
-.linkActive {
+.link_active {
   background: var(--accent-soft);
   color: var(--accent-ink);
   font-weight: 500;
 }
 
-.hookLink {
+.hook_link {
   font-family: var(--mono);
   font-size: 12px;
 }
 
-.statusDot {
+.status_dot {
   display: block;
   width: 6px;
   min-width: 6px;
@@ -128,7 +128,7 @@
   color: var(--muted);
 }
 
-.linkActive svg {
+.link_active svg {
   color: var(--accent);
 }
 
@@ -148,7 +148,7 @@
     padding: 12px;
   }
 
-  .sideOpen {
+  .side_open {
     display: block;
   }
 }

@@ -9,7 +9,7 @@ import { categoryLabels, categoryOrder, statusClass, statusLabel } from "@/conte
 import { hookDocs } from "@/content/hook-docs";
 import { planningTools, type PlanningToolId } from "@/content/tools";
 
-import styles from "./sidebar-nav.module.css";
+import css from "./sidebar-nav.module.css";
 
 type SidebarNavProps = {
   active?:
@@ -28,26 +28,23 @@ export function SidebarNav({ active }: SidebarNavProps) {
   return (
     <>
       <button
-        className={cx(styles.toggle, open && styles.toggleOpen)}
+        className={cx(css.toggle, open && css.toggle_open)}
         onClick={() => setOpen((current) => !current)}
         type="button"
       >
-        Browse docs <span className={styles.chevron}>▾</span>
+        Browse docs <span className={css.chevron}>▾</span>
       </button>
-      <aside className={cx(styles.side, open && styles.sideOpen)}>
+      <aside className={cx(css.side, open && css.side_open)}>
         <nav aria-label="Documentation navigation">
-          <div className={styles.group}>
-            <div className={styles.label}>Get started</div>
-            <Link
-              className={cx(styles.link, active?.kind === "docs" && styles.linkActive)}
-              href="/docs"
-            >
+          <div className={css.group}>
+            <div className={css.label}>Get started</div>
+            <Link className={cx(css.link, active?.kind === "docs" && css.link_active)} href="/docs">
               <IntroIcon /> Introduction
             </Link>
           </div>
 
-          <div className={styles.group}>
-            <div className={styles.label}>Hooks · the package</div>
+          <div className={css.group}>
+            <div className={css.label}>Hooks · the package</div>
             {categoryOrder.map((category) => {
               const items = hookDocs.filter((doc) => categoryLabels[doc.category] === category);
 
@@ -57,22 +54,22 @@ export function SidebarNav({ active }: SidebarNavProps) {
 
               return (
                 <div key={category}>
-                  <div className={styles.subhead}>
-                    {category} <span className={styles.count}>{items.length}</span>
+                  <div className={css.subhead}>
+                    {category} <span className={css.count}>{items.length}</span>
                   </div>
                   {items.map((doc) => (
                     <Link
                       className={cx(
-                        styles.link,
-                        styles.hookLink,
-                        active?.kind === "hook" && active.slug === doc.slug && styles.linkActive,
+                        css.link,
+                        css.hook_link,
+                        active?.kind === "hook" && active.slug === doc.slug && css.link_active,
                       )}
                       href={`/docs/${doc.slug}`}
                       key={doc.slug}
                     >
                       {doc.name}
                       <span
-                        className={cx(styles.statusDot, styles[statusClass(doc.status)])}
+                        className={cx(css.status_dot, css[statusClass(doc.status)])}
                         title={statusLabel(doc.status)}
                       />
                     </Link>
@@ -82,13 +79,13 @@ export function SidebarNav({ active }: SidebarNavProps) {
             })}
           </div>
 
-          <div className={styles.group}>
-            <div className={styles.label}>Tools · planning</div>
+          <div className={css.group}>
+            <div className={css.label}>Tools · planning</div>
             {planningTools.map((tool) => (
               <Link
                 className={cx(
-                  styles.link,
-                  active?.kind === "tools" && active.id === tool.id && styles.linkActive,
+                  css.link,
+                  active?.kind === "tools" && active.id === tool.id && css.link_active,
                 )}
                 href={`/tools/${tool.id}`}
                 key={tool.id}

@@ -67,8 +67,8 @@
   min-width: 0;
 }
 
-.metricLabel,
-.estimatorOutput .metricLabel {
+.metric_label,
+.estimator_output .metric_label {
   margin-bottom: 3px;
   color: var(--muted);
   font-family: var(--mono);
@@ -77,14 +77,14 @@
   text-transform: uppercase;
 }
 
-.metricValue {
+.metric_value {
   color: var(--ink);
   font-family: var(--mono);
   font-size: 20px;
   font-weight: 600;
 }
 
-.metricTotal .metricValue {
+.metric_total .metric_value {
   color: var(--green);
 }
 
@@ -95,7 +95,7 @@
   resize: vertical;
 }
 
-.estimatorOutput {
+.estimator_output {
   display: flex;
   flex-wrap: wrap;
   gap: 22px;
@@ -106,17 +106,17 @@
   padding: 14px 16px;
 }
 
-.estimatorOutput .metricValue {
+.estimator_output .metric_value {
   font-size: 18px;
 }
 
-.modelGrid {
+.model_grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 12px;
 }
 
-.modelCard {
+.model_card {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: var(--bg);
@@ -128,7 +128,7 @@
     box-shadow 0.12s;
 }
 
-.modelCard:hover {
+.model_card:hover {
   border-color: var(--line-2);
 }
 
@@ -137,21 +137,21 @@
   box-shadow: 0 0 0 3px var(--accent-soft);
 }
 
-.modelCardHead {
+.model_card_head {
   display: flex;
   align-items: center;
   gap: 8px;
   margin-bottom: 9px;
 }
 
-.modelCardHead h3 {
+.model_card_head h3 {
   margin: 0;
   font-family: var(--mono);
   font-size: 13px;
   font-weight: 600;
 }
 
-.modelCardHead p {
+.model_card_head p {
   margin: 2px 0 0;
   color: var(--muted);
   font-size: 11px;
@@ -184,7 +184,7 @@
   content: "";
 }
 
-.modelRow {
+.model_row {
   display: flex;
   justify-content: space-between;
   gap: 10px;
@@ -194,7 +194,7 @@
   font-size: 11.5px;
 }
 
-.modelRow b {
+.model_row b {
   color: var(--ink);
   font-weight: 500;
 }
@@ -211,38 +211,38 @@
   white-space: nowrap;
 }
 
-.badgeYes {
+.badge_yes {
   border-color: #c5ddd2;
   background: var(--green-soft);
   color: var(--green);
 }
 
-.badgePartial {
+.badge_partial {
   border-color: #e8d7b4;
   background: var(--amber-soft);
   color: var(--amber);
 }
 
-.badgeNo {
+.badge_no {
   border-color: #e7c9c3;
   background: var(--red-soft);
   color: var(--red);
 }
 
-.badgeDot {
+.badge_dot {
   width: 5px;
   height: 5px;
   border-radius: 50%;
   background: currentColor;
 }
 
-.tableWrap {
+.table_wrap {
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: var(--radius);
 }
 
-.tableScroll {
+.table_scroll {
   overflow-x: auto;
 }
 
@@ -274,40 +274,40 @@
   border-bottom: 0;
 }
 
-.providerName {
+.provider_name {
   color: var(--ink);
   font-family: var(--mono);
   font-size: 12px;
   font-weight: 500;
 }
 
-:global([data-theme="dark"]) .badgeYes {
+:global([data-theme="dark"]) .badge_yes {
   border-color: #234a3d;
 }
 
-:global([data-theme="dark"]) .badgePartial {
+:global([data-theme="dark"]) .badge_partial {
   border-color: #473a1c;
 }
 
-:global([data-theme="dark"]) .badgeNo {
+:global([data-theme="dark"]) .badge_no {
   border-color: #4a2722;
 }
 
 @media (max-width: 980px) {
-  .modelGrid {
+  .model_grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 760px) {
   .fields,
-  .modelGrid {
+  .model_grid {
     grid-template-columns: 1fr;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .modelCard {
+  .model_card {
     transition: none;
   }
 }

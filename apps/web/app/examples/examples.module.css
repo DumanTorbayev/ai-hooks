@@ -30,7 +30,7 @@
   box-shadow: var(--shadow);
 }
 
-.cardHead {
+.card_head {
   display: flex;
   align-items: center;
   gap: 11px;
@@ -51,7 +51,7 @@
   margin-left: auto;
 }
 
-.cardBody {
+.card_body {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
@@ -115,7 +115,7 @@
   background: var(--bg);
 }
 
-.miniHead {
+.mini_head {
   border-bottom: 1px solid var(--line);
   background: var(--bg-2);
   padding: 6px 9px;
@@ -124,7 +124,7 @@
   font-size: 10px;
 }
 
-.miniBody {
+.mini_body {
   display: flex;
   flex-direction: column;
   gap: 7px;
@@ -195,7 +195,7 @@
 }
 
 @media (max-width: 760px) {
-  .cardBody {
+  .card_body {
     grid-template-columns: 1fr;
   }
 

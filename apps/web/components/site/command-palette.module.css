@@ -18,7 +18,7 @@
   box-shadow: 0 24px 60px -12px rgba(20, 21, 24, 0.4);
 }
 
-.inputRow {
+.input_row {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -27,7 +27,7 @@
   padding: 13px 15px;
 }
 
-.inputRow svg {
+.input_row svg {
   color: var(--muted);
 }
 
@@ -57,7 +57,7 @@
   padding: 6px;
 }
 
-.groupLabel {
+.group_label {
   padding: 8px 11px 4px;
   color: var(--muted);
   font-family: var(--mono);
@@ -92,7 +92,7 @@
   font-weight: 500;
 }
 
-.hookPrefix {
+.hook_prefix {
   color: var(--accent);
 }
 
