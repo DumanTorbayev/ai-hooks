@@ -10,13 +10,12 @@ the hooks and planning tools.
 
 ## Install
 
-Release install target:
-
 ```bash
 npm i @ai-hooks/core
 ```
 
-The package is still private during MVP and is not published to npm yet.
+Use this package directly when you need framework-agnostic token, cost, model, provider, or
+streaming utilities. React applications should usually start with `@ai-hooks/react`.
 
 ## Imports
 
