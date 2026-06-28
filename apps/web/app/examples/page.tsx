@@ -19,14 +19,14 @@ export default function ExamplesPage() {
   return (
     <>
       <SiteHeader />
-      <main className={`wrap ${shell.docsLayout}`}>
+      <main className={`wrap ${shell.docs_layout}`}>
         <SidebarNav />
         <div className={shell.main}>
           <div className={shell.crumbs}>
             <Link href="/docs">Docs</Link> / <span>Examples</span>
           </div>
-          <h1 className={shell.pageTitle}>Examples</h1>
-          <p className={shell.pageLede}>
+          <h1 className={shell.page_title}>Examples</h1>
+          <p className={shell.page_lede}>
             Runnable examples and implementation notes for the hooks that exist today. Examples use
             mock routes by default and keep provider keys on your server.
           </p>

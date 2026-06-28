@@ -13,7 +13,7 @@ type Message = {
 };
 
 const replies = [
-  "Good question. `messages` is the ordered thread, `send()` starts a turn, `isStreaming` flips true while tokens arrive, and `stop()` aborts cleanly.",
+  "Good question. `input`, `setInput()`, `send()`, `isStreaming`, and `error` come from the hook; storage and stop behavior stay composable.",
   "You point `endpoint` at your own route, so the provider key stays on your server. The hook just manages streaming UI state.",
   "Pair it with `useConversationStorage` to persist threads and `useTokenUsage` to track tokens per turn.",
 ];
@@ -27,7 +27,8 @@ export function MockChatDemo() {
       role: "user",
     },
     {
-      content: "It returns `messages`, `send()`, `isStreaming`, and `stop()` — you render the UI.",
+      content:
+        "It returns `input`, `setInput()`, `send()`, `isStreaming`, and `error` — you render the UI and compose sibling hooks.",
       role: "assistant",
     },
   ]);
