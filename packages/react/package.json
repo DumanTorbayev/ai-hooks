@@ -1,8 +1,7 @@
 {
   "name": "@ai-hooks/react",
-  "version": "0.0.0",
+  "version": "1.0.0-alpha.34",
   "description": "Headless React hooks for building AI product interfaces.",
-  "private": true,
   "license": "MIT",
   "type": "module",
   "homepage": "https://ai-hooks.vercel.app",
@@ -74,7 +73,7 @@
     "lint": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
-    "@ai-hooks/core": "workspace:*"
+    "@ai-hooks/core": "workspace:1.0.0-alpha.34"
   },
   "peerDependencies": {
     "react": "^18.3.0 || ^19.0.0"

@@ -11,13 +11,11 @@ database writes, and markup.
 
 ## Install
 
-Release install target:
-
 ```bash
 npm i @ai-hooks/react
 ```
 
-The package is still private during MVP and is not published to npm yet.
+`@ai-hooks/core` is installed automatically as a runtime dependency.
 
 ## Import
 

@@ -9,7 +9,7 @@ primitives.
 
 ## The 10-second version
 
-- Use the release install target once the package is published.
+- Install `@ai-hooks/react`.
 - Start with `useChatStream`.
 - Point it at your own `/api/chat` route.
 - Keep provider keys on your server.
@@ -17,14 +17,9 @@ primitives.
 
 ## Install
 
-Release install target:
-
 ```bash
 npm i @ai-hooks/react
 ```
-
-The project is still in MVP. The package is kept private until the API, docs, and
-release process are ready.
 
 For local development:
 
@@ -148,9 +143,9 @@ the project is ready to explain exactly what support funds.
 Future support should fund documentation, examples, tests, release work, infrastructure, and
 long-term maintenance.
 
-## MVP readiness
+## Release scope
 
-Ready for the current MVP:
+Ready for the current alpha release:
 
 - Seven React hooks with root exports and subpath exports.
 - Headless API shape: no UI kit dependency and no runtime provider SDK dependency.
@@ -158,13 +153,13 @@ Ready for the current MVP:
 - Mock streaming demo that does not spend project-owned model credits.
 - Planning tools for costs, tokens, models, and providers.
 - Typecheck, unit tests, production build, and Playwright smoke tests.
+- Public npm metadata for `@ai-hooks/core` and `@ai-hooks/react`.
 
-Not release-ready yet:
+Still intentionally out of scope:
 
-- The npm package is still private.
-- Runnable examples are still minimal.
-- Provider adapters are intentionally not part of the core package yet.
-- Model and provider registries need a final pre-release source review.
+- Provider adapters are not part of the core package.
+- Hosted API routes, account state, and provider SDKs stay in user applications.
+- Model and provider registries are source-backed snapshots, not live pricing feeds.
 
 ## Repository structure
 
