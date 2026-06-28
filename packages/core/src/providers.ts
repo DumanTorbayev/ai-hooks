@@ -34,7 +34,7 @@ const providerCompatibility = [
     displayName: "OpenAI",
     apiStyle: "Responses API",
     bestFor: "multimodal apps, tool use, structured outputs",
-    checkedAt: "2026-06-16",
+    checkedAt: "2026-06-28",
     sourceUrls: [
       "https://developers.openai.com/api/docs/guides/streaming-responses",
       "https://developers.openai.com/api/docs/guides/function-calling",
@@ -73,7 +73,7 @@ const providerCompatibility = [
     displayName: "Anthropic",
     apiStyle: "Messages API",
     bestFor: "Claude apps, long-context chat, tool workflows",
-    checkedAt: "2026-06-16",
+    checkedAt: "2026-06-28",
     sourceUrls: [
       "https://platform.claude.com/docs/en/build-with-claude/streaming",
       "https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview",
@@ -113,7 +113,7 @@ const providerCompatibility = [
     displayName: "Google Gemini",
     apiStyle: "Gemini API",
     bestFor: "multimodal apps, files, Google AI ecosystem",
-    checkedAt: "2026-06-16",
+    checkedAt: "2026-06-28",
     sourceUrls: [
       "https://ai.google.dev/gemini-api/docs/text-generation",
       "https://ai.google.dev/gemini-api/docs/function-calling",
@@ -153,7 +153,7 @@ const providerCompatibility = [
     displayName: "Mistral AI",
     apiStyle: "Chat Completions",
     bestFor: "European provider stack, open-weight options, tool calls",
-    checkedAt: "2026-06-16",
+    checkedAt: "2026-06-28",
     sourceUrls: [
       "https://docs.mistral.ai/studio-api/conversations/chat-completion",
       "https://docs.mistral.ai/studio-api/conversations/function-calling",
@@ -192,7 +192,7 @@ const providerCompatibility = [
     displayName: "OpenRouter",
     apiStyle: "OpenAI-compatible router",
     bestFor: "multi-provider routing, fallback, model discovery",
-    checkedAt: "2026-06-16",
+    checkedAt: "2026-06-28",
     sourceUrls: [
       "https://openrouter.ai/docs/api/reference/overview",
       "https://openrouter.ai/docs/guides/features/structured-outputs",

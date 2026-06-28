@@ -32,7 +32,7 @@ export const DEFAULT_MODEL_ID = "gpt-5.4-mini";
 
 const openAiSources = [
   "https://developers.openai.com/api/docs/models",
-  "https://openai.com/api/pricing/",
+  "https://developers.openai.com/api/docs/pricing",
 ];
 
 const anthropicSources = [
@@ -45,9 +45,12 @@ const googleSources = [
   "https://ai.google.dev/gemini-api/docs/pricing",
 ];
 
-const mistralSources = ["https://docs.mistral.ai/models/overview", "https://mistral.ai/pricing/"];
+const mistralSources = [
+  "https://docs.mistral.ai/getting-started/models/models_overview/",
+  "https://mistral.ai/pricing/",
+];
 
-const checkedAt = "2026-06-18";
+const checkedAt = "2026-06-28";
 
 const modelRegistry = [
   {
@@ -192,6 +195,8 @@ const modelRegistry = [
     id: "gemini-3.5-flash",
     provider: "google",
     displayName: "Gemini 3.5 Flash",
+    contextWindow: 1048576,
+    maxOutputTokens: 65536,
     supports: {
       streaming: true,
       toolCalling: true,
@@ -213,7 +218,8 @@ const modelRegistry = [
     id: "gemini-2.5-flash",
     provider: "google",
     displayName: "Gemini 2.5 Flash",
-    contextWindow: 1000000,
+    contextWindow: 1048576,
+    maxOutputTokens: 65536,
     supports: {
       streaming: true,
       toolCalling: true,
@@ -232,9 +238,11 @@ const modelRegistry = [
     checkedAt,
   },
   {
-    id: "gemini-3.1-flash-lite",
+    id: "gemini-2.5-flash-lite",
     provider: "google",
-    displayName: "Gemini 3.1 Flash-Lite",
+    displayName: "Gemini 2.5 Flash-Lite",
+    contextWindow: 1048576,
+    maxOutputTokens: 65536,
     supports: {
       streaming: true,
       toolCalling: true,
@@ -243,9 +251,9 @@ const modelRegistry = [
       jsonMode: true,
     },
     pricing: {
-      inputPerMillionUsd: 0.25,
+      inputPerMillionUsd: 0.1,
       cachedInputPerMillionUsd: 0.025,
-      outputPerMillionUsd: 1.5,
+      outputPerMillionUsd: 0.4,
       note: "Gemini Developer API standard paid-tier text/image/video pricing.",
     },
     pricingVersion: checkedAt,
@@ -284,8 +292,8 @@ const modelRegistry = [
       jsonMode: true,
     },
     pricing: {
-      inputPerMillionUsd: 0.1,
-      outputPerMillionUsd: 0.3,
+      inputPerMillionUsd: 0.15,
+      outputPerMillionUsd: 0.6,
       note: "Mistral public pricing page, per million input/output tokens.",
     },
     pricingVersion: checkedAt,

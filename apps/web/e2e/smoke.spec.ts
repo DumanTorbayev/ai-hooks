@@ -92,6 +92,27 @@ test.describe("public site smoke", () => {
     await expect(page.getByRole("link", { name: "Open example →" })).toBeVisible();
   });
 
+  test("examples page uses docs shell module classes", async ({ page }) => {
+    await page.goto("/examples");
+
+    const mainClasses = await page
+      .locator("main")
+      .evaluate((element) => Array.from(element.classList));
+    expect(mainClasses.some((name) => name.startsWith("docs-shell_docs_layout__"))).toBe(true);
+
+    const headingClasses = await page
+      .getByRole("heading", { level: 1, name: "Examples" })
+      .evaluate((element) => Array.from(element.classList));
+    expect(headingClasses.some((name) => name.startsWith("docs-shell_page_title__"))).toBe(true);
+
+    const ledeClasses = await page
+      .locator("p")
+      .filter({ hasText: "Runnable examples and implementation notes" })
+      .first()
+      .evaluate((element) => Array.from(element.classList));
+    expect(ledeClasses.some((name) => name.startsWith("docs-shell_page_lede__"))).toBe(true);
+  });
+
   test("home page explains the product and streams the mock chat", async ({ page }) => {
     await page.goto("/");
 
