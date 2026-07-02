@@ -136,12 +136,12 @@ auto-updating feed. Recheck it before release and whenever provider pricing chan
 
 ## Support
 
-AI Hooks is applying to Open Source Collective for transparent project funding. The public site does
-not show a support button yet; funding UI should be added only after the collective is approved and
-the project is ready to explain exactly what support funds.
+AI Hooks accepts transparent project support through Open Collective:
+[Support project](https://opencollective.com/ai-hooks).
 
-Future support should fund documentation, examples, tests, release work, infrastructure, and
-long-term maintenance.
+Support funds documentation, examples, tests, release work, infrastructure, and long-term
+maintenance. The project stays MIT-licensed, with no paid docs, no hosted model API, and no
+project-owned model spend in public demos.
 
 ## Release scope
 

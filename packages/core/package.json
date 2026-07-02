@@ -3,6 +3,10 @@
   "version": "1.0.0-alpha.34",
   "description": "Framework-agnostic AI UI utilities for AI Hooks.",
   "license": "MIT",
+  "funding": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/ai-hooks"
+  },
   "type": "module",
   "homepage": "https://ai-hooks.vercel.app",
   "repository": {
