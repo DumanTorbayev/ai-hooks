@@ -3,11 +3,13 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-import { AiHooksLogo, GitHubIcon, MenuIcon, SearchIcon } from "@/components/icons";
+import { AiHooksLogo, GitHubIcon, MenuIcon, SearchIcon, SupportIcon } from "@/components/icons";
 import { CommandPalette } from "@/components/site/command-palette";
 import { ThemeToggle } from "@/components/site/theme-toggle";
 
 import css from "./site-header.module.css";
+
+const SUPPORT_URL = "https://opencollective.com/ai-hooks";
 
 type SiteHeaderProps = {
   active?: "docs";
@@ -62,6 +64,10 @@ export function SiteHeader({ active }: SiteHeaderProps) {
                 <span>K</span>
               </span>
             </button>
+            <a className={css.support} href={SUPPORT_URL} rel="noreferrer" target="_blank">
+              <SupportIcon size={15} />
+              <span>Support project</span>
+            </a>
             <ThemeToggle />
             <a
               aria-label="GitHub repository"
@@ -87,6 +93,14 @@ export function SiteHeader({ active }: SiteHeaderProps) {
           <Link href="/docs" onClick={() => setMobileOpen(false)}>
             Docs
           </Link>
+          <a
+            href={SUPPORT_URL}
+            onClick={() => setMobileOpen(false)}
+            rel="noreferrer"
+            target="_blank"
+          >
+            Support project ↗
+          </a>
           <a
             href="https://github.com/DumanTorbayev/ai-hooks"
             onClick={() => setMobileOpen(false)}

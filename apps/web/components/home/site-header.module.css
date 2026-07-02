@@ -38,6 +38,7 @@
 .glyph svg,
 .nav a svg,
 .search_button svg,
+.support svg,
 .github svg,
 .hamburger svg {
   flex-shrink: 0;
@@ -126,6 +127,27 @@
   font-size: 16px;
 }
 
+.support {
+  display: inline-flex;
+  height: 34px;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid var(--line-2);
+  border-radius: 7px;
+  background: var(--bg);
+  padding: 0 11px;
+  color: var(--ink-2);
+  font-size: 12.5px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.support:hover {
+  border-color: var(--ink-2);
+  color: var(--ink);
+}
+
 .github,
 .hamburger {
   display: grid;
@@ -176,6 +198,7 @@
 @media (max-width: 760px) {
   .nav,
   .search_button,
+  .support,
   .github {
     display: none;
   }

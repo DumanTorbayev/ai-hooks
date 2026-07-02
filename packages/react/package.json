@@ -3,6 +3,10 @@
   "version": "1.0.0-alpha.34",
   "description": "Headless React hooks for building AI product interfaces.",
   "license": "MIT",
+  "funding": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/ai-hooks"
+  },
   "type": "module",
   "homepage": "https://ai-hooks.vercel.app",
   "repository": {
